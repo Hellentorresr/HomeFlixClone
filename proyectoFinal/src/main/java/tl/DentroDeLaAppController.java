@@ -13,6 +13,8 @@ import view.Main;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -22,6 +24,9 @@ public class DentroDeLaAppController implements Initializable {
     public Button btnCerrar;
     @FXML
     public HBox recentlyPlayedContainer;
+    
+    @FXML
+    private HBox favoritasContainer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
