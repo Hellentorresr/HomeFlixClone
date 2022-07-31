@@ -9,9 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import view.Main;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -43,6 +45,19 @@ public class RegistroVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image;
+
+
+    void handleBtnOpenLinkVideo(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Video");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.mkv", "*.mp4"));
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            textAreaVideoPath.appendText(file.getAbsolutePath());
+        } else {
+            System.out.println("Archivo no encontrado");
+        }
+    }
 
     public void btnRegistrarVideo() {
         String nombre = this.txtNombreVideo.getText();
