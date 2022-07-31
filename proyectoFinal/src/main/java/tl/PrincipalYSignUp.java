@@ -27,5 +27,12 @@ public class PrincipalYSignUp {
     private PasswordField tf_userPassword;
 
 
-
+    /**
+     * Creacion metodo IrACreaCuenta
+     */
+    public void IrACrearCuenta(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("SignUpForm.fxml")));
+        Stage window = (Stage)button_signUp.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
 }
