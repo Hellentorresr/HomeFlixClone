@@ -34,7 +34,7 @@
                                         <Image url="@recursos/home.png" />
                                     </image>
                                 </ImageView>
-                                <Label prefHeight="17.0" prefWidth="119.0" text="Inicio" textFill="#e1c2c2">
+                                <Label prefHeight="17.0" prefWidth="119.0" text="Inicio" textFill="WHITE">
                                     <font>
                                         <Font name="System Bold" size="18.0" />
                                     </font>
@@ -134,7 +134,7 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="50.0" spacing="20.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #b09da6;">
+                <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #b09da6;" stylesheets="@style/styles.css">
                     <children>
                         <HBox alignment="CENTER_LEFT">
                             <children>
@@ -206,7 +206,7 @@
                         <Insets />
                     </VBox.margin>
                 </HBox>
-                <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #fff;">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: black;">
                     <children>
                         <ImageView fitHeight="200.0" fitWidth="1080.0" pickOnBounds="true" smooth="false" HBox.hgrow="ALWAYS">
                             <image>
@@ -223,27 +223,30 @@
                 </HBox>
                 <ScrollPane prefHeight="599.0" prefWidth="1066.0" style="-fx-background-color: transparent;" stylesheets="@style/styles.css" VBox.vgrow="ALWAYS">
                     <content>
-                        <VBox prefHeight="593.0" prefWidth="1062.0" spacing="10.0" style="-fx-background-color: transparent;">
+                        <VBox prefHeight="570.0" prefWidth="1680.0" spacing="10.0" style="-fx-background-color: transparent;">
                             <children>
                                 <Label text="Videos recientes" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane minViewportHeight="245.0" prefHeight="239.0" prefWidth="1062.0" style="-fx-background-color: transparent;">
+                                <ScrollPane fitToWidth="true" minViewportHeight="270.0" prefHeight="229.0" prefWidth="1059.0" style="-fx-background-color: transparent;">
                                     <content>
-                                        <HBox fx:id="recentlyPlayedContainer" prefHeight="0.0" prefWidth="0.0" />
+                                        <HBox fx:id="recentlyPlayedContainer" prefHeight="0.0" prefWidth="0.0" spacing="30.0" />
                                     </content></ScrollPane>
                                 <Label layoutX="10.0" layoutY="10.0" text="Favoritos" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <ScrollPane layoutX="10.0" layoutY="37.0" minViewportHeight="245.0" prefHeight="278.0" prefWidth="1062.0" style="-fx-background-color: transparent;">
+                                <ScrollPane fitToWidth="true" minViewportHeight="270.0" prefHeight="229.0" prefWidth="1059.0" style="-fx-background-color: transparent;">
                                     <content>
                                         <HBox fx:id="favoritasContainer" prefHeight="0.0" prefWidth="0.0" />
                                     </content></ScrollPane>
                             </children>
+                            <padding>
+                                <Insets left="20.0" />
+                            </padding>
                         </VBox>
                     </content>
                     <VBox.margin>
