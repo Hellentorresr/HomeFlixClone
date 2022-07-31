@@ -1,6 +1,10 @@
 package tl;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -10,6 +14,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
+import view.Main;
+
+import java.io.IOException;
+import java.util.Objects;
 
 public class ReproductorVideoController {
     /**
@@ -66,4 +75,26 @@ public class ReproductorVideoController {
     private ImageView ivFullScreen;
     private ImageView ivMute;
     private ImageView ivExit;
+
+
+
+    public void labelMatchEndVideo(String labelTime, String labelTotalTime) {
+        for (int i = 0; i < labelTotalTime.length(); i++) {
+            if (labelTime.charAt(i) != labelTotalTime.charAt(i)) {
+                atEndOfVideo = false;
+                if (isPlaying) buttonPPR.setGraphic(ivPause);
+                else buttonPPR.setGraphic(ivPlay);
+                break;
+            } else {
+                atEndOfVideo = true;
+                buttonPPR.setGraphic(ivRestart);
+            }
+        }
+    }
+
+    public void regresarHome(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Stage window = (Stage) regresar.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
 }
