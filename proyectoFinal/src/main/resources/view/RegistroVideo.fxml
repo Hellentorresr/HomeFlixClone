@@ -4,15 +4,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tl.RegistroVideoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="675.0" style="-fx-background-color: #9980FA;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tl.RegistroVideoController">
     <children>
-        <Label layoutX="183.0" layoutY="20.0" text="Formulario registro Video">
+        <Label layoutX="183.0" layoutY="20.0" text="Formulario registro Video" textFill="WHITE">
             <font>
-                <Font name="System Bold" size="22.0" />
+                <Font name="System Bold" size="25.0" />
             </font>
         </Label>
         <TextField fx:id="txtNombreVideo" layoutX="34.0" layoutY="126.0" prefHeight="25.0" prefWidth="195.0" promptText="Ej. nombre">
@@ -20,14 +21,14 @@
                 <Font size="16.0" />
             </font>
         </TextField>
-        <Label layoutX="40.0" layoutY="89.0" prefHeight="17.0" prefWidth="168.0" text="Nombre del video">
+        <Label layoutX="40.0" layoutY="89.0" prefHeight="17.0" prefWidth="168.0" text="Nombre del video" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="System Bold" size="17.0" />
             </font>
         </Label>
-        <Label layoutX="366.0" layoutY="89.0" prefHeight="17.0" prefWidth="168.0" text="Categoria">
+        <Label layoutX="366.0" layoutY="89.0" prefHeight="17.0" prefWidth="168.0" text="Categoria" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="System Bold" size="17.0" />
             </font>
         </Label>
         <TextField fx:id="txtCategoria" layoutX="366.0" layoutY="120.0" prefHeight="25.0" prefWidth="195.0" promptText="Ej. Comedia">
@@ -35,9 +36,9 @@
                 <Font size="16.0" />
             </font>
         </TextField>
-        <Label layoutX="40.0" layoutY="188.0" prefHeight="17.0" prefWidth="168.0" text="Descripción">
+        <Label layoutX="40.0" layoutY="188.0" prefHeight="17.0" prefWidth="168.0" text="Descripción" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="System Bold" size="17.0" />
             </font>
         </Label>
         <TextField fx:id="txtDescription" layoutX="34.0" layoutY="223.0" prefHeight="25.0" prefWidth="195.0" promptText="Ej. Estreno">
@@ -45,38 +46,40 @@
                 <Font size="16.0" />
             </font>
         </TextField>
-        <Label layoutX="366.0" layoutY="188.0" prefHeight="25.0" prefWidth="232.0" text="imagen de portada del video">
+        <Label layoutX="366.0" layoutY="188.0" prefHeight="25.0" prefWidth="232.0" text="Imagen de portada del video" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="System Bold" size="17.0" />
             </font>
         </Label>
-        <ImageView fx:id="imageViewCover" fitHeight="121.0" fitWidth="200.0" layoutX="364.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true" />
-        <Label layoutX="40.0" layoutY="294.0" prefHeight="25.0" prefWidth="200.0" text="Link de ubicación del vídeo">
+        <ImageView fx:id="imageViewCover" fitHeight="135.0" fitWidth="147.0" layoutX="376.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@recursos/pngwing.com.png" />
+         </image></ImageView>
+        <Label layoutX="40.0" layoutY="294.0" prefHeight="25.0" prefWidth="200.0" text="Link de ubicación del vídeo" textFill="WHITE">
             <font>
-                <Font size="16.0" />
+                <Font name="System Bold" size="17.0" />
             </font>
         </Label>
         <TextArea fx:id="textAreaVideoPath" layoutX="34.0" layoutY="367.0" prefHeight="41.0" prefWidth="226.0" />
-        <Button fx:id="btnPathVideo" layoutX="88.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleBtnOpenLinkVideo" text="Buscar video ">
+        <Button fx:id="btnPathVideo" alignment="CENTER" contentDisplay="CENTER" layoutX="88.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleBtnOpenLinkVideo" style="-fx-background-color: #006266; -fx-cursor: hand;" text="Buscar video " textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
-        <Button fx:id="btnConver" layoutX="365.0" layoutY="224.0" mnemonicParsing="false" onAction="#handleBtnOpenFile" text="Buscar imagen">
+        <Button fx:id="btnConver" alignment="CENTER" contentDisplay="CENTER" layoutX="366.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleBtnOpenFile" style="-fx-background-color: #006266; -fx-cursor: hand;" text="Buscar imagen" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>
         </Button>
-        <Button fx:id="btnRegistrarVideo" layoutX="270.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnRegistrarVideo" prefHeight="35.0" prefWidth="136.0" text="Registrar">
+        <Button fx:id="btnRegistrarVideo" alignment="CENTER" contentDisplay="CENTER" layoutX="284.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnRegistrarVideo" prefHeight="35.0" prefWidth="136.0" style="-fx-background-color: #F79F1F; -fx-cursor: hand;" text="Registrar" textFill="WHITE">
             <font>
-                <Font size="18.0" />
+                <Font name="System Bold" size="18.0" />
             </font>
         </Button>
-        <Button fx:id="irHome" layoutX="18.0" layoutY="451.0" mnemonicParsing="false" onAction="#irPrincipal" text="Ir a pagina principal">
+        <Button fx:id="irHome" layoutX="511.0" layoutY="486.0" mnemonicParsing="false" onAction="#irPrincipal" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Ir a pagina principal" textFill="WHITE" underline="true">
             <font>
-                <Font size="14.0" />
+                <Font name="System Bold" size="15.0" />
             </font>
         </Button>
-        <Button fx:id="irVideo" layoutX="545.0" layoutY="473.0" mnemonicParsing="false" onAction="#irVideo" text="Ver video" />
     </children>
 </AnchorPane>
