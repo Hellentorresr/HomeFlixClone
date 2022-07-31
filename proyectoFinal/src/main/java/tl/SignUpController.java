@@ -51,7 +51,7 @@ public class SignUpController {
     }
 
     public void regresarPrincipal(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignInForm.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignIn.fxml")));
         Stage window = (Stage)regresar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
