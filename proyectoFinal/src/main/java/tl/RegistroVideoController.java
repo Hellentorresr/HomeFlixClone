@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -47,6 +48,21 @@ public class RegistroVideoController {
     private String image;
 
 
+    @FXML
+    void handleBtnOpenFile(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            image = file.toString();
+            imageViewCover.setImage(new Image(file.toURI().toString()));
+        } else {
+            System.out.println("Archivo no encontrado");
+        }
+    }
+
+    @FXML
     void handleBtnOpenLinkVideo(ActionEvent event) {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Video");
@@ -59,6 +75,7 @@ public class RegistroVideoController {
         }
     }
 
+    @FXML
     public void btnRegistrarVideo() {
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
