@@ -7,12 +7,16 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 public class ReproductorVideoController {
     /**
      * Atributos de la clase ReproductorVideoController
      */
     public Button regresar;
+
     @FXML
     private VBox vboxParent;
     @FXML
