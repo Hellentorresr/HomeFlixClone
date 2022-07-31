@@ -14,7 +14,7 @@ import view.Main;
 import java.io.IOException;
 import java.util.Objects;
 
-public class PrincipalYSignUp {
+public class PrincipalYSignIn {
     /**
      * Atributos clase PrincipalYSignUp
      */

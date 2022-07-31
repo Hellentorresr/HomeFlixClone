@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="850.0" maxWidth="750.0" prefHeight="480.0" prefWidth="736.0" style="-fx-background-color: #222f3e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tl.PrincipalYSignUp">
+<HBox alignment="CENTER" maxHeight="850.0" maxWidth="750.0" prefHeight="480.0" prefWidth="736.0" style="-fx-background-color: #222f3e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tl.PrincipalYSignIn">
     <children>
         <AnchorPane maxHeight="484.0" maxWidth="750.0" prefHeight="484.0" prefWidth="382.0" style="-fx-background-color: black;">
             <children>
