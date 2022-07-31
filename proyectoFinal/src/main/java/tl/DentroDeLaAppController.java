@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class MainController implements Initializable {
+public class DentroDeLaAppController implements Initializable {
     @FXML
     public Button btnCerrar;
     @FXML
