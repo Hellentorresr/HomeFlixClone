@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="panelFormSignUp" alignment="CENTER" prefHeight="775.0" prefWidth="800.0" style="-fx-background-color: #30373e;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignUpFormController">
+<VBox fx:id="panelFormSignUp" alignment="CENTER" prefHeight="775.0" prefWidth="800.0" style="-fx-background-color: #30373e;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tl.SignUpController">
     <children>
         <Label text="Formulario de registro" textFill="WHITE">
             <font>
