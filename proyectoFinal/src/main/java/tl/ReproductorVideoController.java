@@ -1,5 +1,6 @@
 package tl;
 
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ import view.Main;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 
 public class ReproductorVideoController {
     /**
@@ -77,6 +79,15 @@ public class ReproductorVideoController {
     private ImageView ivMute;
     private ImageView ivExit;
 
+
+    public void bindCurrentTimeLabel() {
+        labelCurrentTime.textProperty().bind(Bindings.createStringBinding(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                return getTime(mpVideo.getCurrentTime()) + " / ";
+            }
+        }, mpVideo.currentTimeProperty()));
+    }
 
     public String getTime(Duration time) {
         int hours = (int) time.toHours();
