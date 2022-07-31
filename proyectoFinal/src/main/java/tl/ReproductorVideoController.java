@@ -15,6 +15,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import view.Main;
 
 import java.io.IOException;
@@ -77,6 +78,23 @@ public class ReproductorVideoController {
     private ImageView ivExit;
 
 
+    public String getTime(Duration time) {
+        int hours = (int) time.toHours();
+        int minutes = (int) time.toMinutes();
+        int seconds = (int) time.toSeconds();
+
+        if (seconds > 59) seconds = seconds % 60;
+        if (minutes > 59) minutes = minutes % 60;
+        if (hours > 59) hours = hours % 60;
+
+        if (hours > 0) return String.format("%d:%02d:%02d",
+                hours,
+                minutes,
+                seconds);
+        else return String.format("%02d:%02d",
+                minutes,
+                seconds);
+    }
 
     public void labelMatchEndVideo(String labelTime, String labelTotalTime) {
         for (int i = 0; i < labelTotalTime.length(); i++) {
