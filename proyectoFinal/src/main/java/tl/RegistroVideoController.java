@@ -44,6 +44,12 @@ public class RegistroVideoController {
     private String image;
 
 
+    public void irPrincipal(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Stage window = (Stage)irHome.getScene().getWindow();
+        window.setScene(new Scene(root));
+    }
+
     public void irVideo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
         Stage window = (Stage)irVideo.getScene().getWindow();
