@@ -1,14 +1,20 @@
 package tl;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
 public class SignUpController {
     /**
@@ -41,5 +47,11 @@ public class SignUpController {
         } else {
             System.out.println("Archivo no encontrado");
         }
+    }
+
+    public void regresarPrincipal(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignInForm.fxml")));
+        Stage window = (Stage)regresar.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 }
