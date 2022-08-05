@@ -82,13 +82,13 @@ public class RegistroVideoController {
         String desc = this.txtDescription.getText();
         String videoPath = String.valueOf(this.textAreaVideoPath.getText());
         LocalDate fecha = LocalDate.now();
-        if(nombre.isEmpty()|| videoPath.isEmpty() || image.isEmpty()){
+        if (nombre.isEmpty() || videoPath.isEmpty() || image.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setTitle("Error");
             alert.setContentText("Favor llenar todos los campos!");
             alert.showAndWait();
-        }else {
+        } else {
             VideoDAO videoDAO = new VideoDAOImplement();
             videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
