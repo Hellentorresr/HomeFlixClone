@@ -16,7 +16,7 @@
             <children>
                 <ImageView fitHeight="259.0" fitWidth="357.0" layoutX="12.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@recursos/homeflixLogo.png" />
+                        <Image url="@img/homeflixLogo.png" />
                     </image>
                 </ImageView>
                 <Label layoutX="72.0" layoutY="372.0" text="¿No tienes una cuenta?" textFill="WHITE">
