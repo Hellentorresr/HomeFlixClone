@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -49,6 +50,17 @@ public class EditarEliminarVideoController {
     private TextField txtNombreVideo;
     private String image = "";
 
+
+    /**
+     * Metodo para mostrar mensaje
+     */
+    private void mostrarMensaje() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Completado");
+        alert.setContentText("Cambios realizados correctamente!");
+        alert.showAndWait();
+    }
 
     /**
      * Metodo para adjuntar imagen
