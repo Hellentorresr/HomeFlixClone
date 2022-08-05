@@ -1,4 +1,4 @@
-package tl;
+package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
