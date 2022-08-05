@@ -1,10 +1,13 @@
 package controller;
 
+import controller.dao.VideoDAO;
+import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,15 +19,13 @@ import view.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class RegistroVideoController {
-    /**
-     * Atributos de la clase RegistroVideoController
-     */
     public Button irHome;
-    public Button irVideo;
+    public Button btnConver;
     @FXML
     private Button btnPathVideo;
 
@@ -46,7 +47,6 @@ public class RegistroVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image;
-
 
     @FXML
     void handleBtnOpenFile(ActionEvent event) {
@@ -76,25 +76,34 @@ public class RegistroVideoController {
     }
 
     @FXML
-    public void btnRegistrarVideo() {
+    public void btnRegistrarVideo() throws IOException, SQLException {
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
         String desc = this.txtDescription.getText();
         String videoPath = String.valueOf(this.textAreaVideoPath.getText());
         LocalDate fecha = LocalDate.now();
-        Administracion.setVideos(nombre,cate,fecha,desc,1,image,videoPath);
-        System.out.println(Administracion.videos);
+        if (nombre.isEmpty() || videoPath.isEmpty() || image.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Favor llenar todos los campos!");
+            alert.showAndWait();
+        } else {
+            VideoDAO videoDAO = new VideoDAOImplement();
+            videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Completado");
+            alert.setContentText("Se registro el nuevo catalogo!");
+            alert.showAndWait();
+            irPrincipal();
+        }
+
     }
 
-    public void irPrincipal(ActionEvent event) throws IOException {
+    public void irPrincipal() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
-        Stage window = (Stage)irHome.getScene().getWindow();
-        window.setScene(new Scene(root));
-    }
-
-    public void irVideo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
-        Stage window = (Stage)irVideo.getScene().getWindow();
+        Stage window = (Stage) irHome.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 }

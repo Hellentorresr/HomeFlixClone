@@ -96,10 +96,10 @@ public class ReproductorVideoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
         final int IV_SIZE = 25;
-        for (int i = 0; i < Administracion.videos.size(); i++) {
-            mediaVideo = new Media(new File(Administracion.videos.get(i).getVideoPath()).toURI().toString());
+        System.out.println(DentroDeLaAppController.test);
+        for (int i = 0; i < DentroDeLaAppController.recientesPlayed.size(); i++) {
+            mediaVideo = new Media(new File(DentroDeLaAppController.test).toURI().toString());
         }
-
         //this is the video that I'm going to be playing
         // mediaVideo = new Media(new File("src/media/JessicaDarrow.mp4").toURI().toString());
         //with this object I can call methods like play,stop, pause

@@ -19,7 +19,7 @@
             <children>
                 <ImageView fitHeight="156.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="colorIcon">
                     <image>
-                        <Image url="@recursos/homeflixLogo.png" />
+                        <Image url="@img/homeflixLogo.png" />
                     </image>
                     <VBox.margin>
                         <Insets left="20.0" top="20.0" />
@@ -31,7 +31,7 @@
                             <children>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@recursos/home.png" />
+                                        <Image url="@img/home.png" />
                                     </image>
                                 </ImageView>
                                 <Label prefHeight="17.0" prefWidth="119.0" text="Inicio" textFill="WHITE">
@@ -45,7 +45,7 @@
                             <children>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@recursos/video.png" />
+                                        <Image url="@img/video.png" />
                                     </image>
                                 </ImageView>
                                 <Label prefHeight="17.0" prefWidth="119.0" text="Película" textFill="#e1c2c2">
@@ -59,7 +59,7 @@
                             <children>
                                 <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@recursos/list.png" />
+                                        <Image url="@img/list.png" />
                                     </image>
                                 </ImageView>
                                 <Label prefHeight="17.0" prefWidth="119.0" text="Mi lista" textFill="#e1c2c2">
@@ -93,28 +93,47 @@
                         <Insets left="20.0" right="20.0" />
                     </padding>
                 </VBox>
-                <Label prefHeight="62.0" prefWidth="189.0" text="Agregar lista de reproducción" textAlignment="CENTER" textFill="#dacece" wrapText="true">
+                <Label alignment="CENTER" prefHeight="62.0" prefWidth="189.0" text="Administrar Videos" textFill="#ddd2d2" wrapText="true">
                     <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="18.0" />
                     </font>
                     <VBox.margin>
                         <Insets left="20.0" />
                     </VBox.margin>
                 </Label>
+                <Button fx:id="agregarVideo" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#agregarVideo" prefHeight="33.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="upgrade-button" stylesheets="@style/styles.css" text="Agregar video" textFill="#dacece">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="15.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="eliminarEditarVideo" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="661.0" mnemonicParsing="false" onAction="#eliminarEditarVideo" prefHeight="33.0" prefWidth="202.0" style="-fx-cursor: hand;" styleClass="upgrade-button" stylesheets="@style/styles.css" text="Eliminar o editar video" textFill="#dacece">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="15.0" />
+                    </VBox.margin>
+                </Button>
+                <Button fx:id="btnCerrar" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleBtnIngresar" prefHeight="50.0" prefWidth="186.0" style="-fx-cursor: hand; -fx-background-color: black;" text="Cerrar sesión" textFill="#dacece">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets left="20.0" />
+                    </VBox.margin>
+                </Button>
                 <Pane prefHeight="164.0" prefWidth="235.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Button fx:id="btnCerrar" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="192.0" mnemonicParsing="false" onAction="#handleBtnIngresar" prefHeight="33.0" prefWidth="186.0" style="-fx-cursor: hand;" styleClass="upgrade-button" stylesheets="@style/styles.css" text="Cerrar sesión" textFill="#dacece">
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                        </Button>
                         <HBox alignment="CENTER" layoutY="30.0" prefHeight="50.0" prefWidth="235.0" spacing="20.0" styleClass="top-border" stylesheets="@style/styles.css">
                             <children>
                                 <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
                                     <graphic>
                                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@recursos/add.png" />
+                                                <Image url="@img/add.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -134,7 +153,7 @@
     <center>
         <VBox prefHeight="200.0" prefWidth="50.0" spacing="20.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
             <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #b09da6;" stylesheets="@style/styles.css">
+                <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="1080.0" spacing="20.0" style="-fx-background-color: #b09da6;">
                     <children>
                         <HBox alignment="CENTER_LEFT">
                             <children>
@@ -142,7 +161,7 @@
                                     <graphic>
                                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@recursos/right-arrow.png" />
+                                                <Image url="@img/right-arrow.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -151,7 +170,7 @@
                                     <graphic>
                                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@recursos/left-arrow.png" />
+                                                <Image url="@img/left-arrow.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -164,7 +183,7 @@
                                     <graphic>
                                         <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@recursos/search.png" />
+                                                <Image url="@img/search.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -186,7 +205,7 @@
                                     <children>
                                         <ImageView fitHeight="54.0" fitWidth="71.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true">
                                             <image>
-                                                <Image url="@recursos/perfil2.png" />
+                                                <Image url="@img/perfil2.png" />
                                             </image>
                                         </ImageView>
                                     </children>
@@ -210,7 +229,7 @@
                     <children>
                         <ImageView fitHeight="200.0" fitWidth="1080.0" pickOnBounds="true" smooth="false" HBox.hgrow="ALWAYS">
                             <image>
-                                <Image url="@recursos/cover.jpg" />
+                                <Image url="@img/cover.jpg" />
                             </image>
                             <HBox.margin>
                                 <Insets />
@@ -233,7 +252,8 @@
                                 <ScrollPane fitToWidth="true" minViewportHeight="270.0" prefHeight="229.0" prefWidth="1059.0" style="-fx-background-color: transparent;">
                                     <content>
                                         <HBox fx:id="recentlyPlayedContainer" prefHeight="0.0" prefWidth="0.0" spacing="30.0" />
-                                    </content></ScrollPane>
+                                    </content>
+                                </ScrollPane>
                                 <Label layoutX="10.0" layoutY="10.0" text="Favoritos" textFill="WHITE">
                                     <font>
                                         <Font size="18.0" />
@@ -242,7 +262,8 @@
                                 <ScrollPane fitToWidth="true" minViewportHeight="270.0" prefHeight="229.0" prefWidth="1059.0" style="-fx-background-color: transparent;">
                                     <content>
                                         <HBox fx:id="favoritasContainer" prefHeight="0.0" prefWidth="0.0" />
-                                    </content></ScrollPane>
+                                    </content>
+                                </ScrollPane>
                             </children>
                             <padding>
                                 <Insets left="20.0" />

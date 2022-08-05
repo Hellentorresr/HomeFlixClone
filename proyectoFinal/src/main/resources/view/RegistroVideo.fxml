@@ -53,7 +53,7 @@
         </Label>
         <ImageView fx:id="imageViewCover" fitHeight="135.0" fitWidth="147.0" layoutX="376.0" layoutY="270.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@recursos/pngwing.com.png" />
+            <Image url="@img/pngwing.com.png" />
          </image></ImageView>
         <Label layoutX="40.0" layoutY="294.0" prefHeight="25.0" prefWidth="200.0" text="Link de ubicación del vídeo" textFill="WHITE">
             <font>
