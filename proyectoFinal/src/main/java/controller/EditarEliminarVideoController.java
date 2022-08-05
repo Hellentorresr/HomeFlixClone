@@ -153,18 +153,19 @@ public class EditarEliminarVideoController {
     public void eliminarVideoMetodo(ActionEvent event) throws SQLException {
         if (this.txtCodigoParaEliminar.getText().isEmpty()) {
             mostrarMensajeNegativo("Favor ingrese un codigo para hacer la eliminacion");
-        }
-        //primero lo obtengo
-        VideoDAO videoDAO = new VideoDAOImplement();
-        Video video;
-        int codi = Integer.parseInt(this.txtCodigoParaEliminar.getText());
-        video = videoDAO.get(codi);
-        if (videoDAO.getALL().contains(video)) {
-            videoDAO.delete(video);
-            mostrarMensaje("Video borrado correctamente");
+        } else if (!this.txtCodigoParaEliminar.getText().isEmpty()) {
+            //primero lo obtengo
+            VideoDAO videoDAO = new VideoDAOImplement();
+            Video video;
+            int codi = Integer.parseInt(this.txtCodigoParaEliminar.getText());
+            video = videoDAO.get(codi);
+            if (videoDAO.getALL().contains(video)) {
+                videoDAO.delete(video);
+                mostrarMensaje("Video borrado correctamente");
 
-        } else {
-            mostrarMensajeNegativo("Código no encontrado");
+            } else {
+                mostrarMensajeNegativo("Código no encontrado");
+            }
         }
     }
 }
