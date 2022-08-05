@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dao.VideoDAO;
 import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Video;
 import view.Main;
 
 import java.io.File;
@@ -51,6 +53,41 @@ public class EditarEliminarVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image = "";
+
+
+    /**
+     * Metodo para editar un video
+     */
+    @FXML
+    void btnEditarEvent(ActionEvent event) throws SQLException {
+        String nombre = this.txtNombreVideo.getText();
+        String cate = this.txtCategoria.getText();
+        String desc = this.txtDescription.getText();
+
+        //primero lo obtengo
+        VideoDAO videoDAO = new VideoDAOImplement();
+        int codi = Integer.parseInt(this.txtCodigoParaEditar.getText());
+        Video video = videoDAO.get(codi);
+        System.out.println("viendo el video para update " + video);
+        if (!nombre.isEmpty()) {
+            video.setNombreVideo(nombre);
+            mostrarMensaje();
+        }
+        if (!cate.isEmpty()) {
+            video.setCategoryVideo(cate);
+            mostrarMensaje();
+        }
+        if (!desc.isEmpty()) {
+            video.setDescription(desc);
+            mostrarMensaje();
+        }
+        if (!image.isEmpty()) {
+            video.setCover(image);
+            mostrarMensaje();
+        }
+        videoDAO.update(video);
+    }
+
 
     /**
      *Metodo para mostrar information en el contenedor textArea
