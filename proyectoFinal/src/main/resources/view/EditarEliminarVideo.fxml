@@ -1,0 +1,148 @@
+?xml version="1.0" encoding="UTF-8"?>
+
+        <?import javafx.scene.control.Button?>
+        <?import javafx.scene.control.Label?>
+        <?import javafx.scene.control.TextArea?>
+        <?import javafx.scene.control.TextField?>
+        <?import javafx.scene.image.Image?>
+        <?import javafx.scene.image.ImageView?>
+        <?import javafx.scene.layout.AnchorPane?>
+        <?import javafx.scene.layout.VBox?>
+        <?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="842.0" maxWidth="936.0" prefHeight="842.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditarEliminarVideo">
+    <children>
+        <AnchorPane maxHeight="-Infinity" maxWidth="936.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="112.0" prefWidth="936.0" style="-fx-background-color: black;" VBox.vgrow="NEVER">
+            <children>
+                <Label layoutX="342.0" layoutY="34.0" text="Administración de video" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <ImageView fitHeight="100.0" fitWidth="163.0" layoutX="35.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/homeflixLogo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane maxWidth="936.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ced6e0;" VBox.vgrow="NEVER">
+            <children>
+                <TextArea fx:id="textAreaReporte" layoutX="28.0" layoutY="50.0" prefHeight="126.0" prefWidth="532.0" />
+                <Button fx:id="btnMostrarReporte" alignment="CENTER" contentDisplay="CENTER" layoutX="617.0" layoutY="85.0" mnemonicParsing="false" onAction="#btnMostrarReporteEvent" prefHeight="39.0" prefWidth="142.0" style="-fx-background-color: #d35400;" text="Ver reporte" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+                <Label layoutX="28.0" layoutY="14.0" prefHeight="30.0" prefWidth="539.0" text="En este reporte puede obtener los videos existentes">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="10.0" layoutY="122.0" maxWidth="936.0" prefHeight="182.0" prefWidth="936.0" style="-fx-background-color: #c7ecee;" VBox.vgrow="NEVER">
+            <children>
+                <Label layoutX="23.0" layoutY="14.0" text="Eliminar Video">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnEliminarVideo" layoutX="47.0" layoutY="125.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #d35400;" text="Eliminar" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Label layoutX="23.0" layoutY="46.0" text="Favor digite el código del vídeo que desea eliminar">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtCodigoParaEliminar" layoutX="23.0" layoutY="83.0" promptText="1">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="10.0" layoutY="322.0" maxWidth="936.0" prefHeight="350.0" prefWidth="936.0" style="-fx-background-color: #ced6e0;" VBox.vgrow="NEVER">
+            <children>
+                <Label layoutX="23.0" layoutY="14.0" prefHeight="27.0" prefWidth="124.0" text="Editar Video">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnEvitar" layoutX="334.0" layoutY="295.0" mnemonicParsing="false" onAction="#btnEvitarEvent" prefHeight="30.0" prefWidth="168.0" style="-fx-background-color: #d35400;" text="Editar" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Button>
+                <Label layoutX="23.0" layoutY="46.0" text="Favor digite el código del vídeo que desea editar">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtCodigoParaEditar" layoutX="23.0" layoutY="83.0" prefHeight="35.0" prefWidth="135.0" promptText="1">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="23.0" layoutY="166.0" prefHeight="17.0" prefWidth="168.0" text="Nombre del video" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtNombreVideo" layoutX="14.0" layoutY="192.0" prefHeight="25.0" prefWidth="195.0" promptText="Ej. nombre">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="278.0" layoutY="163.0" prefHeight="17.0" prefWidth="168.0" text="Descripción" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtDescription" layoutX="266.0" layoutY="189.0" prefHeight="35.0" prefWidth="180.0" promptText="Ej. Estreno">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="502.0" layoutY="166.0" prefHeight="17.0" prefWidth="168.0" text="Categoria" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="txtCategoria" layoutX="502.0" layoutY="192.0" prefHeight="35.0" prefWidth="154.0" promptText="Ej. Comedia">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </TextField>
+                <Label layoutX="683.0" layoutY="92.0" prefHeight="25.0" prefWidth="232.0" text="Imagen de portada del video" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnConver" alignment="CENTER" contentDisplay="CENTER" layoutX="754.0" layoutY="250.0" mnemonicParsing="false" onAction="#handleBtnOpenFile" style="-fx-background-color: #006266; -fx-cursor: hand;" text="Buscar imagen" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <ImageView fx:id="imageViewCover" fitHeight="112.0" fitWidth="135.0" layoutX="743.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img/pngwing.com.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="209.0" layoutY="134.0" text="Campos disponibles para hacer cambios">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnRegresar" contentDisplay="CENTER" layoutX="704.0" layoutY="313.0" mnemonicParsing="false" onAction="#regresarAPrincipal" style="-fx-background-color: transparent;" text="Ir a pagina principal" textAlignment="CENTER" underline="true" wrapText="true">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
