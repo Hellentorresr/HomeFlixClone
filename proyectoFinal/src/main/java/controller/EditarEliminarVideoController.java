@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import view.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class EditarEliminarVideoController {
@@ -50,6 +52,13 @@ public class EditarEliminarVideoController {
     private TextField txtNombreVideo;
     private String image = "";
 
+    /**
+     *Metodo para mostrar information en el contenedor textArea
+     */
+    @FXML
+    void btnMostrarReporteEvent(ActionEvent event) throws SQLException {
+        textAreaReporte.setText(VideoDAOImplement.devolverInfo());
+    }
 
     /**
      * Metodo para mostrar mensaje
