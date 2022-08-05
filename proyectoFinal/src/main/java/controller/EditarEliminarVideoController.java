@@ -8,10 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import view.Main;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -45,6 +48,24 @@ public class EditarEliminarVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image = "";
+
+
+    /**
+     * Metodo para adjuntar imagen
+     */
+    @FXML
+    void handleBtnOpenFile(ActionEvent event) {
+        final FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Buscar Imagen");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            image = file.toString();
+            imageViewCover.setImage(new Image(file.toURI().toString()));
+        } else {
+            System.out.println("Archivo no encontrado");
+        }
+    }
 
 
     /**
