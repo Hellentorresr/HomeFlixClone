@@ -65,32 +65,39 @@ public class EditarEliminarVideoController {
         String cate = this.txtCategoria.getText();
         String desc = this.txtDescription.getText();
 
-        //primero lo obtengo
-        VideoDAO videoDAO = new VideoDAOImplement();
-        int codi = Integer.parseInt(this.txtCodigoParaEditar.getText());
+        if (this.txtCodigoParaEditar.getText().isEmpty()) {
+            mostrarMensaje("Favor ingresar un código para hacer los cambio");
+        } else if (!this.txtCodigoParaEditar.getText().isEmpty()) {
+            //primero lo obtengo
+            VideoDAO videoDAO = new VideoDAOImplement();
+            int codi = Integer.parseInt(this.txtCodigoParaEditar.getText());
+            Video video = videoDAO.get(codi);
 
-        Video video = videoDAO.get(codi);
-        if (videoDAO.getALL().contains(video)) {
-            System.out.println("viendo el video para update " + video);
-            if (!nombre.isEmpty()) {
-                video.setNombreVideo(nombre);
-                mostrarMensaje("Nombre del video cambiado correctamente");
+            if (videoDAO.getALL().contains(video)) {
+
+                if (!nombre.isEmpty()) {
+                    video.setNombreVideo(nombre);
+                    mostrarMensaje("Nombre del video cambiado correctamente");
+                }
+                if (!cate.isEmpty()) {
+                    video.setCategoryVideo(cate);
+                    mostrarMensaje("Categoría del video cambiado correctamente");
+                }
+                if (!desc.isEmpty()) {
+                    video.setDescription(desc);
+                    mostrarMensaje("Descripción del video cambiado correctamente");
+                }
+                if (!image.isEmpty()) {
+                    video.setCover(image);
+                    mostrarMensaje("Portada del video correctamente");
+                }
+
+                videoDAO.update(video);
+                mostrarMensaje("Video editado correctamente");
+
+            } else {
+                mostrarMensajeNegativo("código ingresado no existe");
             }
-            if (!cate.isEmpty()) {
-                video.setCategoryVideo(cate);
-                mostrarMensaje("Categoría del video cambiado correctamente");
-            }
-            if (!desc.isEmpty()) {
-                video.setDescription(desc);
-                mostrarMensaje("Descripción del video cambiado correctamente");
-            }
-            if (!image.isEmpty()) {
-                video.setCover(image);
-                mostrarMensaje("Portada del video correctamente");
-            }
-            videoDAO.update(video);
-        } else if (!videoDAO.getALL().contains(video) || this.txtCodigoParaEditar.getText().isEmpty()) {
-            mostrarMensajeNegativo("El código ingresado no existe favor intentar de nuevo");
         }
     }
 
