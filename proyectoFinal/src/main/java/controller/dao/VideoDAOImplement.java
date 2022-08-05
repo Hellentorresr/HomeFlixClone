@@ -26,13 +26,13 @@ public class VideoDAOImplement implements VideoDAO {
      * Metodo para obtener un video de la base de datos
      */
     @Override
-    public Video get(int indiceConteo) throws SQLException {
+    public Video get(int idVideo) throws SQLException {
         Video video = null;
         Connection daoConnection = BaseDeDatos.getConnection();
         //aqui se especifican el nombre de cada columna de la tablavideo de mi base de datos
         String sql = "SELECT id, nombre, categoria, fechaRegistro, descripcion, calificacion, imagenPortada, videoPath FROM videotabla WHERE id = ?";
         PreparedStatement ps = daoConnection.prepareStatement(sql);
-        ps.setInt(1, indiceConteo);//primer parametro
+        ps.setInt(1, idVideo);//primer parametro
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {//verificamos si tengo un record

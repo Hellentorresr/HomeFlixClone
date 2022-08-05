@@ -13,6 +13,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Video;
@@ -67,44 +68,58 @@ public class EditarEliminarVideoController {
         //primero lo obtengo
         VideoDAO videoDAO = new VideoDAOImplement();
         int codi = Integer.parseInt(this.txtCodigoParaEditar.getText());
+
         Video video = videoDAO.get(codi);
-        System.out.println("viendo el video para update " + video);
-        if (!nombre.isEmpty()) {
-            video.setNombreVideo(nombre);
-            mostrarMensaje();
+        if (videoDAO.getALL().contains(video)) {
+            System.out.println("viendo el video para update " + video);
+            if (!nombre.isEmpty()) {
+                video.setNombreVideo(nombre);
+                mostrarMensaje("Nombre del video cambiado correctamente");
+            }
+            if (!cate.isEmpty()) {
+                video.setCategoryVideo(cate);
+                mostrarMensaje("Categoría del video cambiado correctamente");
+            }
+            if (!desc.isEmpty()) {
+                video.setDescription(desc);
+                mostrarMensaje("Descripción del video cambiado correctamente");
+            }
+            if (!image.isEmpty()) {
+                video.setCover(image);
+                mostrarMensaje("Portada del video correctamente");
+            }
+            videoDAO.update(video);
+        } else if (!videoDAO.getALL().contains(video) || this.txtCodigoParaEditar.getText().isEmpty()) {
+            mostrarMensajeNegativo("El código ingresado no existe favor intentar de nuevo");
         }
-        if (!cate.isEmpty()) {
-            video.setCategoryVideo(cate);
-            mostrarMensaje();
-        }
-        if (!desc.isEmpty()) {
-            video.setDescription(desc);
-            mostrarMensaje();
-        }
-        if (!image.isEmpty()) {
-            video.setCover(image);
-            mostrarMensaje();
-        }
-        videoDAO.update(video);
     }
 
 
     /**
-     *Metodo para mostrar information en el contenedor textArea
+     * Metodo para mostrar information en el contenedor textArea
      */
     @FXML
     void btnMostrarReporteEvent(ActionEvent event) throws SQLException {
         textAreaReporte.setText(VideoDAOImplement.devolverInfo());
+        textAreaReporte.setFont(Font.font(18));
     }
 
     /**
      * Metodo para mostrar mensaje
      */
-    private void mostrarMensaje() {
+    private void mostrarMensaje(String string) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(null);
         alert.setTitle("Completado");
-        alert.setContentText("Cambios realizados correctamente!");
+        alert.setContentText(string);
+        alert.showAndWait();
+    }
+
+    private void mostrarMensajeNegativo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("ERROR");
+        alert.setContentText(mensaje);
         alert.showAndWait();
     }
 
@@ -127,11 +142,29 @@ public class EditarEliminarVideoController {
 
 
     /**
-     *Metodo para regresar a la página principal
+     * Metodo para regresar a la página principal
      */
     public void regresarAPrincipal(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) btnRegresar.getScene().getWindow();
         window.setScene(new Scene(root));
+    }
+
+    public void eliminarVideoMetodo(ActionEvent event) throws SQLException {
+        if (this.txtCodigoParaEliminar.getText().isEmpty()) {
+            mostrarMensajeNegativo("Favor ingrese un codigo para hacer la eliminacion");
+        }
+        //primero lo obtengo
+        VideoDAO videoDAO = new VideoDAOImplement();
+        Video video;
+        int codi = Integer.parseInt(this.txtCodigoParaEliminar.getText());
+        video = videoDAO.get(codi);
+        if (videoDAO.getALL().contains(video)) {
+            videoDAO.delete(video);
+            mostrarMensaje("Video borrado correctamente");
+
+        } else {
+            mostrarMensajeNegativo("Código no encontrado");
+        }
     }
 }
