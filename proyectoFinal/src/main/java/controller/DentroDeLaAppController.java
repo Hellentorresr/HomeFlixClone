@@ -100,7 +100,7 @@ public class DentroDeLaAppController implements Initializable {
 
     //--Methods---
     public void handleBtnIngresar() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignInForm.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignIn.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
