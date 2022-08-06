@@ -23,6 +23,8 @@ import java.util.Objects;
 
 public class PrincipalYSignIn {
     @FXML
+    private Button button_login;
+    @FXML
     private TextField tf_userName;
     @FXML
     private PasswordField tf_userPassword;
@@ -31,7 +33,7 @@ public class PrincipalYSignIn {
     @FXML
     private Button button_signUp;
 
-    public void login() throws SQLException{
+    public void login() throws SQLException {
         if (tf_userName.getText() == "" || tf_userPassword.getText() == "")
             loginMessage.setText("Datos incorrectos");
         else {
@@ -53,6 +55,7 @@ public class PrincipalYSignIn {
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     loginMessage.setText("Ingresado con exito");
+                    ingresarApp();
                 } else {
                     loginMessage.setText("Datos incorrectos");
                 }
@@ -62,6 +65,15 @@ public class PrincipalYSignIn {
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    /**
+     * Para enviar al usuario a la página de videos
+     */
+    public void ingresarApp() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Stage window = (Stage) button_login.getScene().getWindow();
+        window.setScene(new Scene(root));
     }
 
     public void IrACrearCuenta(ActionEvent event) throws IOException {
