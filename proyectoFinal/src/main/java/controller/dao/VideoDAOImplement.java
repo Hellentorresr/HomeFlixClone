@@ -96,8 +96,8 @@ public class VideoDAOImplement implements VideoDAO {
 
 
     @Override
-    public int insert(Video video) throws SQLException {
-        return 0;
+    public void insert(Video video) throws SQLException {
+
     }
 
     @Override
