@@ -50,6 +50,7 @@ public class SignUpController {
         usuario = new Usuario("","","","",0,"");
         UDI = new UsuarioDAOImplement();
         labelRegister = new Label();
+
     }
 
     public void registering() throws SQLException, ClassNotFoundException {
