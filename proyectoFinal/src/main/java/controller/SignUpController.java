@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dao.UsuarioDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,6 +24,7 @@ import java.sql.Statement;
 import java.util.Objects;
 
 public class SignUpController {
+    UsuarioDAOImplement UDI;
     Usuario usuario;
     /**
      * Atributos
@@ -42,9 +44,11 @@ public class SignUpController {
     public PasswordField tf_password;
     public PasswordField tf_passwordConfirm;
     public Label labelRegister;
+    private String img;
 
     public SignUpController(){
         usuario = new Usuario("","","","",0,"");
+        UDI = new UsuarioDAOImplement();
         labelRegister = new Label();
     }
 
@@ -63,30 +67,27 @@ public class SignUpController {
 
         usuario.setUserId(Integer.parseInt(txtIdSignUp.getText()));
         int id = usuario.getUserId();
+
         if(fName.isEmpty() || lName1.isEmpty() || nickName.isEmpty() || password.isEmpty()){
             labelRegister.setText("Rellene los campos vacios");
-            System.out.println("No");
         } else if (!confirmPassword()) {
             labelRegister.setText("Las contraseñas son diferentes");
-            System.out.println("casi");
         }else{
             labelRegister.setText("Usuario Registrado!");
-            System.out.println("si");
+            UDI.insertarUsuario(fName,lName1,nickName,password,id,img);
         }
 
     }
 
     public Boolean confirmPassword(){
         if(tf_password.getText().equals(tf_passwordConfirm.getText())){
-            System.out.println("entra");
             return true;
         }else{
-            System.out.println("no entra");
             return false;
         }
     }
 
-    public void handleBtnOpenFile(ActionEvent event) {
+    public String handleBtnOpenFile() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files","*.png", "*.jpg", "*.gif"));
@@ -94,8 +95,11 @@ public class SignUpController {
         if (file != null) {
             image = file.toString();
             imageView.setImage(new Image(file.toURI().toString()));
+            img = image;
+            return img;
         } else {
             System.out.println("Archivo no encontrado");
+            return null;
         }
     }
 
