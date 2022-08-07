@@ -17,9 +17,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.Usuario;
 import model.Video;
 import view.Main;
 
@@ -47,6 +50,9 @@ public class DentroDeLaAppController implements Initializable {
     @FXML
     public Button agregarVideo;
     public Button eliminarEditarVideo;
+    //para la foto y nombre del usuario que ingreso al sistema;
+    public ImageView fotoPerfil;
+    public Label nombreDeUsuario;
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
@@ -127,5 +133,16 @@ public class DentroDeLaAppController implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("EditarEliminarVideo.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
+    }
+
+    /**
+     * funcion para mostrar la info del usuario que ingreso
+     */
+    public void infoUsuario() {
+        Usuario u = new  Usuario();
+        Circle cir2 = new Circle(250,200,80);
+
+
+     //   cir2.setFill(new ImagePattern());
     }
 }
