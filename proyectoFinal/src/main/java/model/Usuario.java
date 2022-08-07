@@ -3,6 +3,9 @@ package model;
 import java.util.Objects;
 
 public class Usuario {
+    /**
+     * Atributos de la clase Usuario
+     */
     private String nombre;
     private String apellido1;
     private String userName;
@@ -19,12 +22,11 @@ public class Usuario {
         this.img = img;
     }
 
-    public Usuario() {
-    }
-
     /**
      *Se agrega constructor por defecto
      */
+    public Usuario() {
+    }
 
     public String getNombre() {
         return nombre;
