@@ -17,7 +17,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Video;
@@ -136,6 +138,7 @@ public class DentroDeLaAppController implements Initializable {
      * funcion para mostrar la info del usuario que ingreso
      */
     public void infoUsuario() {
-
+        Circle cir2 = new Circle(250,200,80);
+      //  cir2.setFill(new ImagePattern(fotoPerfil));
     }
 }
