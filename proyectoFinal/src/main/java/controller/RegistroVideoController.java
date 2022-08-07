@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Video;
 import view.Main;
 
 import java.io.File;
@@ -77,6 +78,7 @@ public class RegistroVideoController {
 
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
+        Video v = new Video();
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
         String desc = this.txtDescription.getText();
@@ -89,16 +91,20 @@ public class RegistroVideoController {
             alert.setContentText("Favor llenar todos los campos!");
             alert.showAndWait();
         } else {
-            VideoDAO videoDAO = new VideoDAOImplement();
-            videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setHeaderText(null);
-            alert.setTitle("Completado");
-            alert.setContentText("Se registro el nuevo catalogo!");
-            alert.showAndWait();
-            irPrincipal();
+            v = new Video(nombre, cate, desc, image, videoPath);
+            VideoDAOImplement videoDAOImplement = new VideoDAOImplement();
+            if (videoDAOImplement.getALL().contains(v)) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("No se pudo hacer el registrar el video, verificar si el video ya existe!");
+                alert.showAndWait();
+            } else {
+                VideoDAO videoDAO = new VideoDAOImplement();
+                videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
+                irPrincipal();
+            }
         }
-
     }
 
     public void irPrincipal() throws IOException {

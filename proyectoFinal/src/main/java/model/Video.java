@@ -148,6 +148,6 @@ public class Video {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Video video)) return false;
-        return isCalifica() == video.isCalifica() && getVideoId() == video.getVideoId() && Objects.equals(getNombreVideo(), video.getNombreVideo()) && Objects.equals(getCategoryVideo(), video.getCategoryVideo()) && Objects.equals(getFecha(), video.getFecha()) && Objects.equals(getDescription(), video.getDescription()) && Objects.equals(getCover(), video.getCover()) && Objects.equals(getVideoPath(), video.getVideoPath());
+        return this.videoPath.equals(video.videoPath);
     }
 }
