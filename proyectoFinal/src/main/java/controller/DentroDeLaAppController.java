@@ -30,6 +30,7 @@ import model.Video;
 import view.Main;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -46,6 +47,10 @@ public class DentroDeLaAppController implements Initializable {
     public static Button button2 = new Button();
     //
     private static ArrayList<Video> videosBaseDatos = new ArrayList<>();
+    private static String imagen;
+    //para la foto y nombre del usuario que ingreso al sistema;
+    @FXML
+    public ImageView fotoPerfil;
     @FXML
     public Button btnCerrar;
     @FXML
@@ -53,23 +58,27 @@ public class DentroDeLaAppController implements Initializable {
     @FXML
     public Button agregarVideo;
     public Button eliminarEditarVideo;
-    //para la foto y nombre del usuario que ingreso al sistema;
-    public ImageView fotoPerfil;
     public Label nombreDeUsuario;
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
     public Button btnBuscar;
-
+    //
+    UsuarioDAOImplement UDI;
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
+
+    public DentroDeLaAppController() {
+        UDI = new UsuarioDAOImplement();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         VideoDAO videoDAO = new VideoDAOImplement();
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
-        } catch (SQLException e) {
+            nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         recientesPlayed = new ArrayList<>(videosBaseDatos);
@@ -142,19 +151,6 @@ public class DentroDeLaAppController implements Initializable {
         window.setScene(new Scene(root));
     }
 
-    /**
-     * funcion para mostrar la info del usuario que ingreso
-     */
-    public void infoUsuario() {
-
-        /*UDI.get(UDI.getUserId()).getUserName()+ UDI.get(UDI.getUserId()).getImg();
-        Usuario u = new Usuario();
-        Circle cir2 = new Circle(250, 200, 80);*/
-
-
-        //   cir2.setFill(new ImagePattern());
-    }
-
     public Video buscarVideo(ActionEvent event) {
         String busqueda = this.buscarPlaceholder.getText();
         Video video = new Video();
@@ -163,7 +159,7 @@ public class DentroDeLaAppController implements Initializable {
         } else {
             VideoDAO videoDAO = new VideoDAOImplement();
             try {
-               videoDAO.getALL();
+                videoDAO.getALL();
                 for (int i = 0; i < videosBaseDatos.size(); i++) {
                     busqueda = videosBaseDatos.get(i).getNombreVideo();
                 }
@@ -171,7 +167,7 @@ public class DentroDeLaAppController implements Initializable {
                 throw new RuntimeException(e);
             }
 
-            mostrarMensaje("Video encontrado");
+            // mostrarMensaje("Video encontrado");
         }
         return video;
     }
