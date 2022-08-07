@@ -19,6 +19,13 @@ public class Usuario {
         this.img = img;
     }
 
+    public Usuario() {
+    }
+
+    /**
+     *Se agrega constructor por defecto
+     */
+
     public String getNombre() {
         return nombre;
     }
