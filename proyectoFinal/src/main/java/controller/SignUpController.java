@@ -71,30 +71,37 @@ public class SignUpController {
             alert.setTitle("Incompleto");
             alert.setContentText("Introduzca su identificación");
             alert.showAndWait();
-        }else{
+        } else{
             usuario.setUserId(Integer.parseInt(txtIdSignUp.getText()));
         }
         int id = usuario.getUserId();
+        boolean verificandoId = UDI.verificarId(id);
 
         if(fName.isEmpty() || lName1.isEmpty() || nickName.isEmpty() || password.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setTitle("Completado");
+            alert.setTitle("Error");
             alert.setContentText("Rellene los espacios en blanco");
             alert.showAndWait();
         } else if (!confirmPassword()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setTitle("Completado");
+            alert.setTitle("Error");
             alert.setContentText("Las contraseñas son distintas");
             alert.showAndWait();
         }else if(txtIdSignUp == null || txtIdSignUp.equals("")){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setTitle("Completado");
+            alert.setTitle("Error");
             alert.setContentText("Ingrese su identificación");
             alert.showAndWait();
-        }else{
+        } else if (verificandoId == true) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("La identificacion ya fue registrada");
+            alert.showAndWait();
+        } else{
 
             if(validarContrasena(password)) {
 
