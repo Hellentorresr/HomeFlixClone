@@ -179,12 +179,12 @@
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="44.0" prefWidth="624.0" styleClass="search-container" stylesheets="@style/styles.css">
                             <children>
-                                <TextField alignment="TOP_LEFT" prefHeight="44.0" prefWidth="516.0" promptText="Buscar " style="-fx-background-color: transparent;">
+                                <TextField fx:id="buscarPlaceholder" alignment="TOP_LEFT" prefHeight="44.0" prefWidth="516.0" promptText="Buscar " style="-fx-background-color: transparent;">
                                     <font>
                                         <Font size="20.0" />
                                     </font>
                                 </TextField>
-                                <Button mnemonicParsing="false" prefHeight="48.0" prefWidth="74.0" style="-fx-cursor: hand;" styleClass="upgrade-button" stylesheets="@style/styles.css">
+                                <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarVideo" prefHeight="48.0" prefWidth="74.0" style="-fx-cursor: hand;" styleClass="upgrade-button" stylesheets="@style/styles.css">
                                     <HBox.margin>
                                         <Insets left="10.0" />
                                     </HBox.margin>

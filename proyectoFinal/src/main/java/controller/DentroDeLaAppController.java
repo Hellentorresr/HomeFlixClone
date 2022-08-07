@@ -1,5 +1,6 @@
 package controller;
 
+import controller.dao.UsuarioDAOImplement;
 import controller.dao.VideoDAO;
 import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
@@ -10,9 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -53,6 +56,10 @@ public class DentroDeLaAppController implements Initializable {
     //para la foto y nombre del usuario que ingreso al sistema;
     public ImageView fotoPerfil;
     public Label nombreDeUsuario;
+    //Para la búsqueda de un video
+    public TextField buscarPlaceholder;
+    public Button btnBuscar;
+
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
@@ -139,10 +146,49 @@ public class DentroDeLaAppController implements Initializable {
      * funcion para mostrar la info del usuario que ingreso
      */
     public void infoUsuario() {
-        Usuario u = new  Usuario();
-        Circle cir2 = new Circle(250,200,80);
+
+        /*UDI.get(UDI.getUserId()).getUserName()+ UDI.get(UDI.getUserId()).getImg();
+        Usuario u = new Usuario();
+        Circle cir2 = new Circle(250, 200, 80);*/
 
 
-     //   cir2.setFill(new ImagePattern());
+        //   cir2.setFill(new ImagePattern());
+    }
+
+    public Video buscarVideo(ActionEvent event) {
+        String busqueda = this.buscarPlaceholder.getText();
+        Video video = new Video();
+        if (busqueda.isEmpty()) {
+            mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
+        } else {
+            VideoDAO videoDAO = new VideoDAOImplement();
+            try {
+               videoDAO.getALL();
+                for (int i = 0; i < videosBaseDatos.size(); i++) {
+                    busqueda = videosBaseDatos.get(i).getNombreVideo();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            mostrarMensaje("Video encontrado");
+        }
+        return video;
+    }
+
+    private void mostrarMensaje(String busqueda) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Completado");
+        alert.setContentText(busqueda);
+        alert.showAndWait();
+    }
+
+    private void mostrarMensajeNegativo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("ERROR");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
