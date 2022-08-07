@@ -47,6 +47,9 @@ public class DentroDeLaAppController implements Initializable {
     @FXML
     public Button agregarVideo;
     public Button eliminarEditarVideo;
+    //para la foto y nombre del usuario que ingreso al sistema;
+    public ImageView fotoPerfil;
+    public Label nombreDeUsuario;
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
@@ -127,5 +130,12 @@ public class DentroDeLaAppController implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("EditarEliminarVideo.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
+    }
+
+    /**
+     * funcion para mostrar la info del usuario que ingreso
+     */
+    public void infoUsuario() {
+
     }
 }
