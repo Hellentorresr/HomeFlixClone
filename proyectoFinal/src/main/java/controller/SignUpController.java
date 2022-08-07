@@ -5,10 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -18,6 +16,7 @@ import view.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -69,14 +68,81 @@ public class SignUpController {
         int id = usuario.getUserId();
 
         if(fName.isEmpty() || lName1.isEmpty() || nickName.isEmpty() || password.isEmpty()){
-            labelRegister.setText("Rellene los campos vacios");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Completado");
+            alert.setContentText("Rellene los espacios en blanco");
+            alert.showAndWait();
         } else if (!confirmPassword()) {
-            labelRegister.setText("Las contraseñas son diferentes");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Completado");
+            alert.setContentText("Las contraseñas son distintas");
+            alert.showAndWait();
+        }else if(txtIdSignUp == null || txtIdSignUp.equals("")){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Completado");
+            alert.setContentText("Ingrese su identificación");
+            alert.showAndWait();
         }else{
-            labelRegister.setText("Usuario Registrado!");
-            UDI.insertarUsuario(fName,lName1,nickName,password,id,img);
+
+            if(validarContrasena(password)) {
+
+            }else{
+                labelRegister.setText("Usuario Registrado!");
+                UDI.insertarUsuario(fName,lName1,nickName,password,id,img);
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setTitle("Completado");
+                alert.setContentText("El usuario ha sido registrado");
+                alert.showAndWait();
+            }
+
         }
 
+    }
+
+    public Boolean validarContrasena(String password){
+        Boolean error = false;
+        char especiales[] =  {'!','@','#','$','%','^','&','*','(',')','-','_','=','+','{','}',':',';','"',',','.','<','>','?','/'};
+        int isUpper = 0;
+        int isLower = 0;
+        int isDigit = 0;
+        int isSpecial = 0;
+        if(password.length()>8 || password.length()<6){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Incorrecto");
+            alert.setContentText("La contraseña debe contener de 6 a 8 caracteres");
+            alert.showAndWait();
+            error = true;
+        }
+        for (int i = 0; i < password.length(); i++) {
+            char letra = password.charAt(i);
+            if(Character.isUpperCase(letra)){
+                isUpper++;
+            } else if (Character.isLowerCase(letra)) {
+                isLower++;
+            } else if (Character.isDigit(letra)) {
+                isDigit++;
+            }
+            for (int j = 0; j < 25; j++) {
+                if(letra == especiales[j]){
+                    isSpecial++;
+                }
+            }
+
+        }
+        if(!(isUpper>0&&isLower>0&&isDigit>0&&isSpecial>0)){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Incorrecto");
+            alert.setContentText("La contraseña debe contener almenos un caracter especial, un número, una letra minúscula y una mayúscula");
+            alert.showAndWait();
+            error = true;
+        }
+        return error;
     }
 
     public Boolean confirmPassword(){
