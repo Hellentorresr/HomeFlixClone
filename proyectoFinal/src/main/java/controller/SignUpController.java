@@ -65,7 +65,15 @@ public class SignUpController {
         usuario.setUserPassword(tf_password.getText());
         String password = usuario.getUserPassword();
 
-        usuario.setUserId(Integer.parseInt(txtIdSignUp.getText()));
+        if( txtIdSignUp.getText()==""){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Incompleto");
+            alert.setContentText("Introduzca su identificación");
+            alert.showAndWait();
+        }else{
+            usuario.setUserId(Integer.parseInt(txtIdSignUp.getText()));
+        }
         int id = usuario.getUserId();
 
         if(fName.isEmpty() || lName1.isEmpty() || nickName.isEmpty() || password.isEmpty()){
