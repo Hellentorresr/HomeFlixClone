@@ -66,7 +66,7 @@ public class VideoDAOImplement implements VideoDAO {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Video video = new Video();
+            Video video;
             int oid = rs.getInt("id");// guardando en oid el índice o conteo del video si lo encontró
             String nombreVideo = rs.getString("nombre");
             String categoria = rs.getString("categoria");
@@ -157,5 +157,17 @@ public class VideoDAOImplement implements VideoDAO {
         BaseDeDatos.closePreparedStatement(ps);
         BaseDeDatos.closeConnection(connection);
         return result;
+    }
+
+    public static Video videoGet(String nombre, String categoria) throws SQLException {
+        Video video = null;
+        Connection daoConnection = BaseDeDatos.getConnection();
+
+        String sql = "SELECT id, nombre, categoria, fechaRegistro, descripcion, calificacion, imagenPortada, videoPath FROM videotabla WHERE id = ?";
+        PreparedStatement ps = daoConnection.prepareStatement(sql);
+     //   ps.setInt(1, idVideo);//primer parametro
+        ResultSet rs = ps.executeQuery();
+
+        return video;
     }
 }
