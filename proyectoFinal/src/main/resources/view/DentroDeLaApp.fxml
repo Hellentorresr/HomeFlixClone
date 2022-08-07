@@ -210,7 +210,10 @@
                             <children>
                                 <Pane prefHeight="52.0" prefWidth="76.0" styleClass="imageViewPerfil" stylesheets="@style/styles.css">
                                     <children>
-                                        <ImageView fx:id="fotoPerfil" fitHeight="54.0" fitWidth="71.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true" />
+                                        <ImageView fx:id="fotoPerfil" fitHeight="54.0" fitWidth="71.0" layoutX="3.0" layoutY="2.0" pickOnBounds="true">
+                                 <image>
+                                    <Image url="@img/pngwing.com.png" />
+                                 </image></ImageView>
                                     </children>
                                 </Pane>
                                 <Label fx:id="nombreDeUsuario" prefHeight="17.0" prefWidth="134.0" text="Nombre Usuario" textFill="WHITE">
