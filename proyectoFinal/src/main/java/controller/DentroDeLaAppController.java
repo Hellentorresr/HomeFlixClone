@@ -20,29 +20,21 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.Usuario;
 import model.Video;
 import view.Main;
-
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DentroDeLaAppController implements Initializable {
-    //listas
-    public static List<Video> recientesPlayed = new ArrayList<>();
     public static String test;
     public static Button button2 = new Button();
     //
@@ -156,13 +148,13 @@ public class DentroDeLaAppController implements Initializable {
         window.setScene(new Scene(root));
     }
 
-    //se agrega esta funcion para ser usada como tes
+    //se agrega esta function para ser usada como tes
     @FXML
     public Video buscarVideo() {
         String busqueda = this.buscarPlaceholder.getText();
         Video video = new Video();
         if (busqueda.isEmpty()) {
-            mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
+            mostrarMensajeNegativo();
         } else {
             VideoDAO videoDAO = new VideoDAOImplement();
             try {
@@ -183,11 +175,11 @@ public class DentroDeLaAppController implements Initializable {
     }
 
 
-    private void mostrarMensajeNegativo(String mensaje) {
+    private void mostrarMensajeNegativo() {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setTitle("ERROR");
-        alert.setContentText(mensaje);
+        alert.setContentText("Favor ingrese el nombre del video que desea encontrar");
         alert.showAndWait();
     }
 }
