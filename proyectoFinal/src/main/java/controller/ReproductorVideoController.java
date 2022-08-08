@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,10 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Video;
 import view.Main;
 
 import java.io.File;
@@ -43,16 +40,14 @@ public class ReproductorVideoController implements Initializable {
     /**
      * Atributos de la clase ReproductorVideoController
      */
-    //para configurar la preferencia
     public Button regresar;
-    public Button noLike;
-    public Button like;
 
     @FXML
     private VBox vboxParent;
     @FXML
     private MediaView mvVideo;
     private MediaPlayer mpVideo;
+    private Media mediaVideo;
 
     @FXML
     private HBox hboxControls;
@@ -101,19 +96,13 @@ public class ReproductorVideoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
         final int IV_SIZE = 25;
-        Media mediaVideo = new Media(new File(DentroDeLaAppController.videoPlaying.getVideoPath()).toURI().toString());
-        Video video = DentroDeLaAppController.videoPlaying;
-        RegistroVideoController.actualizarPreferencia(video, like, noLike);
-        if (video.isCalifica()) {
-            like.setTextFill(Paint.valueOf("Green"));
-            Image imagePlay = new Image(new File("src/media/meGusta.png").toURI().toString());
-            ImageView m = new ImageView(imagePlay);
-            m.setFitHeight(IV_SIZE);
-            m.setFitWidth(IV_SIZE);
-            like.setGraphic(m);
-            like.setCursor(Cursor.cursor("hand"));
+        System.out.println(DentroDeLaAppController.test);
+        for (int i = 0; i < DentroDeLaAppController.video.size(); i++) {
+            mediaVideo = new Media(new File(DentroDeLaAppController.test).toURI().toString());
         }
-
+        //this is the video that I'm going to be playing
+        // mediaVideo = new Media(new File("src/media/JessicaDarrow.mp4").toURI().toString());
+        //with this object I can call methods like play,stop, pause
         //the mediaPlayer wraps the media object
         mpVideo = new MediaPlayer(mediaVideo);
         //this displays the media that we want to display
@@ -337,7 +326,6 @@ public class ReproductorVideoController implements Initializable {
             }
         });
     }
-
     public void bindCurrentTimeLabel() {
         labelCurrentTime.textProperty().bind(Bindings.createStringBinding(new Callable<String>() {
             @Override
@@ -383,9 +371,5 @@ public class ReproductorVideoController implements Initializable {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) regresar.getScene().getWindow();
         window.setScene(new Scene(root));
-    }
-
-    public void preferencia(ActionEvent event) {
-
     }
 }
