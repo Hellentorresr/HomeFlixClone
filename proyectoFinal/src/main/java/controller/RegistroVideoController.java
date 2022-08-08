@@ -102,6 +102,7 @@ public class RegistroVideoController {
             } else {
                 VideoDAO videoDAO = new VideoDAOImplement();
                 videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
+                mostrarMensaje("Video registrado correctamente!");
                 irPrincipal();
             }
         }
@@ -111,6 +112,14 @@ public class RegistroVideoController {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) irHome.getScene().getWindow();
         window.setScene(new Scene(root));
+    }
+
+    private void mostrarMensaje(String busqueda) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Completado");
+        alert.setContentText(busqueda);
+        alert.showAndWait();
     }
 }
 
