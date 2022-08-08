@@ -10,5 +10,5 @@ import java.time.LocalDate;
  */
 public interface VideoDAO extends DAO<Video> {
 
-    int insert(String nombreVideo, String categoryVideo, LocalDate fecha, String description, boolean califica, String cover, String videoPath) throws SQLException;
+    int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) throws SQLException;
 }

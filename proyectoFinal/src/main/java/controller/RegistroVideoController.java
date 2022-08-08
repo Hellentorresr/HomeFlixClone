@@ -49,6 +49,29 @@ public class RegistroVideoController {
     private TextField txtNombreVideo;
     private String image;
 
+    //probando
+    public static void actualizarPreferencia(Video video, Button like, Button noLike) {
+        VideoDAO videoDAO = new VideoDAOImplement();
+        like.setOnAction(event -> {
+            like.setText("Si me gusta");
+            video.setCalifica(true);
+            try {
+                videoDAO.update(video);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        noLike.setOnAction(event -> {
+            video.setCalifica(false);
+            try {
+                videoDAO.update(video);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
     @FXML
     void handleBtnOpenFile(ActionEvent event) {
         final FileChooser fileChooser = new FileChooser();
@@ -78,6 +101,7 @@ public class RegistroVideoController {
 
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
+        VideoDAO videoDAO = new VideoDAOImplement();
         Video v;
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
@@ -91,17 +115,16 @@ public class RegistroVideoController {
             alert.setContentText("Favor llenar todos los campos!");
             alert.showAndWait();
         } else {
-            v = new Video(nombre, cate, desc, image, videoPath);
-            VideoDAOImplement videoDAOImplement = new VideoDAOImplement();
-            if (videoDAOImplement.getALL().contains(v)) {
+            v = new Video(nombre, cate, desc, image, videoPath,fecha);
+            if (videoDAO.getALL().contains(v)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
                 alert.setContentText("No se pudo hacer el registrar el video, verificar si el video ya existe!");
                 alert.showAndWait();
             } else {
-                VideoDAO videoDAO = new VideoDAOImplement();
-                videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
+                videoDAO.insert(nombre, cate,  desc, image, videoPath,fecha);
+                mostrarMensaje("Video registrado correctamente!");
                 irPrincipal();
             }
         }
@@ -111,6 +134,14 @@ public class RegistroVideoController {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) irHome.getScene().getWindow();
         window.setScene(new Scene(root));
+    }
+
+    private void mostrarMensaje(String busqueda) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Completado");
+        alert.setContentText(busqueda);
+        alert.showAndWait();
     }
 }
 

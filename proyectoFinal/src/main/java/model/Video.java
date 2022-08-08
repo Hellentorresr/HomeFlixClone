@@ -36,12 +36,13 @@ public class Video {
     public Video() {
     }
 
-    public Video(String nombreVideo, String categoryVideo, String description, String cover, String videoPath) {
+    public Video(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) {
         this.nombreVideo = nombreVideo;
         this.categoryVideo = categoryVideo;
         this.description = description;
         this.cover = cover;
         this.videoPath = videoPath;
+        this.fecha = fecha;
     }
 
     /**

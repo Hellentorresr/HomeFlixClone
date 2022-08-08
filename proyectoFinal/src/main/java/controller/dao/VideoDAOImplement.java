@@ -12,6 +12,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class VideoDAOImplement implements VideoDAO {
+    private ArrayList<Video> videos;
+    private boolean bandera;
+
+    public VideoDAOImplement() {
+        bandera = true;
+        videos = new ArrayList<>();
+    }
 
     public static String devolverInfo() throws SQLException {
         VideoDAO videoDAO = new VideoDAOImplement();
@@ -57,15 +64,11 @@ public class VideoDAOImplement implements VideoDAO {
     @Override
     public ArrayList<Video> getALL() throws SQLException {
         Connection connection = BaseDeDatos.getConnection();
-
-        ArrayList<Video> videos = new ArrayList<>();
-
         String sql = "SELECT * from videotabla";
-
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
-
         while (rs.next()) {
+
             Video video;
             int oid = rs.getInt("id");// guardando en oid el índice o conteo del video si lo encontró
             String nombreVideo = rs.getString("nombre");
@@ -94,15 +97,15 @@ public class VideoDAOImplement implements VideoDAO {
         return 0;
     }
 
-
     @Override
     public void insert(Video video) throws SQLException {
 
     }
 
     @Override
-    public int insert(String nombreVideo, String categoryVideo, LocalDate fecha, String description, boolean califica, String cover, String videoPath) throws SQLException {
-        Video video = new Video(nombreVideo, categoryVideo, fecha, description, califica, cover, videoPath);
+    public int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) throws SQLException {
+        Video video = new Video(nombreVideo, categoryVideo, description, cover, videoPath, fecha);
+
         Connection connection = BaseDeDatos.getConnection();
         String sql = "INSERT INTO videotabla (nombre, categoria, fechaRegistro, descripcion, calificacion, imagenPortada, videoPath) VAlUES (?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -157,17 +160,5 @@ public class VideoDAOImplement implements VideoDAO {
         BaseDeDatos.closePreparedStatement(ps);
         BaseDeDatos.closeConnection(connection);
         return result;
-    }
-
-    public static Video videoGet(String nombre, String categoria) throws SQLException {
-        Video video = null;
-        Connection daoConnection = BaseDeDatos.getConnection();
-
-        String sql = "SELECT id, nombre, categoria, fechaRegistro, descripcion, calificacion, imagenPortada, videoPath FROM videotabla WHERE id = ?";
-        PreparedStatement ps = daoConnection.prepareStatement(sql);
-     //   ps.setInt(1, idVideo);//primer parametro
-        ResultSet rs = ps.executeQuery();
-
-        return video;
     }
 }
