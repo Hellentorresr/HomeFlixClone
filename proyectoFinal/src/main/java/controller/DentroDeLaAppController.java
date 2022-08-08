@@ -46,8 +46,7 @@ public class DentroDeLaAppController implements Initializable {
     public static String test;
     public static Button button2 = new Button();
     //
-    private static ArrayList<Video> videosBaseDatos = new ArrayList<>();
-    private static String imagen;
+    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     //para la foto y nombre del usuario que ingreso al sistema;
     @FXML
     public ImageView fotoPerfil;
@@ -80,35 +79,36 @@ public class DentroDeLaAppController implements Initializable {
 
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
             String img = UDI.get(UDI.getUserId()).getImg();
-            fotoPerfil.setImage(new Image("file:///" + UDI.get(UDI.getUserId()).getImg()));
-            System.out.println("probando img" + img);
+            File nuevo = new File(img);
+            Image image = new Image(nuevo.toURI().toString());
+            fotoPerfil.setImage(image);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        recientesPlayed = new ArrayList<>(videosBaseDatos);
+        // recientesPlayed = new ArrayList<>(videosBaseDatos);
 
-        for (int i = 0; i < recientesPlayed.size(); i++) {
+        for (int i = 0; i < videosBaseDatos.size(); i++) {
             ImageView img = new ImageView();
             img.setFitWidth(200);
             img.setFitHeight(200);
-            img.setImage(new Image("file:///" + recientesPlayed.get(i).getCover()));
+            img.setImage(new Image("file:///" + videosBaseDatos.get(i).getCover()));
             VBox vBox = new VBox(img);
 
             Label nombre = new Label();
-            nombre.setText(recientesPlayed.get(i).getNombreVideo());
+            nombre.setText(videosBaseDatos.get(i).getNombreVideo());
             vBox.getChildren().add(nombre);
             nombre.setFont(Font.font(16));
             nombre.setTextFill(Paint.valueOf("#fff"));
 
 
-            button2 = new Button(recientesPlayed.get(i).getVideoPath());
+            button2 = new Button(videosBaseDatos.get(i).getVideoPath());
             button2.setTextFill(Paint.valueOf("Red"));
             button2.setCursor(Cursor.cursor("hand"));
 
             int finalI = i;
             button2.setOnAction(event -> {
-                test = recientesPlayed.get(finalI).getVideoPath();
+                test = videosBaseDatos.get(finalI).getVideoPath();
                 Parent root;
                 try {
                     root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
@@ -170,7 +170,7 @@ public class DentroDeLaAppController implements Initializable {
                 for (Video iterator : videos) {
                     if (iterator.getNombreVideo().equals(busqueda) || iterator.getCategoryVideo().equals(busqueda)) {
                         video = iterator;
-                        System.out.println("video encontrado"+video);
+                        System.out.println("video encontrado" + video);
                         break;
                     }
                 }
@@ -182,14 +182,6 @@ public class DentroDeLaAppController implements Initializable {
         return video;
     }
 
-
-    private void mostrarMensaje(String busqueda) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Completado");
-        alert.setContentText(busqueda);
-        alert.showAndWait();
-    }
 
     private void mostrarMensajeNegativo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
