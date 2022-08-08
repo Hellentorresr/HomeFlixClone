@@ -6,19 +6,31 @@ import model.Usuario;
 import model.Video;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAOImplement implements DAOUsuario{
+public class UsuarioDAOImplement implements DAOUsuario {
+    boolean nuevoUsurio;
+    ArrayList<Usuario> usuarios;
+    Usuario usuario;
+
+    public UsuarioDAOImplement() {
+        nuevoUsurio = true;
+        usuarios = new ArrayList<>();
+        usuario = new Usuario();
+    }
 
     @Override
     public Usuario get(int userId) throws SQLException {
-        Usuario usuario = null;
+        if(nuevoUsurio){
+
+        }
         BaseDeDatos connection = new BaseDeDatos();
         Connection connectDB = connection.getConnection();
         String getUsuario = "select nombre, apellido,userName, userPassword, id, imagen from usuarios where id = " + "'" + userId + "'";
         PreparedStatement preparedStatement = connectDB.prepareStatement(getUsuario);
         ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()){
+        if (resultSet.next()) {
             String nombre = resultSet.getString("nombre");
             String apellido = resultSet.getString("apellido");
             String userName = resultSet.getString("userName");
@@ -26,8 +38,10 @@ public class UsuarioDAOImplement implements DAOUsuario{
             int id = resultSet.getInt("id");
             String imagen = resultSet.getString("imagen");
 
-            usuario = new Usuario(nombre,apellido,userName,userPassword,id,imagen);
+            usuario = new Usuario(nombre, apellido, userName, userPassword, id, imagen);
         }
+
+
         return usuario;
 
     }
@@ -44,6 +58,21 @@ public class UsuarioDAOImplement implements DAOUsuario{
 
     @Override
     public void insert(Usuario usuario) throws SQLException {
+        nuevoUsurio = true;
+        BaseDeDatos connection = new BaseDeDatos();
+        Connection connectDB = connection.getConnection();
+
+        String insertInfo = "insert into usuarios(nombre, apellido,userName, userPassword, id, imagen) values ('" + usuario.getNombre() + "','" + usuario.getApellido1() + "','" + usuario.getUserName() + "','" + usuario.getUserPassword() + "','" + usuario.getUserPassword() + "','" + usuario.getImg() + "')";
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(insertInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        BaseDeDatos.closeConnection(connectDB);
+        usuarios.add(new Usuario(usuario.getNombre(),usuario.getApellido1(),usuario.getUserName(),usuario.getUserPassword(),usuario.getUserId(),usuario.getImg()));
 
     }
 
@@ -52,11 +81,11 @@ public class UsuarioDAOImplement implements DAOUsuario{
         BaseDeDatos connection = new BaseDeDatos();
         Connection connectDB = connection.getConnection();
 
-        String insertInfo = "insert into usuarios(nombre, apellido,userName, userPassword, id, imagen) values ('" + nombre + "','" + apellido1  + "','" + userName + "','" + userPassword + "','" + userId + "','" + img + "')";
-        try{
+        String insertInfo = "insert into usuarios(nombre, apellido,userName, userPassword, id, imagen) values ('" + nombre + "','" + apellido1 + "','" + userName + "','" + userPassword + "','" + userId + "','" + img + "')";
+        try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(insertInfo);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
@@ -84,9 +113,9 @@ public class UsuarioDAOImplement implements DAOUsuario{
             ResultSet queryResult = statement.executeQuery(verifyId);
             queryResult.next();
             if (queryResult.getInt(1) == 1) {
-                    error = true;
+                error = true;
             } else {
-                    error = false;
+                error = false;
             }
         } catch (Exception e) {
             System.out.println("Error");
