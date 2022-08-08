@@ -71,15 +71,9 @@ public class DentroDeLaAppController implements Initializable {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
 
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
-            String img = UDI.get(UDI.getUserId()).getImg();
-            File nuevo = new File(img);
-            Image image = new Image(nuevo.toURI().toString());
-            fotoPerfil.setImage(image);
-
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        // recientesPlayed = new ArrayList<>(videosBaseDatos);
 
         for (int i = 0; i < videosBaseDatos.size(); i++) {
             ImageView img = new ImageView();
