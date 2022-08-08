@@ -53,7 +53,7 @@ public class DentroDeLaAppController implements Initializable {
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
     public Button btnBuscar;
-    public ImageView portadaEncontrada;
+
     public Label videoEncontrado;
     //
     UsuarioDAOImplement UDI;
@@ -142,7 +142,7 @@ public class DentroDeLaAppController implements Initializable {
     //se agrega esta funcion para ser usada como tes
     @FXML
     public Video buscarVideo() {
-        String busqueda = this.buscarPlaceholder.getText();
+        String busqueda = buscarPlaceholder.getText();
         Video video = new Video();
         recentlyPlayedContainer.getChildren().clear();
         if (busqueda.isEmpty()) {
