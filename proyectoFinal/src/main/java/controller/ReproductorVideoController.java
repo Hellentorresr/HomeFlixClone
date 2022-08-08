@@ -97,7 +97,7 @@ public class ReproductorVideoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
         final int IV_SIZE = 25;
         System.out.println(DentroDeLaAppController.test);
-        for (int i = 0; i < DentroDeLaAppController.recientesPlayed.size(); i++) {
+        for (int i = 0; i < DentroDeLaAppController.video.size(); i++) {
             mediaVideo = new Media(new File(DentroDeLaAppController.test).toURI().toString());
         }
         //this is the video that I'm going to be playing
