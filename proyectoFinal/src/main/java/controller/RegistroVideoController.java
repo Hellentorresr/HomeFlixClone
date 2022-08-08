@@ -78,7 +78,7 @@ public class RegistroVideoController {
 
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
-        Video v = new Video();
+        Video v;
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
         String desc = this.txtDescription.getText();
