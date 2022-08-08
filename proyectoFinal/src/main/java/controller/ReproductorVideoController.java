@@ -104,14 +104,15 @@ public class ReproductorVideoController implements Initializable {
         Media mediaVideo = new Media(new File(DentroDeLaAppController.videoPlaying.getVideoPath()).toURI().toString());
         Video video = DentroDeLaAppController.videoPlaying;
         RegistroVideoController.actualizarPreferencia(video, like, noLike);
-        if(video.isCalifica()){
+        if (video.isCalifica()) {
             like.setTextFill(Paint.valueOf("Green"));
+            Image imagePlay = new Image(new File("src/media/meGusta.png").toURI().toString());
+            ImageView m = new ImageView(imagePlay);
+            m.setFitHeight(IV_SIZE);
+            m.setFitWidth(IV_SIZE);
+            like.setGraphic(m);
             like.setCursor(Cursor.cursor("hand"));
-        }else {
-            noLike.setTextFill(Paint.valueOf("red"));
-            noLike.setCursor(Cursor.cursor("hand"));
         }
-        System.out.println("viene del reproductor " + video);
 
         //the mediaPlayer wraps the media object
         mpVideo = new MediaPlayer(mediaVideo);
