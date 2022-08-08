@@ -77,13 +77,18 @@ public class DentroDeLaAppController implements Initializable {
         VideoDAO videoDAO = new VideoDAOImplement();
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
+
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
+            String img = UDI.get(UDI.getUserId()).getImg();
+            fotoPerfil.setImage(new Image("file:///" + UDI.get(UDI.getUserId()).getImg()));
+            System.out.println("probando img" + img);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         recientesPlayed = new ArrayList<>(videosBaseDatos);
-        int i;
-        for (i = 0; i < recientesPlayed.size(); i++) {
+
+        for (int i = 0; i < recientesPlayed.size(); i++) {
             ImageView img = new ImageView();
             img.setFitWidth(200);
             img.setFitHeight(200);
@@ -151,7 +156,9 @@ public class DentroDeLaAppController implements Initializable {
         window.setScene(new Scene(root));
     }
 
-    public Video buscarVideo(ActionEvent event) {
+    //se agrega esta funcion para ser usada como tes
+    @FXML
+    public Video buscarVideo() {
         String busqueda = this.buscarPlaceholder.getText();
         Video video = new Video();
         if (busqueda.isEmpty()) {
@@ -159,18 +166,22 @@ public class DentroDeLaAppController implements Initializable {
         } else {
             VideoDAO videoDAO = new VideoDAOImplement();
             try {
-                videoDAO.getALL();
-                for (int i = 0; i < videosBaseDatos.size(); i++) {
-                    busqueda = videosBaseDatos.get(i).getNombreVideo();
+                ArrayList<Video> videos = new ArrayList<>(videoDAO.getALL());
+                for (Video iterator : videos) {
+                    if (iterator.getNombreVideo().equals(busqueda) || iterator.getCategoryVideo().equals(busqueda)) {
+                        video = iterator;
+                        System.out.println("video encontrado"+video);
+                        break;
+                    }
                 }
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
-            // mostrarMensaje("Video encontrado");
         }
         return video;
     }
+
 
     private void mostrarMensaje(String busqueda) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
