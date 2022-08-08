@@ -5,7 +5,6 @@ import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -14,7 +13,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Video;
@@ -65,7 +63,6 @@ public class RegistroVideoController {
         });
 
         noLike.setOnAction(event -> {
-            noLike.setText("No me gusta");
             video.setCalifica(false);
             try {
                 videoDAO.update(video);
@@ -104,6 +101,7 @@ public class RegistroVideoController {
 
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
+        VideoDAO videoDAO = new VideoDAOImplement();
         Video v;
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
@@ -117,17 +115,15 @@ public class RegistroVideoController {
             alert.setContentText("Favor llenar todos los campos!");
             alert.showAndWait();
         } else {
-            v = new Video(nombre, cate, desc, image, videoPath);
-            VideoDAOImplement videoDAOImplement = new VideoDAOImplement();
-            if (videoDAOImplement.getALL().contains(v)) {
+            v = new Video(nombre, cate, desc, image, videoPath,fecha);
+            if (videoDAO.getALL().contains(v)) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("Error");
                 alert.setContentText("No se pudo hacer el registrar el video, verificar si el video ya existe!");
                 alert.showAndWait();
             } else {
-                VideoDAO videoDAO = new VideoDAOImplement();
-                videoDAO.insert(nombre, cate, fecha, desc, false, image, videoPath);
+                videoDAO.insert(nombre, cate,  desc, image, videoPath,fecha);
                 mostrarMensaje("Video registrado correctamente!");
                 irPrincipal();
             }
