@@ -29,7 +29,6 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.Video;
 import view.Main;
 
 import java.io.File;
@@ -42,6 +41,7 @@ import java.util.concurrent.Callable;
 import static controller.DentroDeLaAppController.video;
 
 public class ReproductorVideoController implements Initializable {
+    RegistroVideoController rvc;
     /**
      * Atributos de la clase ReproductorVideoController
      */
@@ -99,13 +99,18 @@ public class ReproductorVideoController implements Initializable {
     private ImageView ivMute;
     private ImageView ivExit;
 
+    public ReproductorVideoController() {
+        rvc = new RegistroVideoController();
+    }
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
         final int IV_SIZE = 25;
 
         mediaVideo = new Media(new File(video.getVideoPath()).toURI().toString());
-        RegistroVideoController.actualizarPreferencia(video, like, noLike);
+        rvc.actualizarPreferencia(video, like, noLike);
         if (video.isCalifica()) {
             like.setTextFill(Paint.valueOf("Green"));
             Image imagePlay = new Image(new File("src/media/meGusta.png").toURI().toString());

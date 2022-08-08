@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class RegistroVideoController {
+    VideoDAO videoDAO;
     public Button irHome;
     public Button btnConver;
     @FXML
@@ -48,10 +49,12 @@ public class RegistroVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image;
+    public RegistroVideoController(){
+        videoDAO = new VideoDAOImplement();
+    }
 
     //probando
-    public static void actualizarPreferencia(Video video, Button like, Button noLike) {
-        VideoDAO videoDAO = new VideoDAOImplement();
+    public void actualizarPreferencia(Video video, Button like, Button noLike) {
         like.setOnAction(event -> {
             like.setText("Si me gusta");
             video.setCalifica(true);
@@ -63,6 +66,7 @@ public class RegistroVideoController {
         });
 
         noLike.setOnAction(event -> {
+            like.setText("Me gusta");
             video.setCalifica(false);
             try {
                 videoDAO.update(video);
