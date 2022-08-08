@@ -96,9 +96,7 @@ public class ReproductorVideoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
         final int IV_SIZE = 25;
-        for (int i = 0; i < DentroDeLaAppController.videosBaseDatos.size(); i++) {
-            mediaVideo = new Media(new File(DentroDeLaAppController.test).toURI().toString());
-        }
+        mediaVideo = new Media(new File(DentroDeLaAppController.test).toURI().toString());
 
         //the mediaPlayer wraps the media object
         mpVideo = new MediaPlayer(mediaVideo);
