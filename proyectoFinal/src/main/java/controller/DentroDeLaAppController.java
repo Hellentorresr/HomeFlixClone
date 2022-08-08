@@ -35,10 +35,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DentroDeLaAppController implements Initializable {
-    public static String test;
+ //   public static String test;
     public static Button button2 = new Button();
     //
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
+    public static Video videoPlaying = new Video();
     //para la foto y nombre del usuario que ingreso al sistema;
     @FXML
     public ImageView fotoPerfil;
@@ -100,7 +101,8 @@ public class DentroDeLaAppController implements Initializable {
 
             int finalI = i;
             button2.setOnAction(event -> {
-                test = videosBaseDatos.get(finalI).getVideoPath();
+              //  test = videosBaseDatos.get(finalI).getVideoPath();
+                videoPlaying = videosBaseDatos.get(finalI);
                 Parent root;
                 try {
                     root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));

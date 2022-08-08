@@ -5,6 +5,7 @@ import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Video;
@@ -48,6 +50,30 @@ public class RegistroVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image;
+
+    //probando
+    public static void actualizarPreferencia(Video video, Button like, Button noLike) {
+        VideoDAO videoDAO = new VideoDAOImplement();
+        like.setOnAction(event -> {
+            like.setText("Si me gusta");
+            video.setCalifica(true);
+            try {
+                videoDAO.update(video);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        noLike.setOnAction(event -> {
+            noLike.setText("No me gusta");
+            video.setCalifica(false);
+            try {
+                videoDAO.update(video);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
 
     @FXML
     void handleBtnOpenFile(ActionEvent event) {
