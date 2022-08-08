@@ -32,21 +32,14 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import java.util.List;
+
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class DentroDeLaAppController implements Initializable {
     VideoDAO videoDAO;
-    //listas
-    public static List<Video> video = new ArrayList<>();
-    public static String test;
-    public static Button button2 = new Button();
-    //
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
 
-    private static String imagen;
-    //para la foto y nombre del usuario que ingreso al sistema;
     @FXML
     public ImageView fotoPerfil;
     @FXML
@@ -67,6 +60,8 @@ public class DentroDeLaAppController implements Initializable {
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
+    public Button button;
+    public static Video video = new Video();
 
     public DentroDeLaAppController() {
         videoDAO = new VideoDAOImplement();
@@ -83,48 +78,42 @@ public class DentroDeLaAppController implements Initializable {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
-            String img = UDI.get(UDI.getUserId()).getImg();
-            fotoPerfil.setImage(new Image("file:///" + UDI.get(UDI.getUserId()).getImg()));
-            System.out.println("probando img" + img);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        video = new ArrayList<>(videosBaseDatos);
 
-        for (int i = 0; i < video.size(); i++) {
+        for (int i = 0; i < videosBaseDatos.size(); i++) {
             ImageView img = new ImageView();
             img.setFitWidth(200);
             img.setFitHeight(200);
-            img.setImage(new Image("file:///" + video.get(i).getCover()));
+            img.setImage(new Image("file:///" + videosBaseDatos.get(i).getCover()));
             VBox vBox = new VBox(img);
 
             Label nombre = new Label();
-            nombre.setText(video.get(i).getNombreVideo());
+            nombre.setText(videosBaseDatos.get(i).getNombreVideo());
             vBox.getChildren().add(nombre);
             nombre.setFont(Font.font(16));
             nombre.setTextFill(Paint.valueOf("#fff"));
 
-
-            button2 = new Button(video.get(i).getVideoPath());
-            button2.setTextFill(Paint.valueOf("Red"));
-            button2.setCursor(Cursor.cursor("hand"));
+            button = new Button(videosBaseDatos.get(i).getVideoPath());
+            button.setTextFill(Paint.valueOf("Red"));
+            button.setCursor(Cursor.cursor("hand"));
 
             int finalI = i;
-            button2.setOnAction(event -> {
-                test = video.get(finalI).getVideoPath();
+            button.setOnAction(event -> {
+                video = videosBaseDatos.get(finalI);
                 Parent root;
                 try {
                     root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
-
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Stage window = (Stage) button2.getScene().getWindow();
+                Stage window = (Stage) button.getScene().getWindow();
                 window.setScene(new Scene(root));
             });
-            button2.setText("Reproducir");
-            vBox.getChildren().add(button2);
+            button.setText("Reproducir");
+            vBox.getChildren().add(button);
             recentlyPlayedContainer.getChildren().add(vBox);
         }
     }
@@ -183,12 +172,12 @@ public class DentroDeLaAppController implements Initializable {
                         nombre.setTextFill(Paint.valueOf("#fff"));
 
 
-                        button2 = new Button(video.getVideoPath());
-                        button2.setTextFill(Paint.valueOf("Red"));
-                        button2.setCursor(Cursor.cursor("hand"));
+                        button = new Button(video.getVideoPath());
+                        button.setTextFill(Paint.valueOf("Red"));
+                        button.setCursor(Cursor.cursor("hand"));
 
 
-                        button2.setOnAction(event -> {
+                        button.setOnAction(event -> {
                             Parent root;
                             try {
                                 root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
@@ -196,11 +185,11 @@ public class DentroDeLaAppController implements Initializable {
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            Stage window = (Stage) button2.getScene().getWindow();
+                            Stage window = (Stage) button.getScene().getWindow();
                             window.setScene(new Scene(root));
                         });
-                        button2.setText("Reproducir");
-                        vBox.getChildren().add(button2);
+                        button.setText("Reproducir");
+                        vBox.getChildren().add(button);
                         recentlyPlayedContainer.getChildren().add(vBox);
 
                         //mostrarBusqueda();
@@ -244,7 +233,7 @@ public class DentroDeLaAppController implements Initializable {
     @Override
     public String toString() {
         return "DentroDeLaApp{" +
-                ", button2=" + button2 +
+                ", button2=" + button +
                 ", btnCerrar=" + btnCerrar +
                 ", recentlyPlayedContainer=" + recentlyPlayedContainer +
                 ", agregarVideo=" + agregarVideo +
