@@ -1,6 +1,5 @@
 package controller;
 
-import controller.dao.UsuarioDAOImplement;
 import controller.dao.VideoDAO;
 import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
@@ -11,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
@@ -20,12 +18,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import model.Usuario;
 import model.Video;
 import view.Main;
 
@@ -45,7 +40,7 @@ public class DentroDeLaAppController implements Initializable {
     public static String test;
     public static Button button2 = new Button();
     //
-    private static ArrayList<Video> videosBaseDatos = new ArrayList<>();
+    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     @FXML
     public Button btnCerrar;
     @FXML
@@ -63,6 +58,7 @@ public class DentroDeLaAppController implements Initializable {
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -154,41 +150,11 @@ public class DentroDeLaAppController implements Initializable {
 
         //   cir2.setFill(new ImagePattern());
     }
-
-    public Video buscarVideo(ActionEvent event) {
-        String busqueda = this.buscarPlaceholder.getText();
-        Video video = new Video();
-        if (busqueda.isEmpty()) {
-            mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
-        } else {
-            VideoDAO videoDAO = new VideoDAOImplement();
-            try {
-               videoDAO.getALL();
-                for (int i = 0; i < videosBaseDatos.size(); i++) {
-                    busqueda = videosBaseDatos.get(i).getNombreVideo();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-            mostrarMensaje("Video encontrado");
-        }
-        return video;
-    }
-
-    private void mostrarMensaje(String busqueda) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Completado");
-        alert.setContentText(busqueda);
-        alert.showAndWait();
-    }
-
-    private void mostrarMensajeNegativo(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("ERROR");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
+    @FXML
+    public void buscarVideo() throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("peliculaEncontrada.fxml")));
+        Stage window = (Stage) btnBuscar.getScene().getWindow();
+        window.setScene(new Scene(root));
+        ControllerVideoEncontrado.mostrarVideo();
     }
 }
