@@ -8,6 +8,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+
+    /**
+     * Funcion que permite dirigirse a la pantalla principal de signIn
+     * @param stage Recibe una plantilla para colocar la escena
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PrincipalYSignIn.fxml"));
@@ -17,6 +23,10 @@ public class Main extends Application {
         stage.show();
     }
 
+    /**
+     * Funcion que ejecuta el codigo
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
