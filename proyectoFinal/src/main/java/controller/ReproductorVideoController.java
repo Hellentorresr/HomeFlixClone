@@ -1,3 +1,9 @@
+/**
+ * @autor por Hellen Torres
+ * @FechaCreacion 29/07/2022
+ * @Ultima_Modificacion 08//08/2022 7:pm
+ * @por Hellen torres
+ */
 package controller;
 
 import javafx.beans.InvalidationListener;
@@ -39,12 +45,15 @@ import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 
 import static controller.DentroDeLaAppController.video;
+/**
+ * Creacion de la clase ReproductorVideoController
+ */
 
 public class ReproductorVideoController implements Initializable {
-    RegistroVideoController rvc;
     /**
      * Atributos de la clase ReproductorVideoController
      */
+    RegistroVideoController rvc;
     public Button regresar;
     public Button noLike;
     public Button like;
@@ -54,7 +63,6 @@ public class ReproductorVideoController implements Initializable {
     @FXML
     private MediaView mvVideo;
     private MediaPlayer mpVideo;
-    private Media mediaVideo;
 
     @FXML
     private HBox hboxControls;
@@ -103,13 +111,14 @@ public class ReproductorVideoController implements Initializable {
         rvc = new RegistroVideoController();
     }
 
-
-
+    /**
+     * Metodo initialize que carga la interfaz con todos sus componentes
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
         final int IV_SIZE = 25;
 
-        mediaVideo = new Media(new File(video.getVideoPath()).toURI().toString());
+        Media mediaVideo = new Media(new File(video.getVideoPath()).toURI().toString());
         rvc.actualizarPreferencia(video, like, noLike);
         if (video.isCalifica()) {
             like.setTextFill(Paint.valueOf("Green"));
@@ -121,15 +130,13 @@ public class ReproductorVideoController implements Initializable {
             like.setCursor(Cursor.cursor("hand"));
         }
 
-        //this is the video that I'm going to be playing
-        // mediaVideo = new Media(new File("src/media/JessicaDarrow.mp4").toURI().toString());
+
         //with this object I can call methods like play,stop, pause
         //the mediaPlayer wraps the media object
         mpVideo = new MediaPlayer(mediaVideo);
         //this displays the media that we want to display
         mvVideo.setMediaPlayer(mpVideo);
 
-        //To add images
         Image imagePlay = new Image(new File("src/media/play.png").toURI().toString());
         ivPlay = new ImageView(imagePlay);
         ivPlay.setFitHeight(IV_SIZE);
