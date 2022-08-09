@@ -60,12 +60,12 @@ public class DentroDeLaAppController implements Initializable {
     public Label nombreDeUsuario;
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
-    private Button btnBuscar;
-   public Label videoEncontrado;
-    private Button button;
+    public Label videoEncontrado;
     VideoDAO videoDAO;
     UsuarioDAOImplement UDI;
     ArrayList<Video> favoritas;
+    private Button btnBuscar;
+    private Button button;
     @FXML
     private HBox favoritasContainer;
 
@@ -79,7 +79,7 @@ public class DentroDeLaAppController implements Initializable {
     }
 
     /**
-     *Metodo initialize que carga la interfaz con todos sus componentes
+     * Metodo initialize que carga la interfaz con todos sus componentes
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -163,7 +163,7 @@ public class DentroDeLaAppController implements Initializable {
     }
 
     /**
-     *Agregar comentario: ?
+     * Agregar comentario: ?
      */
     @FXML
     public Video buscarVideo() {
@@ -234,7 +234,7 @@ public class DentroDeLaAppController implements Initializable {
     }
 
     /**
-     *Agregar comentario: ?
+     * Agregar comentario: ?
      */
     public void mostrarBusqueda() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("videoEncontrado.fxml")));
@@ -243,7 +243,7 @@ public class DentroDeLaAppController implements Initializable {
     }
 
     /**
-     *metodo que muestra un mensaje al usuario
+     * metodo que muestra un mensaje al usuario
      */
 
     private void mostrarMensajeNegativo(String mensaje) {
@@ -255,7 +255,7 @@ public class DentroDeLaAppController implements Initializable {
     }
 
     /**
-     *Metodo toString
+     * Metodo toString
      */
     @Override
     public String toString() {
