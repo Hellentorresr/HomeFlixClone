@@ -9,7 +9,6 @@ package controller;
 
 import controller.dao.VideoDAO;
 import controller.dao.VideoDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +30,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * Clase EditarEliminarVideoController
+ */
 public class EditarEliminarVideoController {
     /**
      * Atributos clase EditarEliminarVideoController
@@ -73,7 +75,7 @@ public class EditarEliminarVideoController {
      * Metodo para editar un video
      */
     @FXML
-    void btnEditarEvent(ActionEvent event) throws SQLException {
+    void btnEditarEvent() throws SQLException {
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
         String desc = this.txtDescription.getText();
@@ -117,15 +119,18 @@ public class EditarEliminarVideoController {
 
     /**
      * Metodo para mostrar information en el contenedor textArea
+     * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @FXML
-    void btnMostrarReporteEvent(ActionEvent event) throws SQLException {
+    void btnMostrarReporteEvent() throws SQLException {
         textAreaReporte.setText(VideoDAOImplement.devolverInfo());
         textAreaReporte.setFont(Font.font(18));
     }
 
+
     /**
      * Metodo para mostrar mensaje
+     * @param string recibe un String
      */
     private void mostrarMensaje(String string) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -134,6 +139,11 @@ public class EditarEliminarVideoController {
         alert.setContentText(string);
         alert.showAndWait();
     }
+
+    /**
+     * Metodo para mostrar mensaje
+     * @param mensaje recibe un String
+     */
 
     private void mostrarMensajeNegativo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -147,7 +157,7 @@ public class EditarEliminarVideoController {
      * Metodo para adjuntar imagen
      */
     @FXML
-    void handleBtnOpenFile(ActionEvent event) {
+    void handleBtnOpenFile() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
@@ -164,7 +174,7 @@ public class EditarEliminarVideoController {
     /**
      * Metodo para regresar a la página principal
      */
-    public void regresarAPrincipal(ActionEvent event) throws IOException {
+    public void regresarAPrincipal() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) btnRegresar.getScene().getWindow();
         window.setScene(new Scene(root));

@@ -127,6 +127,7 @@ public class RegistroVideoController {
 
     /**
      *Metodo para registrar videos
+     * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
