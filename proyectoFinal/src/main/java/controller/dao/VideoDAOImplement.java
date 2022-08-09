@@ -36,7 +36,7 @@ public class VideoDAOImplement implements VideoDAO {
     }
 
     /**
-     *Metodo para obtener informacion del los nombres y codigos de los videos existentes
+     * Metodo para obtener informacion del los nombres y codigos de los videos existentes
      */
     public static String devolverInfo() throws SQLException {
         VideoDAO videoDAO = new VideoDAOImplement();
@@ -49,6 +49,7 @@ public class VideoDAOImplement implements VideoDAO {
 
     /**
      * Metodo para obtener un video de la base de datos
+     *@throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @Override
     public Video get(int idVideo) throws SQLException {
@@ -80,7 +81,8 @@ public class VideoDAOImplement implements VideoDAO {
     }
 
     /**
-     *Metodo para listar toodos los video que esten registrados en la base de datos
+     * Metodo para listar todos los video que esten registrados en la base de datos
+     * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @Override
     public ArrayList<Video> getALL() throws SQLException {
@@ -125,12 +127,14 @@ public class VideoDAOImplement implements VideoDAO {
 
     /**
      * Metodo para insertar un Video a la base de datos
-     * @param nombreVideo parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     *
+     * @param nombreVideo   parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
      * @param categoryVideo parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
-     * @param description parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
-     * @param cover parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
-     * @param videoPath parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
-     * @param fecha parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param description   parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param cover         parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param videoPath     parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param fecha         parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @Override
     public int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) throws SQLException {
@@ -156,7 +160,9 @@ public class VideoDAOImplement implements VideoDAO {
 
     /**
      * Metodo que hacer actualizacion a un video por medio de su Id
+     *
      * @param video Recibe un video como parametro
+     * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @Override
     public int update(Video video) throws SQLException {
@@ -183,7 +189,9 @@ public class VideoDAOImplement implements VideoDAO {
 
     /**
      * Metodo para borrar un video de la base de datos por medio de su Id
+     *
      * @param video Recibe por parametro un video de la clase Video
+     * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
 
     @Override
