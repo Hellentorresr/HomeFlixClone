@@ -1,3 +1,9 @@
+/**
+ * @autor por Hellen Torres
+ * @FechaCreacion 29/07/2022
+ * @Ultima_Modificacion 08//08/2022 7:pm
+ * @por Hellen torres
+ */
 package controller.dao;
 
 import baseDatos.BaseDeDatos;
@@ -11,15 +17,27 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Creacion de la clase VideoDAOImplement
+ */
 public class VideoDAOImplement implements VideoDAO {
+    /**
+     * Atributos de la clase  VideoDAOImplement
+     */
     private ArrayList<Video> videos;
     private boolean bandera;
 
+    /**
+     * Metodo constructor de la clase VideoDAOImplement
+     */
     public VideoDAOImplement() {
         bandera = true;
         videos = new ArrayList<>();
     }
 
+    /**
+     *Metodo para obtener informacion del los nombres y codigos de los videos existentes
+     */
     public static String devolverInfo() throws SQLException {
         VideoDAO videoDAO = new VideoDAOImplement();
         StringBuilder reporte = new StringBuilder();
@@ -61,6 +79,9 @@ public class VideoDAOImplement implements VideoDAO {
         return video;
     }
 
+    /**
+     *Metodo para listar toodos los video que esten registrados en la base de datos
+     */
     @Override
     public ArrayList<Video> getALL() throws SQLException {
         Connection connection = BaseDeDatos.getConnection();
@@ -102,6 +123,15 @@ public class VideoDAOImplement implements VideoDAO {
 
     }
 
+    /**
+     * Metodo para insertar un Video a la base de datos
+     * @param nombreVideo parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param categoryVideo parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param description parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param cover parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param videoPath parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     * @param fecha parametro del constructor de la clase Video, se utiliza para ser agregado a la base de datos
+     */
     @Override
     public int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) throws SQLException {
         Video video = new Video(nombreVideo, categoryVideo, description, cover, videoPath, fecha);
@@ -124,6 +154,10 @@ public class VideoDAOImplement implements VideoDAO {
         return result;//retorna 1 si se agrego un nuevo record video
     }
 
+    /**
+     * Metodo que hacer actualizacion a un video por medio de su Id
+     * @param video Recibe un video como parametro
+     */
     @Override
     public int update(Video video) throws SQLException {
         Connection connection = BaseDeDatos.getConnection();
@@ -146,6 +180,11 @@ public class VideoDAOImplement implements VideoDAO {
 
         return result;
     }
+
+    /**
+     * Metodo para borrar un video de la base de datos por medio de su Id
+     * @param video Recibe por parametro un video de la clase Video
+     */
 
     @Override
     public int delete(Video video) throws SQLException {
