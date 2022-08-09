@@ -45,13 +45,22 @@ public class SignUpController {
     public Label labelRegister;
     private String img;
 
+    /**
+     * Constructor de la clase
+     */
     public SignUpController(){
         usuario = new Usuario("","","","",0,"");
         UDI = new UsuarioDAOImplement();
         labelRegister = new Label();
+        usuario = new Usuario();
 
     }
 
+    /**
+     * Funcion que regista un usuario
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public void registering() throws SQLException, ClassNotFoundException {
         usuario.setNombre(txtNombreSignUp.getText());
         String fName = usuario.getNombre();
@@ -107,7 +116,8 @@ public class SignUpController {
 
             }else{
                 labelRegister.setText("Usuario Registrado!");
-                UDI.insertarUsuario(fName,lName1,nickName,password,id,img);
+                usuario = new Usuario(fName,lName1,nickName,password,id,img);
+                UDI.insert(usuario);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setHeaderText(null);
                 alert.setTitle("Completado");
@@ -119,6 +129,11 @@ public class SignUpController {
 
     }
 
+    /**
+     * Funcion que permite validar la contraseña a la hora de registrarla
+     * @param password recibe la contraseña a validar
+     * @return devuelve false o true dependiendo del resultado
+     */
     public Boolean validarContrasena(String password){
         Boolean error = false;
         char especiales[] =  {'!','@','#','$','%','^','&','*','(',')','-','_','=','+','{','}',':',';','"',',','.','<','>','?','/'};
@@ -161,6 +176,11 @@ public class SignUpController {
         return error;
     }
 
+    /**
+     * Funcion que valida si las contraseñas son validas
+     * @return retorna true o false
+     */
+
     public Boolean confirmPassword(){
         if(tf_password.getText().equals(tf_passwordConfirm.getText())){
             return true;
@@ -169,6 +189,10 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Funcion que busca una imagen y su URL
+     * @return devuelve un String URL de la imagen
+     */
     public String handleBtnOpenFile() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
@@ -185,7 +209,11 @@ public class SignUpController {
         }
     }
 
-    public void regresarPrincipal(ActionEvent event) throws IOException {
+    /**
+     *Funcion que redirige a la pantalla de signIn
+     * @throws IOException
+     */
+    public void regresarPrincipal() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignIn.fxml")));
         Stage window = (Stage)regresar.getScene().getWindow();
         window.setScene(new Scene(root));
