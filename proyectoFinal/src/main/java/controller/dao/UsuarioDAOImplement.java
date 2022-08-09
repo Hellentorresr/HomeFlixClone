@@ -1,9 +1,8 @@
 package controller.dao;
 
-import baseDatos.BaseDeDatos;
+import controller.baseDatos.BaseDeDatos;
 import controller.PrincipalYSignIn;
 import model.Usuario;
-import model.Video;
 
 import java.sql.*;
 import java.util.ArrayList;
