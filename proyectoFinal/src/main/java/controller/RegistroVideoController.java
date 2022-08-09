@@ -1,8 +1,13 @@
+/**
+ * @autor por Hellen Torres
+ * @FechaCreacion 29/07/2022
+ * @Ultima_Modificacion 08//08/2022 7:pm
+ * @por Hellen torres
+ */
 package controller;
 
 import controller.dao.VideoDAO;
 import controller.dao.VideoDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +28,13 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
-
+/**
+ * Creacion de la clase ReproductorVideoController
+ */
 public class RegistroVideoController {
+    /**
+     * Atributos de la clase RegistroVideoController
+     */
     VideoDAO videoDAO;
     public Button irHome;
     public Button btnConver;
@@ -53,7 +63,13 @@ public class RegistroVideoController {
         videoDAO = new VideoDAOImplement();
     }
 
-    //probando
+    /**
+     * Metodo actualizar referencias que hace el cambio del atributo de la clase Video de falso a verdadero,
+     * Cuando es verdadero le agrega una imagen y el font se cambiara a verde
+     * @param video recibe por parametro un Video para su actualizacion
+     * @param like parametro de tipo Boton
+     * @param noLike parametro de tipo Boton
+     */
     public void actualizarPreferencia(Video video, Button like, Button noLike) {
         like.setOnAction(event -> {
             like.setText("Si me gusta");
@@ -76,8 +92,11 @@ public class RegistroVideoController {
         });
     }
 
+    /**
+     *Metodo para agregar una imagen para portada del video
+     */
     @FXML
-    void handleBtnOpenFile(ActionEvent event) {
+    void handleBtnOpenFile() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
@@ -90,8 +109,11 @@ public class RegistroVideoController {
         }
     }
 
+    /**
+     *Metodo para agregar una un video por medio de su path
+     */
     @FXML
-    void handleBtnOpenLinkVideo(ActionEvent event) {
+    void handleBtnOpenLinkVideo() {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Video");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.mkv", "*.mp4"));
@@ -103,6 +125,9 @@ public class RegistroVideoController {
         }
     }
 
+    /**
+     *Metodo para registrar videos
+     */
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
         VideoDAO videoDAO = new VideoDAOImplement();
@@ -128,23 +153,29 @@ public class RegistroVideoController {
                 alert.showAndWait();
             } else {
                 videoDAO.insert(nombre, cate,  desc, image, videoPath,fecha);
-                mostrarMensaje("Video registrado correctamente!");
+                mostrarMensaje();
                 irPrincipal();
             }
         }
     }
 
+    /**
+     *Metodo para hacer cambios de interfaz
+     */
     public void irPrincipal() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) irHome.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
-    private void mostrarMensaje(String busqueda) {
+    /**
+     *Metodo para mostrar mensaje
+     */
+    private void mostrarMensaje() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(null);
         alert.setTitle("Completado");
-        alert.setContentText(busqueda);
+        alert.setContentText("Video registrado correctamente!");
         alert.showAndWait();
     }
 }

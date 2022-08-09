@@ -1,3 +1,10 @@
+/**
+ * @autor por Hellen Torres
+ * @FechaCreacion 29/07/2022
+ * @Ultima_Modificacion 08//08/2022 7:pm
+ * @por Hellen torres
+ */
+
 package controller;
 
 import controller.dao.VideoDAO;
@@ -53,8 +60,14 @@ public class EditarEliminarVideoController {
     private TextField txtDescription;
     @FXML
     private TextField txtNombreVideo;
-    private String image = "";
+    private String image;
 
+    /**
+     * Metodo contractor de la clase EditarEliminarVideoController
+     */
+    public EditarEliminarVideoController() {
+        image = "";
+    }
 
     /**
      * Metodo para editar un video
@@ -157,7 +170,10 @@ public class EditarEliminarVideoController {
         window.setScene(new Scene(root));
     }
 
-    public void eliminarVideoMetodo(ActionEvent event) throws SQLException {
+    /**
+     *Metodo para eliminar un video registrado
+     */
+    public void eliminarVideoMetodo() throws SQLException {
         if (this.txtCodigoParaEliminar.getText().isEmpty()) {
             mostrarMensajeNegativo("Favor ingrese un codigo para hacer la eliminacion");
         } else if (!this.txtCodigoParaEliminar.getText().isEmpty()) {

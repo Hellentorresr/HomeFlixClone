@@ -1,3 +1,9 @@
+/**
+ * @autor por Hellen Torres
+ * @FechaCreacion 29/07/2022
+ * @Ultima_Modificacion 08//08/2022 7:pm
+ * @por Hellen torres
+ */
 package controller;
 
 import controller.dao.UsuarioDAOImplement;
@@ -26,20 +32,22 @@ import javafx.stage.Stage;
 import model.Video;
 import view.Main;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+/**
+ * Creacion de la clase DentroDeLaAppController
+ */
 public class DentroDeLaAppController implements Initializable {
-    VideoDAO videoDAO;
+    /**
+     * Atributos de la clase DentroDeLaAppController
+     */
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
-
+    public static Video video = new Video();
     @FXML
     public ImageView fotoPerfil;
     @FXML
@@ -52,29 +60,37 @@ public class DentroDeLaAppController implements Initializable {
     public Label nombreDeUsuario;
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
-    public Button btnBuscar;
-
-    public Label videoEncontrado;
-    //
+    private Button btnBuscar;
+   public Label videoEncontrado;
+    private Button button;
+    VideoDAO videoDAO;
     UsuarioDAOImplement UDI;
     ArrayList<Video> favoritas;
     @FXML
     private HBox favoritasContainer;
-    public Button button;
-    public static Video video = new Video();
 
+
+    /**
+     * Metodo constructor
+     */
     public DentroDeLaAppController() {
         videoDAO = new VideoDAOImplement();
         UDI = new UsuarioDAOImplement();
-        videoEncontrado = new Label();
     }
 
+    /**
+     *Metodo initialize que carga la interfaz con todos sus componentes
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getData();
     }
 
-    public void getData(){
+    /**
+     * metodo getData que agregar los elementos que debe mostrar en el initialize
+     */
+
+    public void getData() {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
@@ -118,13 +134,18 @@ public class DentroDeLaAppController implements Initializable {
         }
     }
 
-    //--Methods---
+    /**
+     * Metodo para regresar a la pagina principalYSignIn por medio del boton cerrar
+     */
     public void handleBtnIngresar() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignIn.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
+    /**
+     * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz RegistroVideo.fxml
+     */
     public void agregarVideo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("RegistroVideo.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
@@ -132,14 +153,18 @@ public class DentroDeLaAppController implements Initializable {
     }
 
 
-
+    /**
+     * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz EditarEliminarVideo.fxml
+     */
     public void eliminarEditarVideo(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("EditarEliminarVideo.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
-    //se agrega esta funcion para ser usada como tes
+    /**
+     *Agregar comentario: ?
+     */
     @FXML
     public Video buscarVideo() {
         String busqueda = buscarPlaceholder.getText();
@@ -148,11 +173,11 @@ public class DentroDeLaAppController implements Initializable {
         if (busqueda.isEmpty()) {
             mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
             getData();
-        } else{
+        } else {
 
             try {
                 ArrayList<Video> videos = new ArrayList<>(videoDAO.getALL());
-                for (int i = 0; i<videos.size();i++) {
+                for (int i = 0; i < videos.size(); i++) {
                     if (videos.get(i).getNombreVideo().equals(busqueda) || videos.get(i).getCategoryVideo().equals(busqueda)) {
                         video = videos.get(i);
                         videos = new ArrayList<>();
@@ -194,7 +219,7 @@ public class DentroDeLaAppController implements Initializable {
 
                         //mostrarBusqueda();
                         break;
-                    }else{
+                    } else {
                         mostrarMensajeNegativo("El video no fue encontrado");
                         getData();
                         break;
@@ -208,19 +233,18 @@ public class DentroDeLaAppController implements Initializable {
         return video;
     }
 
+    /**
+     *Agregar comentario: ?
+     */
     public void mostrarBusqueda() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("videoEncontrado.fxml")));
         Stage window = (Stage) btnBuscar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
-    private void mostrarMensaje(String busqueda) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Completado");
-        alert.setContentText(busqueda);
-        alert.showAndWait();
-    }
+    /**
+     *metodo que muestra un mensaje al usuario
+     */
 
     private void mostrarMensajeNegativo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -230,6 +254,9 @@ public class DentroDeLaAppController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     *Metodo toString
+     */
     @Override
     public String toString() {
         return "DentroDeLaApp{" +

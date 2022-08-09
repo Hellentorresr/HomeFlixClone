@@ -1,7 +1,13 @@
+/**
+ * @autor por Hellen Torres
+ * @FechaCreacion 29/07/2022
+ * @Ultima_Modificacion 08//08/2022 7:pm
+ * @por Hellen torres
+ */
 package model;
 
 import java.time.LocalDate;
-import java.util.Objects;
+
 
 public class Video {
 
@@ -18,7 +24,6 @@ public class Video {
     /**
      * Metodo constructor
      */
-
     public Video(String nombreVideo, String categoryVideo, LocalDate fecha, String description, boolean califica, String cover, String videoPath, int videoId) {
         this.nombreVideo = nombreVideo;
         this.categoryVideo = categoryVideo;
@@ -36,6 +41,9 @@ public class Video {
     public Video() {
     }
 
+    /***
+     * Tercer constructor
+     */
     public Video(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) {
         this.nombreVideo = nombreVideo;
         this.categoryVideo = categoryVideo;
@@ -46,7 +54,7 @@ public class Video {
     }
 
     /**
-     * tercer constructor
+     *  constructor 4
      */
     public Video(String nombreVideo, String categoryVideo, LocalDate fecha, String description, boolean califica, String cover, String videoPath) {
         this.nombreVideo = nombreVideo;
