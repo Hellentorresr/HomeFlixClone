@@ -4,8 +4,9 @@
  * @Ultima_Modificacion 08//08/2022 7:pm
  * @por Hellen torres
  */
-package controller;
+package controller.controllerApp;
 
+import controller.controllerApp.RegisterVideoController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
@@ -44,7 +45,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 
-import static controller.HomeController.video;
+import static controller.controllerApp.HomeController.video;
 /**
  * Creacion de la clase ReproductorVideoController
  */

@@ -9,7 +9,7 @@
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vboxParent" alignment="CENTER" prefHeight="66.0" prefWidth="800.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReproductorVideoController">
+<VBox fx:id="vboxParent" alignment="CENTER" prefHeight="66.0" prefWidth="800.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.ReproductorVideoController">
     <children>
         <MediaView fx:id="mvVideo" VBox.vgrow="ALWAYS" />
         <Slider fx:id="sliderTime" style="-fx-cursor: hand;">

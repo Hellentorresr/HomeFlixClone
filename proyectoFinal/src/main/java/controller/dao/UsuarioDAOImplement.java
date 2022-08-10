@@ -1,7 +1,7 @@
 package controller.dao;
 
 import controller.baseDatos.BaseDeDatos;
-import controller.SignInController;
+import controller.controllerApp.SignInController;
 import model.Usuario;
 
 import java.sql.*;
