@@ -1,6 +1,6 @@
 package controller.dao;
 
-import controller.baseDatos.BaseDeDatos;
+import controller.baseDatos.Connexion;
 import controller.controllerApp.SignInController;
 import model.Usuario;
 
@@ -26,11 +26,11 @@ public class UsuarioDAOImplement implements DAOUsuario {
      * Funcion que obtiene un usuario por medio de un id
      * @param userId id del usuario
      * @return devuelve un usuario
-     * @throws SQLException
+     * @throws SQLException v
      */
     @Override
     public Usuario get(int userId) throws SQLException {
-        BaseDeDatos connection = new BaseDeDatos();
+        Connexion connection = new Connexion();
         Connection connectDB = connection.getConnection();
 
         if(nuevoUsurio){
@@ -47,8 +47,8 @@ public class UsuarioDAOImplement implements DAOUsuario {
 
                 usuario = new Usuario(nombre, apellido, userName, userPassword, id, imagen);
             }
-            BaseDeDatos.closePreparedStatement(preparedStatement);
-            BaseDeDatos.closeConnection(connectDB);
+            Connexion.closePreparedStatement(preparedStatement);
+            Connexion.closeConnection(connectDB);
         }
         return usuario;
 
@@ -83,7 +83,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
     @Override
     public void insert(Usuario usuario) throws SQLException {
         nuevoUsurio = true;
-        BaseDeDatos connection = new BaseDeDatos();
+        Connexion connection = new Connexion();
         Connection connectDB = connection.getConnection();
 
         String insertInfo = "insert into usuarios(nombre, apellido,userName, userPassword, id, imagen) values ('" + usuario.getNombre() + "','" + usuario.getApellido1() + "','" + usuario.getUserName() + "','" + usuario.getUserPassword() + "','" + usuario.getUserId() + "','" + usuario.getImg() + "')";
@@ -95,7 +95,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
 
         }
 
-        BaseDeDatos.closeConnection(connectDB);
+        Connexion.closeConnection(connectDB);
         usuarios.add(new Usuario(usuario.getNombre(),usuario.getApellido1(),usuario.getUserName(),usuario.getUserPassword(),usuario.getUserId(),usuario.getImg()));
 
     }
@@ -108,14 +108,14 @@ public class UsuarioDAOImplement implements DAOUsuario {
      */
 
     public int getUserId() throws SQLException, ClassNotFoundException {
-        BaseDeDatos connection = new BaseDeDatos();
+        Connexion connection = new Connexion();
         Connection connectDB = connection.getConnection();
         String id = "select id from usuarios where userName = " + "'" + SignInController.userName + "'" + " and userPassword = " + "'" + SignInController.userPassword + "'";
         Statement statement = connectDB.createStatement();
         ResultSet queryResult = statement.executeQuery(id);
         queryResult.next();
         String user = queryResult.getString(1);
-        BaseDeDatos.closeConnection(connectDB);
+        Connexion.closeConnection(connectDB);
         return Integer.parseInt(user);
     }
 
@@ -127,7 +127,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
      */
     public Boolean verificarId(int userId) throws SQLException {
         boolean error = false;
-        BaseDeDatos connectNow = new BaseDeDatos();
+        Connexion connectNow = new Connexion();
         Connection connectDB = connectNow.getConnection();
         String verifyId = "select count(1) from usuarios where id = " + "'" + userId + "'";
         try {
@@ -144,7 +144,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
             e.printStackTrace();
             e.getCause();
         }
-        BaseDeDatos.closeConnection(connectDB);
+        Connexion.closeConnection(connectDB);
         return error;
     }
 
@@ -157,7 +157,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
      */
     public Boolean verificarUsuario(String userName, String password) throws SQLException {
         boolean error = true;
-        BaseDeDatos connectNow = new BaseDeDatos();
+        Connexion connectNow = new Connexion();
         Connection connectDB = connectNow.getConnection();
         String verifyLogin = "select count(1) from usuarios where userName = " + "'" + userName + "'" + " and userPassword = " + "'" + password + "'";
         try {
@@ -176,7 +176,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
             e.printStackTrace();
             e.getCause();
         }
-        BaseDeDatos.closeConnection(connectDB);
+        Connexion.closeConnection(connectDB);
         return error;
     }
 
