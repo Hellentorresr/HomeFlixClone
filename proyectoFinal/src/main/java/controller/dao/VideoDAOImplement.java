@@ -6,7 +6,7 @@
  */
 package controller.dao;
 
-import controller.baseDatos.BaseDeDatos;
+import controller.baseDatos.Connexion;
 import model.Video;
 
 import java.sql.Connection;
@@ -53,7 +53,7 @@ public class VideoDAOImplement implements DAOVideo {
     @Override
     public Video get(int idVideo) throws SQLException {
         Video video = null;
-        Connection daoConnection = BaseDeDatos.getConnection();
+        Connection daoConnection = Connexion.getConnection();
         //aqui se especifican el nombre de cada columna de la tablavideo de mi base de datos
         String sql = "SELECT id, nombre, categoria, fechaRegistro, descripcion, calificacion, imagenPortada, videoPath FROM videotabla WHERE id = ?";
         PreparedStatement ps = daoConnection.prepareStatement(sql);
@@ -84,7 +84,7 @@ public class VideoDAOImplement implements DAOVideo {
      */
     @Override
     public ArrayList<Video> getALL() throws SQLException {
-        Connection connection = BaseDeDatos.getConnection();
+        Connection connection = Connexion.getConnection();
         String sql = "SELECT * from videotabla";
         PreparedStatement ps = connection.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
@@ -107,8 +107,8 @@ public class VideoDAOImplement implements DAOVideo {
             videos.add(video);
         }
         //cerrando la connexion
-        BaseDeDatos.closePreparedStatement(ps);
-        BaseDeDatos.closeConnection(connection);
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
 
         return videos;
     }
@@ -136,7 +136,7 @@ public class VideoDAOImplement implements DAOVideo {
     public int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) throws SQLException {
         Video video = new Video(nombreVideo, categoryVideo, description, cover, videoPath, fecha);
 
-        Connection connection = BaseDeDatos.getConnection();
+        Connection connection = Connexion.getConnection();
         String sql = "INSERT INTO videotabla (nombre, categoria, fechaRegistro, descripcion, calificacion, imagenPortada, videoPath) VAlUES (?,?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
 
@@ -149,8 +149,8 @@ public class VideoDAOImplement implements DAOVideo {
         ps.setString(7, video.getVideoPath());
         int result = ps.executeUpdate();
 
-        BaseDeDatos.closePreparedStatement(ps);
-        BaseDeDatos.closeConnection(connection);
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
         return result;//retorna 1 si se agrego un nuevo record video
     }
 
@@ -160,7 +160,7 @@ public class VideoDAOImplement implements DAOVideo {
      */
     @Override
     public int update(Video video) throws SQLException {
-        Connection connection = BaseDeDatos.getConnection();
+        Connection connection = Connexion.getConnection();
         String sql = "UPDATE videotabla set nombre = ?, categoria = ?, fechaRegistro = ?, descripcion = ?, calificacion = ?, imagenPortada = ?, videoPath = ? where id = ?";
 
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -175,8 +175,8 @@ public class VideoDAOImplement implements DAOVideo {
         ps.setInt(8, video.getVideoId());
 
         int result = ps.executeUpdate();
-        BaseDeDatos.closePreparedStatement(ps);
-        BaseDeDatos.closeConnection(connection);
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
 
         return result;
     }
@@ -188,7 +188,7 @@ public class VideoDAOImplement implements DAOVideo {
 
     @Override
     public int delete(Video video) throws SQLException {
-        Connection connection = BaseDeDatos.getConnection();
+        Connection connection = Connexion.getConnection();
         String sql = "DELETE FROM videotabla where id = ?";
 
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -196,8 +196,8 @@ public class VideoDAOImplement implements DAOVideo {
         ps.setInt(1, video.getVideoId());
         int result = ps.executeUpdate();
         //cerrando la connexion
-        BaseDeDatos.closePreparedStatement(ps);
-        BaseDeDatos.closeConnection(connection);
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
         return result;
     }
 }

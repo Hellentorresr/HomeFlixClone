@@ -30,7 +30,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.Video;
-import view.Main;
+import view.InicioApp;
 
 import java.io.IOException;
 import java.net.URL;
@@ -121,7 +121,7 @@ public class HomeController implements Initializable {
                 video = videosBaseDatos.get(finalI);
                 Parent root;
                 try {
-                    root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
+                    root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("ReproductorVideo.fxml")));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -138,7 +138,7 @@ public class HomeController implements Initializable {
      * Metodo para regresar a la pagina principalYSignIn por medio del boton cerrar
      */
     public void handleBtnIngresar() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignIn.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("PrincipalYSignIn.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
@@ -147,7 +147,7 @@ public class HomeController implements Initializable {
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz RegistroVideo.fxml
      */
     public void agregarVideo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("RegistroVideo.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("RegistroVideo.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
@@ -157,7 +157,7 @@ public class HomeController implements Initializable {
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz EditarEliminarVideo.fxml
      */
     public void eliminarEditarVideo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("EditarEliminarVideo.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("EditarEliminarVideo.fxml")));
         Stage window = (Stage) btnCerrar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
@@ -205,7 +205,7 @@ public class HomeController implements Initializable {
                         button.setOnAction(event -> {
                             Parent root;
                             try {
-                                root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("ReproductorVideo.fxml")));
+                                root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("ReproductorVideo.fxml")));
 
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
@@ -237,7 +237,7 @@ public class HomeController implements Initializable {
      * Agregar comentario: ?
      */
     public void mostrarBusqueda() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("videoEncontrado.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("videoEncontrado.fxml")));
         Stage window = (Stage) btnBuscar.getScene().getWindow();
         window.setScene(new Scene(root));
     }

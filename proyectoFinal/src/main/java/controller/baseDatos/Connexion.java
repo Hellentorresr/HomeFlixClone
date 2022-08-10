@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class BaseDeDatos {
+public class Connexion {
 
     private static String URL = "jdbc:mysql://localhost:3306/proyecto";
     private static String USER = "root";
@@ -14,7 +14,7 @@ public class BaseDeDatos {
     /**
      * Constructor de la clase
      */
-    public BaseDeDatos() {
+    public Connexion() {
     }
 
     /**

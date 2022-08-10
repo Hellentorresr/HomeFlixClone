@@ -7,16 +7,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class InicioApp extends Application {
 
     /**
-     * Funcion que permite dirigirse a la pantalla principal de signIn
+     * Function que permite dirigirse a la pantalla principal de signIn
      * @param stage Recibe una plantilla para colocar la escena
-     * @throws IOException
+     * @throws IOException Se genera una excepción si es escena no carga
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("PrincipalYSignIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(InicioApp.class.getResource("PrincipalYSignIn.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("HomeFlix!");
         stage.setScene(scene);
@@ -24,8 +24,8 @@ public class Main extends Application {
     }
 
     /**
-     * Funcion que ejecuta el codigo
-     * @param args
+     * Function que ejecuta el código
+     * @param args cadena de caracteres
      */
     public static void main(String[] args) {
         launch();

@@ -23,7 +23,7 @@ import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Video;
-import view.Main;
+import view.InicioApp;
 
 import java.io.File;
 import java.io.IOException;
@@ -175,7 +175,7 @@ public class CRUDVideoController {
      * Metodo para regresar a la página principal
      */
     public void regresarAPrincipal() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) btnRegresar.getScene().getWindow();
         window.setScene(new Scene(root));
     }

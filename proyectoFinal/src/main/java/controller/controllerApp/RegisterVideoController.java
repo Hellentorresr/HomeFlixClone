@@ -21,7 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Video;
-import view.Main;
+import view.InicioApp;
 
 import java.io.File;
 import java.io.IOException;
@@ -164,7 +164,7 @@ public class RegisterVideoController {
      *Metodo para hacer cambios de interfaz
      */
     public void irPrincipal() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) irHome.getScene().getWindow();
         window.setScene(new Scene(root));
     }

@@ -1,7 +1,6 @@
 package controller.controllerApp;
 
 import controller.dao.UsuarioDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,14 +11,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Usuario;
-import view.Main;
+import view.InicioApp;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Objects;
 
 public class SignUpController {
@@ -214,7 +210,7 @@ public class SignUpController {
      * @throws IOException
      */
     public void regresarPrincipal() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("PrincipalYSignIn.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("PrincipalYSignIn.fxml")));
         Stage window = (Stage)regresar.getScene().getWindow();
         window.setScene(new Scene(root));
     }

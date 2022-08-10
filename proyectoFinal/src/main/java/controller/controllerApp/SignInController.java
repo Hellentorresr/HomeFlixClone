@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import view.Main;
+import view.InicioApp;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -77,7 +77,7 @@ public class SignInController {
      * @throws IOException
      */
     public void ingresarApp() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) button_login.getScene().getWindow();
         window.setScene(new Scene(root));
     }
@@ -89,7 +89,7 @@ public class SignInController {
      */
 
     public void IrACrearCuenta(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("SignUpForm.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("SignUpForm.fxml")));
         Stage window = (Stage) button_signUp.getScene().getWindow();
         window.setScene(new Scene(root));
     }
