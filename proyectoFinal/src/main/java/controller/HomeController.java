@@ -7,7 +7,7 @@
 package controller;
 
 import controller.dao.UsuarioDAOImplement;
-import controller.dao.VideoDAO;
+import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,7 +42,7 @@ import java.util.ResourceBundle;
 /**
  * Creacion de la clase DentroDeLaAppController
  */
-public class DentroDeLaAppController implements Initializable {
+public class HomeController implements Initializable {
     /**
      * Atributos de la clase DentroDeLaAppController
      */
@@ -61,7 +61,7 @@ public class DentroDeLaAppController implements Initializable {
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
     public Label videoEncontrado;
-    VideoDAO videoDAO;
+    DAOVideo videoDAO;
     UsuarioDAOImplement UDI;
     ArrayList<Video> favoritas;
     private Button btnBuscar;
@@ -73,7 +73,7 @@ public class DentroDeLaAppController implements Initializable {
     /**
      * Metodo constructor
      */
-    public DentroDeLaAppController() {
+    public HomeController() {
         videoDAO = new VideoDAOImplement();
         UDI = new UsuarioDAOImplement();
     }
