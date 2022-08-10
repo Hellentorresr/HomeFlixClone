@@ -6,7 +6,7 @@
  */
 package controller;
 
-import controller.dao.VideoDAO;
+import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,11 +31,11 @@ import java.util.Objects;
 /**
  * Creacion de la clase ReproductorVideoController
  */
-public class RegistroVideoController {
+public class RegisterVideoController {
     /**
      * Atributos de la clase RegistroVideoController
      */
-    VideoDAO videoDAO;
+    DAOVideo videoDAO;
     public Button irHome;
     public Button btnConver;
     @FXML
@@ -59,7 +59,7 @@ public class RegistroVideoController {
     @FXML
     private TextField txtNombreVideo;
     private String image;
-    public RegistroVideoController(){
+    public RegisterVideoController(){
         videoDAO = new VideoDAOImplement();
     }
 
@@ -131,7 +131,7 @@ public class RegistroVideoController {
      */
     @FXML
     public void btnRegistrarVideo() throws IOException, SQLException {
-        VideoDAO videoDAO = new VideoDAOImplement();
+        DAOVideo videoDAO = new VideoDAOImplement();
         Video v;
         String nombre = this.txtNombreVideo.getText();
         String cate = this.txtCategoria.getText();
