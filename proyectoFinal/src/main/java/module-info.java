@@ -8,6 +8,6 @@ module com.example.proyectofinal {
     opens view to javafx.fxml;
     exports view;
     exports model;
-    exports controller;
-    opens controller to javafx.fxml;
+    exports controller.controllerApp;
+    opens controller.controllerApp to javafx.fxml;
 }

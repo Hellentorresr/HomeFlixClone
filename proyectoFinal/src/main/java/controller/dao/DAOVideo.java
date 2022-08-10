@@ -14,7 +14,7 @@ import java.time.LocalDate;
 /**
  * Interfaz que implementa la interfaz DAO generica
  */
-public interface VideoDAO extends DAO<Video> {
+public interface DAOVideo extends DAO<Video> {
 
     /**
      *
