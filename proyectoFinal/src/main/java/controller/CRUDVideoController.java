@@ -7,7 +7,7 @@
 
 package controller;
 
-import controller.dao.VideoDAO;
+import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +33,7 @@ import java.util.Objects;
 /**
  * Clase EditarEliminarVideoController
  */
-public class EditarEliminarVideoController {
+public class CRUDVideoController {
     /**
      * Atributos clase EditarEliminarVideoController
      */
@@ -67,7 +67,7 @@ public class EditarEliminarVideoController {
     /**
      * Metodo contractor de la clase EditarEliminarVideoController
      */
-    public EditarEliminarVideoController() {
+    public CRUDVideoController() {
         image = "";
     }
 
@@ -84,7 +84,7 @@ public class EditarEliminarVideoController {
             mostrarMensaje("Favor ingresar un código para hacer los cambio");
         } else if (!this.txtCodigoParaEditar.getText().isEmpty()) {
             //primero lo obtengo
-            VideoDAO videoDAO = new VideoDAOImplement();
+            DAOVideo videoDAO = new VideoDAOImplement();
             int codi = Integer.parseInt(this.txtCodigoParaEditar.getText());
             Video video = videoDAO.get(codi);
 
@@ -188,7 +188,7 @@ public class EditarEliminarVideoController {
             mostrarMensajeNegativo("Favor ingrese un codigo para hacer la eliminacion");
         } else if (!this.txtCodigoParaEliminar.getText().isEmpty()) {
             //primero lo obtengo
-            VideoDAO videoDAO = new VideoDAOImplement();
+            DAOVideo videoDAO = new VideoDAOImplement();
             Video video;
             int codi = Integer.parseInt(this.txtCodigoParaEliminar.getText());
             video = videoDAO.get(codi);
