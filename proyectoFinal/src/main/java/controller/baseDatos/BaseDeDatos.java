@@ -9,7 +9,7 @@ public class BaseDeDatos {
 
     private static String URL = "jdbc:mysql://localhost:3306/proyecto";
     private static String USER = "root";
-    private static String PASS = "EscribaSuContraseña";
+    private static String PASS = "Developer2022$";
 
     /**
      * Constructor de la clase
