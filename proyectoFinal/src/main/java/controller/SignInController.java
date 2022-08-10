@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 
-public class PrincipalYSignIn {
+public class SignInController {
     UsuarioDAOImplement UDI;
 
     @FXML
@@ -37,7 +37,7 @@ public class PrincipalYSignIn {
     /**
      * Funcion que crea el constructor de la clase
      */
-    public PrincipalYSignIn(){
+    public SignInController(){
         UDI = new UsuarioDAOImplement();
     }
 
