@@ -28,7 +28,7 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import view.Main;
+import view.InicioApp;
 
 import java.io.File;
 import java.io.IOException;
@@ -338,7 +338,7 @@ public class ReproductorVideoController implements Initializable {
     }
 
     public void regresarHome() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) regresar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
