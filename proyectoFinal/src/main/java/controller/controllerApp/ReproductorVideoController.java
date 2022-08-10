@@ -6,14 +6,7 @@
  */
 package controller.controllerApp;
 
-import controller.controllerApp.RegisterVideoController;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -43,22 +35,21 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
 
 import static controller.controllerApp.HomeController.video;
+
 /**
  * Creacion de la clase ReproductorVideoController
  */
 
 public class ReproductorVideoController implements Initializable {
+    public Button regresar;
+    public Button noLike;
+    public Button like;
     /**
      * Atributos de la clase ReproductorVideoController
      */
     RegisterVideoController rvc;
-    public Button regresar;
-    public Button noLike;
-    public Button like;
-
     @FXML
     private VBox vboxParent;
     @FXML
@@ -180,25 +171,22 @@ public class ReproductorVideoController implements Initializable {
         labelFullScreen.setGraphic(ivFullScreen);
 
         //Start using the button or adding functionality
-        buttonPPR.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {//funciona para cualquier nodo o componente
-                bindCurrentTimeLabel();
-                Button buttonPlay = (Button) actionEvent.getSource();//interface ActionListener
-                if (atEndOfVideo) {
-                    sliderTime.setValue(0);
-                    atEndOfVideo = false;
-                    isPlaying = false;
-                }
-                if (isPlaying) {
-                    buttonPlay.setGraphic(ivPlay);
-                    mpVideo.pause();
-                    isPlaying = false;
-                } else {
-                    buttonPlay.setGraphic(ivPause);
-                    mpVideo.play();
-                    isPlaying = true;
-                }
+        buttonPPR.setOnAction(actionEvent -> {//funciona para cualquier nodo o componente
+            bindCurrentTimeLabel();
+            Button buttonPlay = (Button) actionEvent.getSource();//interface ActionListener
+            if (atEndOfVideo) {
+                sliderTime.setValue(0);
+                atEndOfVideo = false;
+                isPlaying = false;
+            }
+            if (isPlaying) {
+                buttonPlay.setGraphic(ivPlay);
+                mpVideo.pause();
+                isPlaying = false;
+            } else {
+                buttonPlay.setGraphic(ivPause);
+                mpVideo.play();
+                isPlaying = true;
             }
         });
 
@@ -209,160 +197,112 @@ public class ReproductorVideoController implements Initializable {
 
         bindCurrentTimeLabel();
 
-        sliderVolume.valueProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                mpVideo.setVolume(sliderVolume.getValue());
-                if (mpVideo.getVolume() != 0.0) {
-                    labelVolume.setGraphic(ivVolume);
-                    isMuted = false;
-                } else {
-                    labelVolume.setGraphic(ivMute);
-                    isMuted = true;
-                }
+        sliderVolume.valueProperty().addListener(observable -> {
+            mpVideo.setVolume(sliderVolume.getValue());
+            if (mpVideo.getVolume() != 0.0) {
+                labelVolume.setGraphic(ivVolume);
+                isMuted = false;
+            } else {
+                labelVolume.setGraphic(ivMute);
+                isMuted = true;
             }
         });
 
-        labelSpeed.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (labelSpeed.getText().equals("1x")) {
-                    labelSpeed.setText("2x");
-                    mpVideo.setRate(2.0);
-                } else {
-                    labelSpeed.setText("1x");
-                    mpVideo.setRate(1.0);
-                }
+        labelSpeed.setOnMouseClicked(mouseEvent -> {
+            if (labelSpeed.getText().equals("1x")) {
+                labelSpeed.setText("2x");
+                mpVideo.setRate(2.0);
+            } else {
+                labelSpeed.setText("1x");
+                mpVideo.setRate(1.0);
             }
         });
 
-        labelVolume.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (isMuted) {
-                    labelVolume.setGraphic(ivVolume);
-                    sliderVolume.setValue(0.2);
-                    isMuted = false;
-                } else {
-                    labelVolume.setGraphic(ivMute);
-                    sliderVolume.setValue(0);
-                    isMuted = true;
-                }
+        labelVolume.setOnMouseClicked(mouseEvent -> {
+            if (isMuted) {
+                labelVolume.setGraphic(ivVolume);
+                sliderVolume.setValue(0.2);
+                isMuted = false;
+            } else {
+                labelVolume.setGraphic(ivMute);
+                sliderVolume.setValue(0);
+                isMuted = true;
             }
         });
 
-        labelVolume.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if (hboxVolume.lookup("#sliderVolume") == null) {
-                    hboxVolume.getChildren().add(sliderVolume);
-                    sliderVolume.setValue(mpVideo.getVolume());
-                }
+        labelVolume.setOnMouseEntered(mouseEvent -> {
+            if (hboxVolume.lookup("#sliderVolume") == null) {
+                hboxVolume.getChildren().add(sliderVolume);
+                sliderVolume.setValue(mpVideo.getVolume());
             }
         });
 
-        hboxVolume.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                hboxVolume.getChildren().remove(sliderVolume);
-            }
-        });
+        hboxVolume.setOnMouseExited(mouseEvent -> hboxVolume.getChildren().remove(sliderVolume));
 
-        vboxParent.sceneProperty().addListener(new ChangeListener<Scene>() {
-            @Override
-            public void changed(ObservableValue<? extends Scene> observableValue, Scene oldScene, Scene newScene) {
-                mvVideo.fitHeightProperty().bind(newScene.heightProperty().subtract(hboxControls.heightProperty().add(20)));
-            }
-        });
+        vboxParent.sceneProperty().addListener((observableValue, oldScene, newScene) -> mvVideo.fitHeightProperty().bind(newScene.heightProperty().subtract(hboxControls.heightProperty().add(20))));
 
-        labelFullScreen.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Label label = (Label) mouseEvent.getSource();
-                Stage stage = (Stage) label.getScene().getWindow();
-                if (stage.isFullScreen()) {
-                    stage.setFullScreen(false);
+        labelFullScreen.setOnMouseClicked(mouseEvent -> {
+            Label label = (Label) mouseEvent.getSource();
+            Stage stage = (Stage) label.getScene().getWindow();
+            if (stage.isFullScreen()) {
+                stage.setFullScreen(false);
+                labelFullScreen.setGraphic(ivFullScreen);
+            } else {
+                stage.setFullScreen(true);
+                labelFullScreen.setGraphic(ivExit);
+            }
+
+            stage.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+                if (keyEvent.getCode() == KeyCode.ESCAPE) {
                     labelFullScreen.setGraphic(ivFullScreen);
-                } else {
-                    stage.setFullScreen(true);
-                    labelFullScreen.setGraphic(ivExit);
                 }
-
-                stage.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-                    @Override
-                    public void handle(KeyEvent keyEvent) {
-                        if (keyEvent.getCode() == KeyCode.ESCAPE) {
-                            labelFullScreen.setGraphic(ivFullScreen);
-                        }
-                    }
-                });
-            }
+            });
         });
 
-        mpVideo.totalDurationProperty().addListener(new ChangeListener<Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends Duration> observableValue, Duration oldDuration, Duration newDuration) {
-                bindCurrentTimeLabel();
-                sliderTime.setMax(newDuration.toSeconds());
-                labelTotalTime.setText(getTime(newDuration));
-            }
+        mpVideo.totalDurationProperty().addListener((observableValue, oldDuration, newDuration) -> {
+            bindCurrentTimeLabel();
+            sliderTime.setMax(newDuration.toSeconds());
+            labelTotalTime.setText(getTime(newDuration));
         });
 
         //Time slider I want to add a listener to the value changing property
-        sliderTime.valueChangingProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean wasChanging, Boolean isChanging) {
-                //what I want to do is once the slider has stopped changing meaning the user has let go of the slider ball,
-                //so I have to set the video to that time
-                bindCurrentTimeLabel();
-                if (!isChanging) {//if this is no longer true
-                    mpVideo.seek(Duration.seconds(sliderTime.getValue()));
-                }
+        sliderTime.valueChangingProperty().addListener((observableValue, wasChanging, isChanging) -> {
+            //what I want to do is once the slider has stopped changing meaning the user has let go of the slider ball,
+            //so I have to set the video to that time
+            bindCurrentTimeLabel();
+            if (!isChanging) {//if this is no longer true
+                mpVideo.seek(Duration.seconds(sliderTime.getValue()));
             }
         });
 
-        sliderTime.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                bindCurrentTimeLabel();
-                double currentTime = mpVideo.getCurrentTime().toSeconds();
-                if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {// half second
-                    mpVideo.seek(Duration.seconds(newValue.doubleValue()));
-                }
-                labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
+        sliderTime.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            bindCurrentTimeLabel();
+            double currentTime = mpVideo.getCurrentTime().toSeconds();
+            if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {// half second
+                mpVideo.seek(Duration.seconds(newValue.doubleValue()));
             }
+            labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
         });
 
-        mpVideo.currentTimeProperty().addListener(new ChangeListener<Duration>() {
-            @Override
-            public void changed(ObservableValue<? extends Duration> observableValue, Duration oldTime, Duration newTime) {
-                bindCurrentTimeLabel();
-                if (!sliderTime.isValueChanging()) {
-                    sliderTime.setValue(newTime.toSeconds());
-                }
-                labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
+        mpVideo.currentTimeProperty().addListener((observableValue, oldTime, newTime) -> {
+            bindCurrentTimeLabel();
+            if (!sliderTime.isValueChanging()) {
+                sliderTime.setValue(newTime.toSeconds());
             }
+            labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
         });
 
-        mpVideo.setOnEndOfMedia(new Runnable() {
-            @Override
-            public void run() {
-                buttonPPR.setGraphic(ivRestart);
-                atEndOfVideo = true;
-                if (!labelCurrentTime.textProperty().equals(labelTotalTime.textProperty())) {
-                    labelCurrentTime.setText(getTime(mpVideo.getTotalDuration()) + " / ");
-                }
+        mpVideo.setOnEndOfMedia(() -> {
+            buttonPPR.setGraphic(ivRestart);
+            atEndOfVideo = true;
+            if (!labelCurrentTime.textProperty().equals(labelTotalTime.textProperty())) {
+                labelCurrentTime.setText(getTime(mpVideo.getTotalDuration()) + " / ");
             }
         });
     }
 
     public void bindCurrentTimeLabel() {
-        labelCurrentTime.textProperty().bind(Bindings.createStringBinding(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                return getTime(mpVideo.getCurrentTime()) + " / ";
-            }
-        }, mpVideo.currentTimeProperty()));
+        labelCurrentTime.textProperty().bind(Bindings.createStringBinding(() -> getTime(mpVideo.getCurrentTime()) + " / ", mpVideo.currentTimeProperty()));
     }
 
     public String getTime(Duration time) {
@@ -397,13 +337,13 @@ public class ReproductorVideoController implements Initializable {
         }
     }
 
-    public void regresarHome(ActionEvent event) throws IOException {
+    public void regresarHome() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("DentroDeLaApp.fxml")));
         Stage window = (Stage) regresar.getScene().getWindow();
         window.setScene(new Scene(root));
     }
 
-    public void preferencia(ActionEvent event) {
+    public void preferencia() {
 
     }
 }
