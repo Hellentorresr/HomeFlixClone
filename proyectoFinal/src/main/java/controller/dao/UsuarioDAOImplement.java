@@ -1,7 +1,7 @@
 package controller.dao;
 
 import controller.baseDatos.BaseDeDatos;
-import controller.PrincipalYSignIn;
+import controller.SignInController;
 import model.Usuario;
 
 import java.sql.*;
@@ -110,7 +110,7 @@ public class UsuarioDAOImplement implements DAOUsuario {
     public int getUserId() throws SQLException, ClassNotFoundException {
         BaseDeDatos connection = new BaseDeDatos();
         Connection connectDB = connection.getConnection();
-        String id = "select id from usuarios where userName = " + "'" + PrincipalYSignIn.userName + "'" + " and userPassword = " + "'" + PrincipalYSignIn.userPassword + "'";
+        String id = "select id from usuarios where userName = " + "'" + SignInController.userName + "'" + " and userPassword = " + "'" + SignInController.userPassword + "'";
         Statement statement = connectDB.createStatement();
         ResultSet queryResult = statement.executeQuery(id);
         queryResult.next();
