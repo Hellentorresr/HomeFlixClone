@@ -44,7 +44,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
 
-import static controller.DentroDeLaAppController.video;
+import static controller.HomeController.video;
 /**
  * Creacion de la clase ReproductorVideoController
  */
@@ -53,7 +53,7 @@ public class ReproductorVideoController implements Initializable {
     /**
      * Atributos de la clase ReproductorVideoController
      */
-    RegistroVideoController rvc;
+    RegisterVideoController rvc;
     public Button regresar;
     public Button noLike;
     public Button like;
@@ -108,7 +108,7 @@ public class ReproductorVideoController implements Initializable {
     private ImageView ivExit;
 
     public ReproductorVideoController() {
-        rvc = new RegistroVideoController();
+        rvc = new RegisterVideoController();
     }
 
     /**
@@ -181,9 +181,9 @@ public class ReproductorVideoController implements Initializable {
         //Start using the button or adding functionality
         buttonPPR.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
+            public void handle(ActionEvent actionEvent) {//funciona para cualquier nodo o componente
                 bindCurrentTimeLabel();
-                Button buttonPlay = (Button) actionEvent.getSource();
+                Button buttonPlay = (Button) actionEvent.getSource();//interface ActionListener
                 if (atEndOfVideo) {
                     sliderTime.setValue(0);
                     atEndOfVideo = false;
