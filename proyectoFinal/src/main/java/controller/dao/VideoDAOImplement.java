@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Creacion de la clase VideoDAOImplement
  */
-public class VideoDAOImplement implements VideoDAO {
+public class VideoDAOImplement implements DAOVideo {
     /**
      * Atributos de la clase  VideoDAOImplement
      */
@@ -39,7 +39,7 @@ public class VideoDAOImplement implements VideoDAO {
      *Metodo para obtener informacion del los nombres y codigos de los videos existentes
      */
     public static String devolverInfo() throws SQLException {
-        VideoDAO videoDAO = new VideoDAOImplement();
+        DAOVideo videoDAO = new VideoDAOImplement();
         StringBuilder reporte = new StringBuilder();
         for (Video video : videoDAO.getALL()) {
             reporte.append("Código: ").append(video.getVideoId()).append(", Nombre: ").append(video.getNombreVideo()).append("\n");
