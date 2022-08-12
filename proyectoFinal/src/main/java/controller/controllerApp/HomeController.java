@@ -122,7 +122,7 @@ public class HomeController implements Initializable {
     }
 
     /**
-     * Metodo para regresar a la pagina principalYSignIn por medio del boton cerrar
+     * Metodo para regresar a la página principalYSignIn por medio del boton cerrar
      */
     public void handleBtnIngresar() throws IOException {
         utilitiesImplements.pathInterfazGrafica("PrincipalYSignIn.fxml", btnCerrar);
