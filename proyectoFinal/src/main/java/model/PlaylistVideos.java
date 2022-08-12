@@ -72,4 +72,17 @@ public class PlaylistVideos {
     public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
+
+    /**
+     * Metodo toString
+     */
+    @Override
+    public String toString() {
+        return "PlaylistVideos{" +
+                "namePlaylist='" + namePlaylist + '\'' +
+                ", totalPlayListDurationTime=" + totalPlayListDurationTime +
+                ", tema='" + tema + '\'' +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }
