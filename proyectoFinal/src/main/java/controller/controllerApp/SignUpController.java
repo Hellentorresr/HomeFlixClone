@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class SignUpController {
+    UtilitiesImplements utilitiesImplements;
     UsuarioDAOImplement UDI;
     Usuario usuario;
     /**
@@ -49,11 +50,12 @@ public class SignUpController {
         UDI = new UsuarioDAOImplement();
         labelRegister = new Label();
         usuario = new Usuario();
+        utilitiesImplements = new UtilitiesImplements();
 
     }
 
     /**
-     * Funcion que regista un usuario
+     * Function que registra un usuario
      * @throws SQLException
      * @throws ClassNotFoundException
      */
