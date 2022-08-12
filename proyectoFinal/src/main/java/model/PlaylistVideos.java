@@ -7,6 +7,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -21,6 +22,7 @@ public class PlaylistVideos {
     private String tema;
     private LocalDate creationDate;
     private int code;
+    private ArrayList<Video>videos;
 
     /**
      * Metodo constructor
@@ -30,6 +32,7 @@ public class PlaylistVideos {
         this.totalPlayListDurationTime = totalPlayListDurationTime;
         this.tema = tema;
         this.creationDate = creationDate;
+        this.videos = new ArrayList<>();
     }
 
     /**
@@ -93,6 +96,14 @@ public class PlaylistVideos {
         this.code = code;
     }
 
+    public ArrayList<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(ArrayList<Video> videos) {
+        this.videos = videos;
+    }
+
     /**
      * Metodo toString
      */
@@ -104,9 +115,9 @@ public class PlaylistVideos {
                 ", tema='" + tema + '\'' +
                 ", creationDate=" + creationDate +
                 ", code=" + code +
+                ", videos=" + videos +
                 '}';
     }
-
 
     /**
      * Metodo equals
@@ -115,7 +126,6 @@ public class PlaylistVideos {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PlaylistVideos that)) return false;
-        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getCode() == that.getCode() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate());
+        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getCode() == that.getCode() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate()) && Objects.equals(getVideos(), that.getVideos());
     }
-
 }
