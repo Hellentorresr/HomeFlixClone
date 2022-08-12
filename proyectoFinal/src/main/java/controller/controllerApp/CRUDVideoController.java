@@ -182,7 +182,7 @@ public class CRUDVideoController {
      */
     public void eliminarVideoMetodo() throws SQLException {
         if (this.txtCodeParaEliminar.getText().isEmpty()) {
-            mostrarMensajeNegativo("Favor ingrese un código para hacer la elimination");
+            mostrarMensajeNegativo("Favor ingrese un código para hacer la eliminación");
         } else if (!this.txtCodeParaEliminar.getText().isEmpty()) {
             //primero lo obtengo
             DAOVideo videoDAO = new VideoDAOImplement();
