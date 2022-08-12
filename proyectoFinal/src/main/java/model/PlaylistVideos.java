@@ -103,14 +103,19 @@ public class PlaylistVideos {
                 ", totalPlayListDurationTime=" + totalPlayListDurationTime +
                 ", tema='" + tema + '\'' +
                 ", creationDate=" + creationDate +
+                ", code=" + code +
                 '}';
     }
 
+
+    /**
+     * Metodo equals
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PlaylistVideos that)) return false;
-        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate());
+        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getCode() == that.getCode() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate());
     }
 
 }
