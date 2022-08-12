@@ -36,15 +36,13 @@ public class CRUDVideoController {
 
     UtilitiesImplements utilitiesImplements;
     @FXML
-    private Button btnConver;
+    private Button btnCover;
     @FXML
     private Button btnEliminarVideo;
     @FXML
     private Button btnEvitar;
     @FXML
     private Button btnMostrarReporte;
-    @FXML
-    private Button btnPathVideo;
     @FXML
     private ImageView imageViewCover;
     @FXML
