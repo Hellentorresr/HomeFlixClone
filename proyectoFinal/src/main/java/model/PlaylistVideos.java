@@ -19,4 +19,20 @@ public class PlaylistVideos {
     private float totalPlayListDurationTime;
     private String tema;
     private LocalDate creationDate;
+
+    /**
+     * Metodo constructor
+     */
+    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate) {
+        this.namePlaylist = namePlaylist;
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
+        this.tema = tema;
+        this.creationDate = creationDate;
+    }
+
+    /**
+     * Segundo metodo constructor
+     */
+    public PlaylistVideos() {
+    }
 }
