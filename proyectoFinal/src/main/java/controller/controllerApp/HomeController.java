@@ -146,10 +146,8 @@ public class HomeController implements Initializable {
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz RegistroVideo.fxml
      */
-    public void agregarVideo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("RegistroVideo.fxml")));
-        Stage window = (Stage) btnCerrar.getScene().getWindow();
-        window.setScene(new Scene(root));
+    public void agregarVideo() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("RegistroVideo.fxml", btnCerrar);
     }
 
 
