@@ -9,7 +9,6 @@ package controller.controllerApp;
 import controller.dao.UsuarioDAOImplement;
 import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,10 +42,6 @@ import java.util.ResourceBundle;
  * Creacion de la clase DentroDeLaAppController
  */
 public class HomeController implements Initializable {
-    /**
-     * Atributos de la clase DentroDeLaAppController
-     */
-    UtilitiesImplements utilitiesImplements;
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     public static Video video = new Video();
     @FXML
@@ -61,11 +56,13 @@ public class HomeController implements Initializable {
     public Label nombreDeUsuario;
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
-    public Label videoEncontrado;
+    /**
+     * Atributos de la clase DentroDeLaAppController
+     */
+    UtilitiesImplements utilitiesImplements;
     DAOVideo videoDAO;
     UsuarioDAOImplement UDI;
     ArrayList<Video> favoritas;
-    private Button btnBuscar;
     private Button button;
     @FXML
     private HBox favoritasContainer;
@@ -96,7 +93,6 @@ public class HomeController implements Initializable {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
-
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -118,17 +114,14 @@ public class HomeController implements Initializable {
             button.setTextFill(Paint.valueOf("Red"));
             button.setCursor(Cursor.cursor("hand"));
 
-            int finalI = i;
+            int toGetIterator = i;
             button.setOnAction(event -> {
-                video = videosBaseDatos.get(finalI);
-                Parent root;
+                video = videosBaseDatos.get(toGetIterator);
                 try {
-                    root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("ReproductorVideo.fxml")));
+                    utilitiesImplements.pathInterfazGrafica("ReproductorVideo.fxml", button);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                Stage window = (Stage) button.getScene().getWindow();
-                window.setScene(new Scene(root));
             });
             button.setText("Reproducir");
             vBox.getChildren().add(button);
@@ -227,15 +220,6 @@ public class HomeController implements Initializable {
             }
         }
         return video;
-    }
-
-    /**
-     * Agregar comentario: ?
-     */
-    public void mostrarBusqueda() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("videoEncontrado.fxml")));
-        Stage window = (Stage) btnBuscar.getScene().getWindow();
-        window.setScene(new Scene(root));
     }
 
     /**
