@@ -42,9 +42,9 @@ public class SignInController {
     }
 
     /**
-     * Funcion que valida la entrada de datos en los campos de username y password
-     * @throws SQLException
-     * @throws IOException
+     * Function que valida la entrada de datos en los campos de username y password
+     * @throws SQLException dara un exception si no se conecta correctamente a la base de datos
+     * @throws IOException dara un exception si no se conecta correctamente a la base de datos
      */
     public void login() throws SQLException, IOException {
         if (tf_userName.getText() == "" || tf_userPassword.getText() == "")
@@ -55,9 +55,9 @@ public class SignInController {
     }
 
     /**
-     * Funcion que valida si el username y el password hacen match en la base de datos
-     * @throws SQLException
-     * @throws IOException
+     * Function que válida si el username y el password hacen match en la base de datos
+     * @throws SQLException dara un exception si no se conecta correctamente a la base de datos
+     * @throws IOException dara un exception si no se conecta correctamente a la base de datos
      */
     public void validateLogin() throws SQLException, IOException {
         userName = tf_userName.getText();
@@ -74,7 +74,7 @@ public class SignInController {
 
     /**
      * Para enviar al usuario a la página principal de videos
-     * @throws IOException
+     * @throws IOException dara un exception si no se conecta correctamente a la base de datos
      */
     public void ingresarApp() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
@@ -84,11 +84,10 @@ public class SignInController {
 
     /**
      * Función que envia a la pantalla de signUp
-     * @param event
-     * @throws IOException
+     * @throws IOException Dara un error si no encuentra la interfaz
      */
 
-    public void IrACrearCuenta(ActionEvent event) throws IOException {
+    public void IrACrearCuenta() throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("SignUpForm.fxml")));
         Stage window = (Stage) button_signUp.getScene().getWindow();
         window.setScene(new Scene(root));
