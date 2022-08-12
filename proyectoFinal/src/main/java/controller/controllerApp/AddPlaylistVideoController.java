@@ -30,6 +30,14 @@ public class AddPlaylistVideoController {
     /**
      * metodo addRegistration
      */
+
+    /**
+     * Constructor de la clase AddPlayListVideoController
+     */
+    public AddPlaylistVideoController() {
+        this.playlistVideos = new PlaylistVideos();
+    }
+
     @FXML
     void addRegistration() {
 
