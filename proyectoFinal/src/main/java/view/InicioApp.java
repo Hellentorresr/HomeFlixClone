@@ -17,7 +17,7 @@ public class InicioApp extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(InicioApp.class.getResource("PrincipalYSignIn.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(InicioApp.class.getResource("AddPlayList.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("HomeFlix!");
         stage.setScene(scene);
@@ -31,6 +31,6 @@ public class InicioApp extends Application {
     public static void main(String[] args) {
         launch();
         ServerJava serverJava = new ServerJava();
-        serverJava.serverConnectorJava();
+      //  serverJava.serverConnectorJava();
     }
 }
