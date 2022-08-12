@@ -18,4 +18,11 @@ public class UtilitiesAbstract {
     //variable String para recibir path
     private int num;
     private String pathInterfazGrafica;
+
+    /**
+     * Constructor
+     */
+    public UtilitiesAbstract() {
+    }
+
 }
