@@ -1,7 +1,7 @@
 /**
  * @autor por Hellen Torres
  * @FechaCreacion 29/07/2022
- * @Ultima_Modificacion 08//08/2022 7:pm
+ * @Ultima_Modificacion 12/08/2022 7:pm
  * @por Hellen torres
  */
 
@@ -182,7 +182,7 @@ public class CRUDVideoController {
      */
     public void eliminarVideoMetodo() throws SQLException {
         if (this.txtCodeParaEliminar.getText().isEmpty()) {
-            mostrarMensajeNegativo("Favor ingrese un codigo para hacer la eliminacion");
+            mostrarMensajeNegativo("Favor ingrese un código para hacer la eliminación");
         } else if (!this.txtCodeParaEliminar.getText().isEmpty()) {
             //primero lo obtengo
             DAOVideo videoDAO = new VideoDAOImplement();

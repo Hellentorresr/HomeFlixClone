@@ -341,8 +341,4 @@ public class ReproductorVideoController implements Initializable {
     public void regresarHome() throws IOException {
         utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", regresar);
     }
-
-    public void preferencia() {
-
-    }
 }
