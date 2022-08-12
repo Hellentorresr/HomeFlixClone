@@ -35,4 +35,41 @@ public class PlaylistVideos {
      */
     public PlaylistVideos() {
     }
+
+
+    /**
+     * Getters y setters
+     */
+
+    public String getNamePlaylist() {
+        return namePlaylist;
+    }
+
+    public void setNamePlaylist(String namePlaylist) {
+        this.namePlaylist = namePlaylist;
+    }
+
+    public float getTotalPlayListDurationTime() {
+        return totalPlayListDurationTime;
+    }
+
+    public void setTotalPlayListDurationTime(float totalPlayListDurationTime) {
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
+    }
+
+    public String getTema() {
+        return tema;
+    }
+
+    public void setTema(String tema) {
+        this.tema = tema;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
 }
