@@ -7,6 +7,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Clase PlaylistVideos
@@ -85,4 +86,12 @@ public class PlaylistVideos {
                 ", creationDate=" + creationDate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PlaylistVideos that)) return false;
+        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate());
+    }
+
 }
