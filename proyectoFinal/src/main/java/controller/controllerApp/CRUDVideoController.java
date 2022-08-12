@@ -10,9 +10,6 @@ package controller.controllerApp;
 import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -21,23 +18,23 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import model.Video;
-import view.InicioApp;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Objects;
+
 
 /**
  * Clase EditarEliminarVideoController
  */
 public class CRUDVideoController {
+    public Button btnRegresar;
     /**
      * Atributos clase EditarEliminarVideoController
      */
-    public Button btnRegresar;
+
+    UtilitiesImplements utilitiesImplements;
     @FXML
     private Button btnConver;
     @FXML
@@ -69,6 +66,7 @@ public class CRUDVideoController {
      */
     public CRUDVideoController() {
         image = "";
+        this.utilitiesImplements = new UtilitiesImplements();
     }
 
     /**
@@ -119,6 +117,7 @@ public class CRUDVideoController {
 
     /**
      * Metodo para mostrar information en el contenedor textArea
+     *
      * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      */
     @FXML
@@ -130,6 +129,7 @@ public class CRUDVideoController {
 
     /**
      * Metodo para mostrar mensaje
+     *
      * @param string recibe un String
      */
     private void mostrarMensaje(String string) {
@@ -142,6 +142,7 @@ public class CRUDVideoController {
 
     /**
      * Metodo para mostrar mensaje
+     *
      * @param mensaje recibe un String
      */
 
@@ -175,13 +176,11 @@ public class CRUDVideoController {
      * Metodo para regresar a la página principal
      */
     public void regresarAPrincipal() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
-        Stage window = (Stage) btnRegresar.getScene().getWindow();
-        window.setScene(new Scene(root));
+        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", btnRegresar);
     }
 
     /**
-     *Metodo para eliminar un video registrado
+     * Metodo para eliminar un video registrado
      */
     public void eliminarVideoMetodo() throws SQLException {
         if (this.txtCodigoParaEliminar.getText().isEmpty()) {
