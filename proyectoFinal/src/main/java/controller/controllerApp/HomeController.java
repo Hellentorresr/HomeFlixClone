@@ -154,10 +154,8 @@ public class HomeController implements Initializable {
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz EditarEliminarVideo.fxml
      */
-    public void eliminarEditarVideo(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("EditarEliminarVideo.fxml")));
-        Stage window = (Stage) btnCerrar.getScene().getWindow();
-        window.setScene(new Scene(root));
+    public void eliminarEditarVideo() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("EditarEliminarVideo.fxml", btnCerrar);
     }
 
     /**
