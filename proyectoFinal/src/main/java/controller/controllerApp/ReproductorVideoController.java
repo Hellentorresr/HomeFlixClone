@@ -8,11 +8,8 @@ package controller.controllerApp;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -28,12 +25,10 @@ import javafx.scene.media.MediaView;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import view.InicioApp;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static controller.controllerApp.HomeController.video;
@@ -339,10 +334,12 @@ public class ReproductorVideoController implements Initializable {
         }
     }
 
+    /**
+     * Metodo regresarHome para regresar a la interfaz DentroDeLaApp.fxml
+     * @throws IOException dara un error si no encuentra la interfaz
+     */
     public void regresarHome() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
-        Stage window = (Stage) regresar.getScene().getWindow();
-        window.setScene(new Scene(root));
+        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", regresar);
     }
 
     public void preferencia() {
