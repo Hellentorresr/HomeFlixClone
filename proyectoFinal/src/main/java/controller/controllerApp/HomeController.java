@@ -10,12 +10,8 @@ import controller.dao.UsuarioDAOImplement;
 import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
@@ -27,15 +23,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 import model.Video;
-import view.InicioApp;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -192,15 +184,11 @@ public class HomeController implements Initializable {
 
 
                         button.setOnAction(event -> {
-                            Parent root;
                             try {
-                                root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("ReproductorVideo.fxml")));
-
+                                utilitiesImplements.pathInterfazGrafica("ReproductorVideo.fxml", button);
                             } catch (IOException e) {
                                 throw new RuntimeException(e);
                             }
-                            Stage window = (Stage) button.getScene().getWindow();
-                            window.setScene(new Scene(root));
                         });
                         button.setText("Reproducir");
                         vBox.getChildren().add(button);
