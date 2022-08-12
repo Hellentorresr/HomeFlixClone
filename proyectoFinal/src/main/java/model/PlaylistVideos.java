@@ -20,6 +20,7 @@ public class PlaylistVideos {
     private float totalPlayListDurationTime;
     private String tema;
     private LocalDate creationDate;
+    private int code;
 
     /**
      * Metodo constructor
@@ -37,6 +38,16 @@ public class PlaylistVideos {
     public PlaylistVideos() {
     }
 
+    /**
+     * Tercer constructor
+     */
+    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int code) {
+        this.namePlaylist = namePlaylist;
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
+        this.tema = tema;
+        this.creationDate = creationDate;
+        this.code = code;
+    }
 
     /**
      * Getters y setters
