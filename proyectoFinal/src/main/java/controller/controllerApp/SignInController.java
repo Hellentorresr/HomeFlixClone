@@ -77,9 +77,7 @@ public class SignInController {
      * @throws IOException dara un exception si no se conecta correctamente a la base de datos
      */
     public void ingresarApp() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("DentroDeLaApp.fxml")));
-        Stage window = (Stage) button_login.getScene().getWindow();
-        window.setScene(new Scene(root));
+        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml",button_login);
     }
 
     /**
