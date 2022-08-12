@@ -10,7 +10,7 @@ package controller.controllerApp;
 /**
  * clase UtilitiesAbstract para abstraer código repetitivo
  */
-public class UtilitiesAbstract {
+public abstract class  UtilitiesAbstract {
     /**
      * Atributos de la clase UtilitiesAbstract
      */
@@ -51,4 +51,9 @@ public class UtilitiesAbstract {
     public void setPathInterfazGrafica(String pathInterfazGrafica) {
         this.pathInterfazGrafica = pathInterfazGrafica;
     }
+
+    /**
+     * Creacion de metodo validarNumero
+     */
+    public abstract int validarNumero(int numero);
 }
