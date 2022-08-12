@@ -1,7 +1,7 @@
 /**
  * @autor por Hellen Torres
  * @FechaCreacion 29/07/2022
- * @Ultima_Modificacion 08//08/2022 7:pm
+ * @Ultima_Modificacion 12//08/2022
  * @por Hellen torres
  */
 package controller.controllerApp;
@@ -49,6 +49,7 @@ public class ReproductorVideoController implements Initializable {
     /**
      * Atributos de la clase ReproductorVideoController
      */
+    UtilitiesImplements utilitiesImplements;
     RegisterVideoController rvc;
     @FXML
     private VBox vboxParent;
@@ -101,6 +102,7 @@ public class ReproductorVideoController implements Initializable {
 
     public ReproductorVideoController() {
         rvc = new RegisterVideoController();
+        utilitiesImplements = new UtilitiesImplements();
     }
 
     /**
