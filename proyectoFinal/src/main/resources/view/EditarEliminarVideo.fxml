@@ -58,7 +58,7 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtCodigoParaEliminar" layoutX="23.0" layoutY="83.0" promptText="1">
+                <TextField fx:id="txtCodeParaEliminar" layoutX="23.0" layoutY="83.0" promptText="1">
                     <font>
                         <Font size="16.0" />
                     </font>
@@ -82,7 +82,7 @@
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtCodigoParaEditar" layoutX="23.0" layoutY="83.0" prefHeight="35.0" prefWidth="135.0" promptText="1">
+                <TextField fx:id="txtCodeParaEditar" layoutX="23.0" layoutY="83.0" prefHeight="35.0" prefWidth="135.0" promptText="1">
                     <font>
                         <Font size="16.0" />
                     </font>
