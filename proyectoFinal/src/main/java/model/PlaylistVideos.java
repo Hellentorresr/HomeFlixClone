@@ -85,6 +85,14 @@ public class PlaylistVideos {
         this.creationDate = creationDate;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
     /**
      * Metodo toString
      */
