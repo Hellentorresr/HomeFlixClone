@@ -7,6 +7,8 @@
  */
 package controller.controllerApp;
 
+import javafx.scene.control.Button;
+
 import java.io.IOException;
 
 /**
@@ -60,4 +62,6 @@ public abstract class  UtilitiesAbstract {
     public abstract int validarNumero(int numero);
 
     public abstract String pathInterfazGrafica(String path) throws IOException;
+
+    public abstract String pathInterfazGrafica(String path, Button button) throws IOException;
 }
