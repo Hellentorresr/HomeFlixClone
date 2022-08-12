@@ -7,6 +7,8 @@
  */
 package controller.controllerApp;
 
+import java.io.IOException;
+
 /**
  * clase UtilitiesAbstract para abstraer código repetitivo
  */
@@ -56,4 +58,6 @@ public abstract class  UtilitiesAbstract {
      * Creacion de metodo validarNumero
      */
     public abstract int validarNumero(int numero);
+
+    public abstract String pathInterfazGrafica(String path) throws IOException;
 }
