@@ -86,8 +86,6 @@ public class SignInController {
      */
 
     public void IrACrearCuenta() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("SignUpForm.fxml")));
-        Stage window = (Stage) button_signUp.getScene().getWindow();
-        window.setScene(new Scene(root));
+        utilitiesImplements.pathInterfazGrafica("SignUpForm.fxml",button_signUp);
     }
 }
