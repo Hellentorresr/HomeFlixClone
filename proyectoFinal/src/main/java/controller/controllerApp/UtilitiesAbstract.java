@@ -25,4 +25,13 @@ public class UtilitiesAbstract {
     public UtilitiesAbstract() {
     }
 
+    /**
+     * Constructor dos si solo ocupo el path
+     *
+     * @param pathInterfazGrafica recibe un string
+     */
+
+    public UtilitiesAbstract(String pathInterfazGrafica) {
+        this.pathInterfazGrafica = pathInterfazGrafica;
+    }
 }
