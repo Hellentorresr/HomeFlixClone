@@ -9,6 +9,7 @@ package controller.controllerApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import model.PlaylistVideos;
 
 /**
  * Creacion de la clase AddPlaylistVideoController
@@ -25,7 +26,7 @@ public class AddPlaylistVideoController {
     @FXML
     private TextField txtTemaList;
 
-
+    private PlaylistVideos playlistVideos;
     /**
      * metodo addRegistration
      */
