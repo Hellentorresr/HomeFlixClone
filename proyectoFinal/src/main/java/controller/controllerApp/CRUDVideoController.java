@@ -36,7 +36,7 @@ public class CRUDVideoController {
 
     UtilitiesImplements utilitiesImplements;
     @FXML
-    private Button btnConver;
+    private Button btnCover;
     @FXML
     private Button btnEliminarVideo;
     @FXML
@@ -44,17 +44,15 @@ public class CRUDVideoController {
     @FXML
     private Button btnMostrarReporte;
     @FXML
-    private Button btnPathVideo;
-    @FXML
     private ImageView imageViewCover;
     @FXML
     private TextArea textAreaReporte;
     @FXML
     private TextField txtCategoria;
     @FXML
-    private TextField txtCodigoParaEditar;
+    private TextField txtCodeParaEditar;
     @FXML
-    private TextField txtCodigoParaEliminar;
+    private TextField txtCodeParaEliminar;
     @FXML
     private TextField txtDescription;
     @FXML
@@ -78,12 +76,12 @@ public class CRUDVideoController {
         String cate = this.txtCategoria.getText();
         String desc = this.txtDescription.getText();
 
-        if (this.txtCodigoParaEditar.getText().isEmpty()) {
+        if (this.txtCodeParaEditar.getText().isEmpty()) {
             mostrarMensaje("Favor ingresar un código para hacer los cambio");
-        } else if (!this.txtCodigoParaEditar.getText().isEmpty()) {
+        } else if (!this.txtCodeParaEditar.getText().isEmpty()) {
             //primero lo obtengo
             DAOVideo videoDAO = new VideoDAOImplement();
-            int codi = Integer.parseInt(this.txtCodigoParaEditar.getText());
+            int codi = Integer.parseInt(this.txtCodeParaEditar.getText());
             Video video = videoDAO.get(codi);
 
             if (videoDAO.getALL().contains(video)) {
@@ -183,13 +181,13 @@ public class CRUDVideoController {
      * Metodo para eliminar un video registrado
      */
     public void eliminarVideoMetodo() throws SQLException {
-        if (this.txtCodigoParaEliminar.getText().isEmpty()) {
+        if (this.txtCodeParaEliminar.getText().isEmpty()) {
             mostrarMensajeNegativo("Favor ingrese un codigo para hacer la eliminacion");
-        } else if (!this.txtCodigoParaEliminar.getText().isEmpty()) {
+        } else if (!this.txtCodeParaEliminar.getText().isEmpty()) {
             //primero lo obtengo
             DAOVideo videoDAO = new VideoDAOImplement();
             Video video;
-            int codi = Integer.parseInt(this.txtCodigoParaEliminar.getText());
+            int codi = Integer.parseInt(this.txtCodeParaEliminar.getText());
             video = videoDAO.get(codi);
             if (videoDAO.getALL().contains(video)) {
                 videoDAO.delete(video);

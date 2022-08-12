@@ -1,24 +1,18 @@
 package controller.controllerApp;
 
 import controller.dao.UsuarioDAOImplement;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import model.Usuario;
-import view.InicioApp;
-
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class SignUpController {
+    UtilitiesImplements utilitiesImplements;
     UsuarioDAOImplement UDI;
     Usuario usuario;
     /**
@@ -27,7 +21,6 @@ public class SignUpController {
     public ImageView imageView;
     private String image;
     public Button btnSignUp;
-    public Button btnCleanSignUp;
     public Button btnOpenFile;
     public Button regresar;
 
@@ -49,15 +42,15 @@ public class SignUpController {
         UDI = new UsuarioDAOImplement();
         labelRegister = new Label();
         usuario = new Usuario();
+        utilitiesImplements = new UtilitiesImplements();
 
     }
 
     /**
-     * Funcion que regista un usuario
-     * @throws SQLException
-     * @throws ClassNotFoundException
+     * Function que registra un usuario
+     * @throws SQLException dara un exception si no se conecta correctamente a la base de datos
      */
-    public void registering() throws SQLException, ClassNotFoundException {
+    public void registering() throws SQLException {
         usuario.setNombre(txtNombreSignUp.getText());
         String fName = usuario.getNombre();
 
@@ -206,12 +199,10 @@ public class SignUpController {
     }
 
     /**
-     *Funcion que redirige a la pantalla de signIn
-     * @throws IOException
+     *Function que redirige a la pantalla de signIn
+     * @throws IOException dara un exception si no se conecta correctamente a la base de datos
      */
     public void regresarPrincipal() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("PrincipalYSignIn.fxml")));
-        Stage window = (Stage)regresar.getScene().getWindow();
-        window.setScene(new Scene(root));
+        utilitiesImplements.pathInterfazGrafica("PrincipalYSignIn.fxml",regresar);
     }
 }
