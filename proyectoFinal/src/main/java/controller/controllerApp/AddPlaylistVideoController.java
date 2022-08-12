@@ -26,5 +26,11 @@ public class AddPlaylistVideoController {
     private TextField txtTemaList;
 
 
+    /**
+     * metodo addRegistration
+     */
+    @FXML
+    void addRegistration() {
 
+    }
 }
