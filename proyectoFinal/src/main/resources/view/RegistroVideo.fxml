@@ -66,7 +66,7 @@
                 <Font size="14.0" />
             </font>
         </Button>
-        <Button fx:id="btnConver" alignment="CENTER" contentDisplay="CENTER" layoutX="366.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleBtnOpenFile" style="-fx-background-color: #006266; -fx-cursor: hand;" text="Buscar imagen" textFill="WHITE">
+        <Button fx:id="btnCover" alignment="CENTER" contentDisplay="CENTER" layoutX="366.0" layoutY="226.0" mnemonicParsing="false" onAction="#handleBtnOpenFile" style="-fx-background-color: #006266; -fx-cursor: hand;" text="Buscar imagen" textFill="WHITE">
             <font>
                 <Font size="14.0" />
             </font>
