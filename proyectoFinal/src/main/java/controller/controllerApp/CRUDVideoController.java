@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 
 /**
- * Clase EditarEliminarVideoController
+ * Clase CRUDVideoController
  */
 public class CRUDVideoController {
     public Button btnRegresar;

@@ -1,7 +1,7 @@
 /**
  * @autor por Hellen Torres
  * @FechaCreacion 29/07/2022
- * @Ultima_Modificacion 08//08/2022 7:pm
+ * @Ultima_Modificacion 12//08/2022
  * @por Hellen torres
  */
 package controller.controllerApp;
@@ -46,6 +46,7 @@ public class HomeController implements Initializable {
     /**
      * Atributos de la clase DentroDeLaAppController
      */
+    UtilitiesImplements utilitiesImplements;
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     public static Video video = new Video();
     @FXML
@@ -76,6 +77,7 @@ public class HomeController implements Initializable {
     public HomeController() {
         videoDAO = new VideoDAOImplement();
         UDI = new UsuarioDAOImplement();
+        this.utilitiesImplements = new UtilitiesImplements();
     }
 
     /**
