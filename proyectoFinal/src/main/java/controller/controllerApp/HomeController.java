@@ -140,9 +140,7 @@ public class HomeController implements Initializable {
      * Metodo para regresar a la pagina principalYSignIn por medio del boton cerrar
      */
     public void handleBtnIngresar() throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(InicioApp.class.getResource("PrincipalYSignIn.fxml")));
-        Stage window = (Stage) btnCerrar.getScene().getWindow();
-        window.setScene(new Scene(root));
+        utilitiesImplements.pathInterfazGrafica("PrincipalYSignIn.fxml", btnCerrar);
     }
 
     /**
