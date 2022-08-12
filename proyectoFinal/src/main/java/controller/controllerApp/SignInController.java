@@ -1,7 +1,6 @@
 package controller.controllerApp;
 
 import controller.dao.UsuarioDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,12 +32,13 @@ public class SignInController {
     private Button button_login;
     public static String userName;
     public static String userPassword;
-
+    UtilitiesImplements utilitiesImplements;
     /**
-     * Funcion que crea el constructor de la clase
+     * Function que crea el constructor de la clase
      */
     public SignInController(){
         UDI = new UsuarioDAOImplement();
+        utilitiesImplements = new UtilitiesImplements();
     }
 
     /**
