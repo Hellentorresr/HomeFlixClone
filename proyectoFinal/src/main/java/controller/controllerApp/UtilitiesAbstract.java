@@ -34,4 +34,21 @@ public class UtilitiesAbstract {
     public UtilitiesAbstract(String pathInterfazGrafica) {
         this.pathInterfazGrafica = pathInterfazGrafica;
     }
+
+    //getters y setters
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public String getPathInterfazGrafica() {
+        return pathInterfazGrafica;
+    }
+
+    public void setPathInterfazGrafica(String pathInterfazGrafica) {
+        this.pathInterfazGrafica = pathInterfazGrafica;
+    }
 }
