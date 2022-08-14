@@ -21,6 +21,8 @@ public class Video {
 
     private int videoId;
 
+    private double totalDuration;
+
     /**
      * Metodo constructor
      */
@@ -64,6 +66,10 @@ public class Video {
         this.califica = califica;
         this.cover = cover;
         this.videoPath = videoPath;
+    }
+
+    public Video(double totalDuration) {
+        this.totalDuration = totalDuration;
     }
 
     /**
@@ -133,6 +139,14 @@ public class Video {
         this.videoId = videoId;
     }
 
+    public double getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(double totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
     /**
      * Metodo toString
      */
@@ -147,11 +161,12 @@ public class Video {
                 ", cover='" + cover + '\'' +
                 ", videoPath='" + videoPath + '\'' +
                 ", videoId=" + videoId +
+                ", totalDuration=" + totalDuration +
                 '}';
     }
 
     /**
-     * Metodo toString
+     * Metodo equals
      */
     @Override
     public boolean equals(Object o) {
