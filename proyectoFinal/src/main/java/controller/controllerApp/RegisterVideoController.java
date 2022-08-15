@@ -15,13 +15,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import model.Video;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static controller.controllerApp.HomeController.video;
 
 /**
  * Creacion de la clase ReproductorVideoController
@@ -138,6 +144,8 @@ public class RegisterVideoController {
         String desc = this.txtDescription.getText();
         String videoPath = String.valueOf(this.textAreaVideoPath.getText());
         LocalDate fecha = LocalDate.now();
+
+
         if (nombre.isEmpty() || videoPath.isEmpty() || image.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -153,7 +161,8 @@ public class RegisterVideoController {
                 alert.setContentText("No se pudo hacer el registrar el video, verificar si el video ya existe!");
                 alert.showAndWait();
             } else {
-                videoDAO.insert(nombre, cate, desc, image, videoPath, fecha);
+                float time = 0;
+                videoDAO.insert(nombre, cate, desc, image, videoPath, fecha, time);
                 mostrarMensaje();
                 irPrincipal();
             }
