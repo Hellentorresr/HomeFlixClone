@@ -21,7 +21,7 @@ public class Video {
 
     private int videoId;
 
-    private double totalDuration;
+    private float totalDuration;
 
     /**
      * Metodo constructor
@@ -68,7 +68,25 @@ public class Video {
         this.videoPath = videoPath;
     }
 
-    public Video(double totalDuration) {
+    public Video(String nombreVideo, String categoryVideo, LocalDate fecha, String description, String cover, String videoPath, float totalDuration) {
+        this.nombreVideo = nombreVideo;
+        this.categoryVideo = categoryVideo;
+        this.fecha = fecha;
+        this.description = description;
+        this.cover = cover;
+        this.videoPath = videoPath;
+        this.totalDuration = totalDuration;
+    }
+
+    public Video(String nombreVideo, String categoryVideo, LocalDate fecha, String description, boolean califica, String cover, String videoPath, int videoId, float totalDuration) {
+        this.nombreVideo = nombreVideo;
+        this.categoryVideo = categoryVideo;
+        this.fecha = fecha;
+        this.description = description;
+        this.califica = califica;
+        this.cover = cover;
+        this.videoPath = videoPath;
+        this.videoId = videoId;
         this.totalDuration = totalDuration;
     }
 
@@ -139,11 +157,11 @@ public class Video {
         this.videoId = videoId;
     }
 
-    public double getTotalDuration() {
+    public float getTotalDuration() {
         return totalDuration;
     }
 
-    public void setTotalDuration(double totalDuration) {
+    public void setTotalDuration(float totalDuration) {
         this.totalDuration = totalDuration;
     }
 
