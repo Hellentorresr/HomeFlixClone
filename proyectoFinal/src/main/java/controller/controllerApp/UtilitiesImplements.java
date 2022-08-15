@@ -63,7 +63,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
     /**
      * Metodos para notificar
      */
-    private void mostrarMensajePositivo(String mensaje) {
+    public void mostrarMensajePositivo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(null);
         alert.setTitle("Exitoso");
@@ -71,7 +71,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         alert.showAndWait();
     }
 
-    private void mostrarMensajeNegativo(String mensaje) {
+    public void mostrarMensajeNegativo(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setTitle("ERROR");
