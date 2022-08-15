@@ -1,12 +1,20 @@
 package view;
 
+import controller.dao.DAOPlayListVideos;
+import controller.dao.DAOVideo;
+import controller.dao.PlaylistVideoDAOImplement;
+import controller.dao.VideoDAOImplement;
 import controller.server.ServerJava;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.PlaylistVideos;
+import model.Video;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class InicioApp extends Application {
 
@@ -15,10 +23,25 @@ public class InicioApp extends Application {
      *
      * @param args cadena de caracteres
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         launch();
         ServerJava serverJava = new ServerJava();
         //  serverJava.serverConnectorJava();
+
+       /* DAOPlayListVideos v = new PlaylistVideoDAOImplement();
+        PlaylistVideos f = v.get(2);
+        v.delete(f);
+        System.out.println(f);*/
+
+        DAOPlayListVideos v = new PlaylistVideoDAOImplement();
+        PlaylistVideos f;
+        f = v.get(1);
+
+        DAOVideo V = new VideoDAOImplement();
+        Video video = V.get(11);
+        f.agregarVideo(video);
+        v.update(f);
+        System.out.println(f);
     }
 
     /**
