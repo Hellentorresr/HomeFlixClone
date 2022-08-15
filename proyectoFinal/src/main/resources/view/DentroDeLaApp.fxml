@@ -129,7 +129,7 @@
                     <children>
                         <HBox alignment="CENTER" layoutY="30.0" prefHeight="50.0" prefWidth="235.0" spacing="20.0" styleClass="top-border" stylesheets="@style/styles.css">
                             <children>
-                                <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;">
+                                <Button fx:id="btnNewPlayList" mnemonicParsing="false" onAction="#goToCreateNewPlayList" style="-fx-background-color: transparent; -fx-cursor: hand;">
                                     <graphic>
                                         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                             <image>

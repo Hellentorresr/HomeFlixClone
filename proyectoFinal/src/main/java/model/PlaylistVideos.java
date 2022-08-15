@@ -22,7 +22,7 @@ public class PlaylistVideos {
     private String tema;
     private LocalDate creationDate;
     private int code;
-    private ArrayList<Video>videos;
+    private ArrayList<Video>videos = new ArrayList<>();
 
     /**
      * Metodo constructor
@@ -44,21 +44,22 @@ public class PlaylistVideos {
     /**
      * Tercer constructor
      */
-    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int code) {
+    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int code, ArrayList<Video> videos) {
         this.namePlaylist = namePlaylist;
         this.totalPlayListDurationTime = totalPlayListDurationTime;
         this.tema = tema;
         this.creationDate = creationDate;
         this.code = code;
+        this.videos = videos;
+    }
+
+    public String getNamePlaylist() {
+        return namePlaylist;
     }
 
     /**
      * Getters y setters
      */
-
-    public String getNamePlaylist() {
-        return namePlaylist;
-    }
 
     public void setNamePlaylist(String namePlaylist) {
         this.namePlaylist = namePlaylist;
@@ -68,8 +69,8 @@ public class PlaylistVideos {
         return totalPlayListDurationTime;
     }
 
-    public void setTotalPlayListDurationTime(Video video) {
-        this.totalPlayListDurationTime+=video.getTotalDuration();
+    public void setTotalPlayListDurationTime(float totalPlayListDurationTime) {
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
     }
 
     public String getTema() {
@@ -104,6 +105,14 @@ public class PlaylistVideos {
         this.videos = videos;
     }
 
+    public void setTotalPlayListDurationTime(Video video) {
+        this.totalPlayListDurationTime+=video.getTotalDuration();
+    }
+
+
+    public void agregarVideo(Video video){
+        this.videos.add(video);
+    }
     /**
      * Metodo toString
      */

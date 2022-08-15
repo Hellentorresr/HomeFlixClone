@@ -9,6 +9,7 @@ package controller.controllerApp;
 import controller.dao.UsuarioDAOImplement;
 import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -34,6 +35,9 @@ import java.util.ResourceBundle;
  * Creacion de la clase DentroDeLaAppController
  */
 public class HomeController implements Initializable {
+    /**
+     * Atributos de la clase DentroDeLaAppController
+     */
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     public static Video video = new Video();
     @FXML
@@ -48,9 +52,10 @@ public class HomeController implements Initializable {
     public Label nombreDeUsuario;
     //Para la búsqueda de un video
     public TextField buscarPlaceholder;
-    /**
-     * Atributos de la clase DentroDeLaAppController
-     */
+    //boton para ir a crear una playlist
+    public Button btnNewPlayList;
+
+
     UtilitiesImplements utilitiesImplements;
     DAOVideo videoDAO;
     UsuarioDAOImplement UDI;
@@ -235,5 +240,9 @@ public class HomeController implements Initializable {
                 ", favoritas=" + favoritas +
                 ", favoritasContainer=" + favoritasContainer +
                 '}';
+    }
+
+    public void goToCreateNewPlayList() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("AddPlayList.fxml", btnNewPlayList);
     }
 }

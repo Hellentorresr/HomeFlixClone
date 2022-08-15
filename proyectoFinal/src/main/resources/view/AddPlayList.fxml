@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.AddPlaylistVideoController">
    <children>
       <AnchorPane maxHeight="489.0" maxWidth="533.0" prefHeight="489.0" prefWidth="533.0" style="-fx-background-color: #487eb0;">
@@ -53,6 +52,11 @@
                   </Button>
                </children>
             </AnchorPane>
+            <Button fx:id="btnRegresar" alignment="CENTER" contentDisplay="CENTER" layoutX="369.0" layoutY="440.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Regresar" underline="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </children>
