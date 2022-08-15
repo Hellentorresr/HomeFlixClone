@@ -22,7 +22,7 @@ public class PlaylistVideos {
     private String tema;
     private LocalDate creationDate;
     private int code;
-    private ArrayList<Video>videos;
+    private ArrayList<Integer>videos;
 
     /**
      * Metodo constructor
@@ -44,12 +44,13 @@ public class PlaylistVideos {
     /**
      * Tercer constructor
      */
-    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int code) {
+    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int code, ArrayList<Integer> videos) {
         this.namePlaylist = namePlaylist;
         this.totalPlayListDurationTime = totalPlayListDurationTime;
         this.tema = tema;
         this.creationDate = creationDate;
         this.code = code;
+        this.videos = videos;
     }
 
     /**
@@ -96,11 +97,11 @@ public class PlaylistVideos {
         this.code = code;
     }
 
-    public ArrayList<Video> getVideos() {
+    public ArrayList<Integer> getVideos() {
         return videos;
     }
 
-    public void setVideos(ArrayList<Video> videos) {
+    public void setVideos(ArrayList<Integer> videos) {
         this.videos = videos;
     }
 
