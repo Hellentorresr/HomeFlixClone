@@ -12,6 +12,7 @@ import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import view.InicioApp;
@@ -57,5 +58,24 @@ public class UtilitiesImplements extends UtilitiesAbstract {
             video.setTotalDuration(totalT);
             videoDAO.update(video);
         }
+    }
+
+    /**
+     * Metodos para notificar
+     */
+    private void mostrarMensajePositivo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Exitoso");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
+    }
+
+    private void mostrarMensajeNegativo(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("ERROR");
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
