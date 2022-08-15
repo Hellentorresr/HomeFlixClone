@@ -27,9 +27,6 @@ public class AddPlaylistVideoController {
     private TextField txtTemaList;
 
     private PlaylistVideos playlistVideos;
-    /**
-     * metodo addRegistration
-     */
 
     /**
      * Constructor de la clase AddPlayListVideoController
@@ -38,8 +35,12 @@ public class AddPlaylistVideoController {
         this.playlistVideos = new PlaylistVideos();
     }
 
+    /**
+     * metodo addRegistration
+     */
     @FXML
     void addRegistration() {
-
+        String name = this.txtNameList.getText();
+        String tema = this.txtTemaList.getText();
     }
 }
