@@ -68,8 +68,8 @@ public class PlaylistVideos {
         return totalPlayListDurationTime;
     }
 
-    public void setTotalPlayListDurationTime(float totalPlayListDurationTime) {
-        this.totalPlayListDurationTime = totalPlayListDurationTime;
+    public void setTotalPlayListDurationTime(Video video) {
+        this.totalPlayListDurationTime+=video.getTotalDuration();
     }
 
     public String getTema() {
