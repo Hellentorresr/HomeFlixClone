@@ -2,11 +2,9 @@ package controller.dao;
 
 import controller.baseDatos.Connexion;
 import model.PlaylistVideos;
+import model.Video;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -34,9 +32,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
             DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
             int videosList = rs.getInt("videosList");
-            ArrayList<Integer> videos = new ArrayList<>();
-            videos.add(videosList);
-
+            ArrayList<Video> videos = new ArrayList<>();
             playlistVideos = new PlaylistVideos(nombreVideo, duration, tema, creationDate, oid, videos);
         }
         return playlistVideos;
@@ -76,7 +72,23 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
     @Override
     public int update(PlaylistVideos playlistVideos) throws SQLException {
-        return 0;
+        Connection connection = Connexion.getConnection();
+        String sql = "UPDATE playlisttable set namePlaylist =?, totalPlayListDurationTime = ?, tema = ?, creationDate = ?, videosList = ? WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+
+        ps.setString(1, playlistVideos.getNamePlaylist());
+        ps.setFloat(2, playlistVideos.getTotalPlayListDurationTime());
+        ps.setString(3, playlistVideos.getTema());
+        ps.setString(4, String.valueOf(playlistVideos.getCreationDate()));
+        for (int i = 0; i < playlistVideos.getVideos().size(); i++) {
+            ps.setInt(5, playlistVideos.getVideos().get(i).getVideoId());
+        }
+        ps.setInt(6, playlistVideos.getCode());
+
+        int result = ps.executeUpdate();
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
+        return result;
     }
 
     @Override
