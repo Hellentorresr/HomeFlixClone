@@ -266,7 +266,6 @@ public class ReproductorVideoController implements Initializable {
             double total = newDuration.toMinutes();
             total = Double.parseDouble(new DecimalFormat("##.##").format(total));
             time = (float) total;
-            System.out.println(time);
             try {
                 utilitiesImplements.addVideoDuration();
             } catch (SQLException e) {
