@@ -29,6 +29,8 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 
 import static controller.controllerApp.HomeController.video;
@@ -72,6 +74,7 @@ public class ReproductorVideoController implements Initializable {
     private Slider sliderVolume;
     @FXML
     private Slider sliderTime;
+    public static float time;
 
     /**
      * Declarar algunas variables booleanas para determinar si nuestro video se está reproduciendo o no
@@ -260,6 +263,15 @@ public class ReproductorVideoController implements Initializable {
             bindCurrentTimeLabel();
             sliderTime.setMax(newDuration.toSeconds());
             labelTotalTime.setText(getTime(newDuration));
+            double total = newDuration.toMinutes();
+            total = Double.parseDouble(new DecimalFormat("##.##").format(total));
+            time = (float) total;
+            System.out.println(time);
+            try {
+                utilitiesImplements.addVideoDuration();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         //Time slider I want to add a listener to the value changing property
