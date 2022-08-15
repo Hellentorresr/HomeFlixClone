@@ -21,6 +21,8 @@ public class Video {
 
     private int videoId;
 
+    private float totalDuration;
+
     /**
      * Metodo constructor
      */
@@ -64,6 +66,28 @@ public class Video {
         this.califica = califica;
         this.cover = cover;
         this.videoPath = videoPath;
+    }
+
+    public Video(String nombreVideo, String categoryVideo, LocalDate fecha, String description, String cover, String videoPath, float totalDuration) {
+        this.nombreVideo = nombreVideo;
+        this.categoryVideo = categoryVideo;
+        this.fecha = fecha;
+        this.description = description;
+        this.cover = cover;
+        this.videoPath = videoPath;
+        this.totalDuration = totalDuration;
+    }
+
+    public Video(String nombreVideo, String categoryVideo, LocalDate fecha, String description, boolean califica, String cover, String videoPath, int videoId, float totalDuration) {
+        this.nombreVideo = nombreVideo;
+        this.categoryVideo = categoryVideo;
+        this.fecha = fecha;
+        this.description = description;
+        this.califica = califica;
+        this.cover = cover;
+        this.videoPath = videoPath;
+        this.videoId = videoId;
+        this.totalDuration = totalDuration;
     }
 
     /**
@@ -133,6 +157,14 @@ public class Video {
         this.videoId = videoId;
     }
 
+    public float getTotalDuration() {
+        return totalDuration;
+    }
+
+    public void setTotalDuration(float totalDuration) {
+        this.totalDuration = totalDuration;
+    }
+
     /**
      * Metodo toString
      */
@@ -147,11 +179,12 @@ public class Video {
                 ", cover='" + cover + '\'' +
                 ", videoPath='" + videoPath + '\'' +
                 ", videoId=" + videoId +
+                ", totalDuration=" + totalDuration +
                 '}';
     }
 
     /**
-     * Metodo toString
+     * Metodo equals
      */
     @Override
     public boolean equals(Object o) {

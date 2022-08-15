@@ -15,7 +15,6 @@ import java.time.LocalDate;
  * Interfaz que implementa la interfaz DAO generica
  */
 public interface DAOVideo extends DAO<Video> {
-
     /**
      *
      * @param nombreVideo Parametro de la clase Video, se utiliza para su registro
@@ -27,5 +26,6 @@ public interface DAOVideo extends DAO<Video> {
      * @throws SQLException genera una excepción si la conexion no es establecida con la base de datos
      * @metodo insert para insertar un video a la base de datos
      */
-    int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha) throws SQLException;
+
+    int insert(String nombreVideo, String categoryVideo, String description, String cover, String videoPath, LocalDate fecha, float time) throws SQLException;
 }
