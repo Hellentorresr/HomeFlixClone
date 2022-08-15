@@ -81,6 +81,15 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
     @Override
     public int delete(PlaylistVideos playlistVideos) throws SQLException {
-        return 0;
+        Connection connection = Connexion.getConnection();
+
+        String sql = "DELETE FROM playlisttable WHERE id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, playlistVideos.getCode());
+        int result = ps.executeUpdate();
+
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
+        return result;
     }
 }
