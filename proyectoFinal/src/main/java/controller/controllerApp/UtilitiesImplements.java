@@ -7,15 +7,21 @@
  */
 package controller.controllerApp;
 
+import controller.dao.DAOVideo;
+import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.Video;
 import view.InicioApp;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Objects;
+
+import static controller.controllerApp.HomeController.video;
 
 /**
  * Clase UtilitiesImplements, para implementar los metodos abstractos de la clase UtilitiesAbstract
@@ -43,5 +49,14 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         Stage window = (Stage) button.getScene().getWindow();
         window.setScene(new Scene(root));
         return path;
+    }
+
+    public void addVideoDuration() throws SQLException {
+        DAOVideo videoDAO = new VideoDAOImplement();
+        float totalT = ReproductorVideoController.time;
+        if(video.getTotalDuration()==0){
+            video.setTotalDuration(totalT);
+            videoDAO.update(video);
+        }
     }
 }
