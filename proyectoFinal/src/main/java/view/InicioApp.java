@@ -11,26 +11,28 @@ import java.io.IOException;
 public class InicioApp extends Application {
 
     /**
-     * Function que permite dirigirse a la pantalla principal de signIn
-     * @param stage Recibe una plantilla para colocar la escena
-     * @throws IOException Se genera una excepción si es escena no carga
-     */
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(InicioApp.class.getResource("AddPlayList.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("HomeFlix!");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    /**
      * Function que ejecuta el código
+     *
      * @param args cadena de caracteres
      */
     public static void main(String[] args) {
         launch();
         ServerJava serverJava = new ServerJava();
-      //  serverJava.serverConnectorJava();
+        //  serverJava.serverConnectorJava();
+    }
+
+    /**
+     * Function que permite dirigirse a la pantalla principal de signIn
+     *
+     * @param stage Recibe una plantilla para colocar la escena
+     * @throws IOException Se genera una excepción si es escena no carga
+     */
+    @Override
+    public void start(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(InicioApp.class.getResource("PrincipalYSignIn.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("HomeFlix!");
+        stage.setScene(scene);
+        stage.show();
     }
 }
