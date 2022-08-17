@@ -21,7 +21,7 @@ public class PlaylistVideos {
     private float totalPlayListDurationTime;
     private String tema;
     private LocalDate creationDate;
-    private int code;
+    private int id;
     private ArrayList<Video>videos = new ArrayList<>();
 
     /**
@@ -49,8 +49,16 @@ public class PlaylistVideos {
         this.totalPlayListDurationTime = totalPlayListDurationTime;
         this.tema = tema;
         this.creationDate = creationDate;
-        this.code = code;
+        this.id = code;
         this.videos = videos;
+    }
+
+    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int id) {
+        this.namePlaylist = namePlaylist;
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
+        this.tema = tema;
+        this.creationDate = creationDate;
+        this.id = id;
     }
 
     public String getNamePlaylist() {
@@ -89,12 +97,12 @@ public class PlaylistVideos {
         this.creationDate = creationDate;
     }
 
-    public int getCode() {
-        return code;
+    public int getId() {
+        return id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ArrayList<Video> getVideos() {
@@ -123,7 +131,7 @@ public class PlaylistVideos {
                 ", totalPlayListDurationTime=" + totalPlayListDurationTime +
                 ", tema='" + tema + '\'' +
                 ", creationDate=" + creationDate +
-                ", code=" + code +
+                ", code=" + id +
                 ", videos=" + videos +
                 '}';
     }
@@ -135,6 +143,6 @@ public class PlaylistVideos {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PlaylistVideos that)) return false;
-        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getCode() == that.getCode() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate()) && Objects.equals(getVideos(), that.getVideos());
+        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getId() == that.getId() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate()) && Objects.equals(getVideos(), that.getVideos());
     }
 }
