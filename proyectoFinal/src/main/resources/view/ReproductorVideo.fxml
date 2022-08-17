@@ -55,6 +55,14 @@
                 </Label>
                 <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                     <children>
+                  <Button fx:id="agregarAPlayList" layoutX="342.0" layoutY="10.0" mnemonicParsing="false" onAction="#irPlaylist" prefHeight="30.0" prefWidth="140.0" style="-fx-cursor: hand; -fx-background-color: black;" text="Agregar a playlist" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </Button>
                       <Button fx:id="regresar" mnemonicParsing="false" onAction="#regresarHome" prefHeight="21.0" prefWidth="137.0" style="-fx-cursor: hand; -fx-background-color: Black;" text="Regresar a Inicio" textFill="WHITE">
                           <font>
                               <Font name="System Bold" size="15.0" />
