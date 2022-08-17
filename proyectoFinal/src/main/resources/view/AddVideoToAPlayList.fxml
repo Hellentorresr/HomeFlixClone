@@ -18,7 +18,7 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <TableView layoutX="53.0" layoutY="143.0" prefHeight="121.0" prefWidth="371.0" style="-fx-background-color: white;">
+      <TableView fx:id="tabla" layoutX="53.0" layoutY="143.0" prefHeight="121.0" prefWidth="371.0" style="-fx-background-color: white;">
         <columns>
           <TableColumn fx:id="idLista" prefWidth="146.0" text="Id lista" />
           <TableColumn fx:id="nombreLista" prefWidth="224.0" text="Nombre lista" />
