@@ -9,7 +9,6 @@ package controller.controllerApp;
 import controller.dao.UsuarioDAOImplement;
 import controller.dao.DAOVideo;
 import controller.dao.VideoDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -90,30 +89,34 @@ public class HomeController implements Initializable {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
+            cargarDatos(utilitiesImplements.recentAdd(), recentlyPlayedContainer);
+            cargarDatos(videosBaseDatos, favoritasContainer);
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
 
-        for (int i = 0; i < videosBaseDatos.size(); i++) {
+    public void cargarDatos(ArrayList<Video> videos, HBox hbox) {
+        for (int i = 0; i < videos.size(); i++) {
             ImageView img = new ImageView();
             img.setFitWidth(200);
             img.setFitHeight(200);
-            img.setImage(new Image("file:///" + videosBaseDatos.get(i).getCover()));
+            img.setImage(new Image("file:///" + videos.get(i).getCover()));
             VBox vBox = new VBox(img);
 
             Label nombre = new Label();
-            nombre.setText(videosBaseDatos.get(i).getNombreVideo());
+            nombre.setText(videos.get(i).getNombreVideo());
             vBox.getChildren().add(nombre);
             nombre.setFont(Font.font(16));
             nombre.setTextFill(Paint.valueOf("#fff"));
 
-            button = new Button(videosBaseDatos.get(i).getVideoPath());
+            button = new Button(videos.get(i).getVideoPath());
             button.setTextFill(Paint.valueOf("Red"));
             button.setCursor(Cursor.cursor("hand"));
 
             int toGetIterator = i;
             button.setOnAction(event -> {
-                video = videosBaseDatos.get(toGetIterator);
+                video = videos.get(toGetIterator);
                 try {
                     utilitiesImplements.pathInterfazGrafica("ReproductorVideo.fxml", button);
                 } catch (IOException e) {
@@ -122,7 +125,7 @@ public class HomeController implements Initializable {
             });
             button.setText("Reproducir");
             vBox.getChildren().add(button);
-            recentlyPlayedContainer.getChildren().add(vBox);
+            hbox.getChildren().add(vBox);
         }
     }
 
