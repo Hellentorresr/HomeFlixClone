@@ -145,6 +145,11 @@
                                 </Label>
                             </children>
                         </HBox>
+                  <Button fx:id="btnListas" alignment="TOP_LEFT" layoutY="95.0" mnemonicParsing="false" onAction="#irAdministrarListas" prefHeight="47.0" prefWidth="256.0" style="-fx-background-color: transparent;" text="Administrar listas de reproducción" textAlignment="CENTER" textFill="WHITE" underline="true" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
                     </children>
                 </Pane>
             </children>
