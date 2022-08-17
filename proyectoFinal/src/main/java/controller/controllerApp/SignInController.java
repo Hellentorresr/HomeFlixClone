@@ -73,7 +73,7 @@ public class SignInController {
      * @throws IOException dara un exception si no se conecta correctamente a la base de datos
      */
     public void ingresarApp() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", button_login);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", button_login);
     }
 
     /**

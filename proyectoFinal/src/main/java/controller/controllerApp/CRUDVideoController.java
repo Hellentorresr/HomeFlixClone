@@ -174,7 +174,7 @@ public class CRUDVideoController {
      * Metodo para regresar a la página principal
      */
     public void regresarAPrincipal() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", btnRegresar);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", btnRegresar);
     }
 
     /**

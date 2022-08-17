@@ -346,10 +346,10 @@ public class ReproductorVideoController implements Initializable {
     }
 
     /**
-     * Metodo regresarHome para regresar a la interfaz DentroDeLaApp.fxml
+     * Metodo regresarHome para regresar a la interfaz Home.fxml
      * @throws IOException dara un error si no encuentra la interfaz
      */
     public void regresarHome() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", regresar);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", regresar);
     }
 }
