@@ -7,7 +7,9 @@
  */
 package controller.controllerApp;
 
+import controller.dao.DAOPlayListVideos;
 import controller.dao.DAOVideo;
+import controller.dao.PlaylistVideoDAOImplement;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.PlaylistVideos;
 import model.Video;
 import view.InicioApp;
 
@@ -31,9 +34,11 @@ import static controller.controllerApp.HomeController.video;
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
     private DAOVideo videoDAO;
+    private DAOPlayListVideos daoPlayListVideos;
 
     public UtilitiesImplements() {
         this.videoDAO = new VideoDAOImplement();
+        this.daoPlayListVideos = new PlaylistVideoDAOImplement();
     }
 
     @Override
@@ -103,4 +108,14 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         return todayVideos;
     }
 
+    public ArrayList<PlaylistVideos> allPlaylist() throws SQLException {
+        ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
+        ArrayList<PlaylistVideos> play = new ArrayList<>(daoPlayListVideos.getALL());
+        PlaylistVideos play1;
+        for (int i = 0; i < play.size(); i++) {
+            play1 = play.get(i);
+            playlistVideos.add(play1);
+        }
+        return playlistVideos;
+    }
 }
