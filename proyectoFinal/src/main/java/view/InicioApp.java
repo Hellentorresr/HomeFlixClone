@@ -24,15 +24,15 @@ public class InicioApp extends Application {
      * @param args cadena de caracteres
      */
     public static void main(String[] args) throws SQLException {
-        launch();
-        ServerJava serverJava = new ServerJava();
-        //  serverJava.serverConnectorJava();
+         launch();
+        /*ServerJava serverJava = new ServerJava();
+        serverJava.serverConnectorJava();*/
 
        /* DAOPlayListVideos v = new PlaylistVideoDAOImplement();
         PlaylistVideos f = v.get(2);
         v.delete(f);
         System.out.println(f);*/
-
+/*
         DAOPlayListVideos v = new PlaylistVideoDAOImplement();
         PlaylistVideos f;
         f = v.get(1);
@@ -41,7 +41,7 @@ public class InicioApp extends Application {
         Video video = V.get(11);
         f.agregarVideo(video);
         v.update(f);
-        System.out.println(f);
+        System.out.println(f);*/
     }
 
     /**
