@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="314.0" layoutY="14.0" prefHeight="55.0" prefWidth="176.0" text="PLAYLISTS">
+         <font>
+            <Font name="Arial Narrow" size="38.0" />
+         </font>
+      </Label>
+      <TableView fx:id="TableViewPlaylists" layoutY="72.0" prefHeight="538.0" prefWidth="804.0">
+        <columns>
+          <TableColumn fx:id="namePlaylist" prefWidth="134.0" text="NOMBRE" />
+          <TableColumn fx:id="tema" prefWidth="73.0" text="TEMA" />
+            <TableColumn fx:id="videos" prefWidth="226.0" text="VIDEOS" />
+            <TableColumn fx:id="creationDate" prefWidth="143.0" text="FECHA DE CREACION" />
+            <TableColumn fx:id="totalPlayListDurationTime" prefWidth="116.0" text="DURACION" />
+            <TableColumn fx:id="PLAY" prefWidth="116.0" text="PLAY" />
+        </columns>
+      </TableView>
+   </children>
+</Pane>
