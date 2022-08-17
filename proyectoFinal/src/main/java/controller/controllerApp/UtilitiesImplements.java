@@ -15,10 +15,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.Video;
 import view.InicioApp;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static controller.controllerApp.HomeController.video;
@@ -27,6 +30,13 @@ import static controller.controllerApp.HomeController.video;
  * Clase UtilitiesImplements, para implementar los metodos abstractos de la clase UtilitiesAbstract
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
+    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
+    private DAOVideo videoDAO;
+
+    public UtilitiesImplements() {
+        this.videoDAO = new VideoDAOImplement();
+    }
+
     @Override
     public int validarNumero(int numero) {
         return 0;
@@ -39,7 +49,8 @@ public class UtilitiesImplements extends UtilitiesAbstract {
 
     /**
      * Metodo pathInterfazGrafica
-     * @param path recibe un String por parametro que será la el path de la interfaz fxml
+     *
+     * @param path   recibe un String por parametro que será la el path de la interfaz fxml
      * @param button recibe un Button por parametro que será la el boton que ejecutara este metodo
      * @throws IOException generará un error si no encuentra el path de la interfaz
      */
@@ -52,9 +63,8 @@ public class UtilitiesImplements extends UtilitiesAbstract {
     }
 
     public void addVideoDuration() throws SQLException {
-        DAOVideo videoDAO = new VideoDAOImplement();
         float totalT = ReproductorVideoController.time;
-        if(video.getTotalDuration()==0){
+        if (video.getTotalDuration() == 0) {
             video.setTotalDuration(totalT);
             videoDAO.update(video);
         }
@@ -78,4 +88,20 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
+
+    public ArrayList<Video> recentAdd() throws SQLException {
+        ArrayList<Video> todayVideos = new ArrayList<>();
+        ArrayList<Video> v = new ArrayList<>(videoDAO.getALL());
+        Video video1;
+        LocalDate today = LocalDate.now();
+
+        for (int i = 0; i < v.size(); i++) {
+            if (v.get(i).getFecha().equals(today)) {
+                video1 = v.get(i);
+                todayVideos.add(video1);
+            }
+        }
+        return todayVideos;
+    }
+
 }
