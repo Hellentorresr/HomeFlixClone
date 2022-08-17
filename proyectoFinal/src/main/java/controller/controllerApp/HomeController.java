@@ -12,7 +12,6 @@ import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -53,6 +52,10 @@ public class HomeController implements Initializable {
     public TextField buscarPlaceholder;
     //boton para ir a crear una playlist
     public Button btnNewPlayList;
+    /**
+     * Padre de los containers
+     */
+    public VBox vboxContainer;
 
 
     UtilitiesImplements utilitiesImplements;
@@ -160,7 +163,7 @@ public class HomeController implements Initializable {
         Video video = new Video();
         recentlyPlayedContainer.getChildren().clear();
         if (busqueda.isEmpty()) {
-            mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
+            utilitiesImplements.mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
             getData();
         } else {
 
@@ -205,7 +208,7 @@ public class HomeController implements Initializable {
                         //mostrarBusqueda();
                         break;
                     } else {
-                        mostrarMensajeNegativo("El video no fue encontrado");
+                        utilitiesImplements.mostrarMensajeNegativo("El video no fue encontrado");
                         getData();
                         break;
                     }
@@ -218,17 +221,9 @@ public class HomeController implements Initializable {
         return video;
     }
 
-    /**
-     * metodo que muestra un mensaje al usuario
-     */
 
-    private void mostrarMensajeNegativo(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("ERROR");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
+
+
 
     /**
      * Metodo toString
