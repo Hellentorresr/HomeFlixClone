@@ -8,7 +8,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
@@ -63,7 +62,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
             String fechaString = rs.getString("creationDate");
             DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
-            playlistVideos = new PlaylistVideos(nombre, totalTime, tema, creationDate);
+            playlistVideos = new PlaylistVideos(nombre, totalTime, tema, creationDate,id);
             allPlaylist.add(playlistVideos);
         }
         //cerrando la connexion
@@ -111,7 +110,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
         for (int i = 0; i < playlistVideos.getVideos().size(); i++) {
             ps.setInt(5, playlistVideos.getVideos().get(i).getVideoId());
         }
-        ps.setInt(6, playlistVideos.getCode());
+        ps.setInt(6, playlistVideos.getId());
 
         int result = ps.executeUpdate();
         Connexion.closePreparedStatement(ps);
@@ -125,7 +124,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
         String sql = "DELETE FROM playlisttable WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, playlistVideos.getCode());
+        ps.setInt(1, playlistVideos.getId());
         int result = ps.executeUpdate();
 
         Connexion.closePreparedStatement(ps);
