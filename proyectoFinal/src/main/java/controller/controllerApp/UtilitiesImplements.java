@@ -129,7 +129,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
      * Metodo para verificar si una lista de reproduccion existe
      *
      * @param id recibe por parametro un entero para hacer la busqueda
-     * @return retorna true si encuentra una lista con ese id o false si no existe
+     * @return retorna true si encuentra una lista con ese, id o false si no existe
      * @throws SQLException genera una exception si no hay communication con la bae de datos
      */
     public boolean verificarSiExistePlayList(int id, Video v) throws SQLException {
