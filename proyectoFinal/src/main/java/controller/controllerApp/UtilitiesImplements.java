@@ -2,7 +2,7 @@
  * @controller.controllerApp paquete que controla la interfaz grafica
  * @autor por Hellen Torres
  * @FechaCreacion 12/08/2022
- * @Ultima_Modificacion 12/08/2022
+ * @Ultima_Modificacion 17/08/2022
  * @por Hellen torres
  */
 package controller.controllerApp;
