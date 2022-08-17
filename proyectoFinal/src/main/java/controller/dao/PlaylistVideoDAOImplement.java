@@ -8,9 +8,15 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
+
+    private ArrayList<PlaylistVideos> allPlaylist;
+
+    public PlaylistVideoDAOImplement() {
+        this.allPlaylist = new ArrayList<>();
+    }
+
     @Override
     public PlaylistVideos get(int indiceConteo) throws SQLException {
         PlaylistVideos playlistVideos = null;
@@ -40,8 +46,29 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
     }
 
     @Override
-    public List<PlaylistVideos> getALL() throws SQLException {
-        return null;
+    public ArrayList<PlaylistVideos> getALL() throws SQLException {
+        Connection connection = Connexion.getConnection();
+        String sql = "SELECT * from playlisttable";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            PlaylistVideos playlistVideos = new PlaylistVideos();
+            int id = rs.getInt("id");
+            String nombre = rs.getString("namePlaylist");
+            float totalTime = rs.getFloat("totalPlayListDurationTime");
+            String tema = rs.getString("tema");
+
+            String fechaString = rs.getString("creationDate");
+            DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
+            playlistVideos = new PlaylistVideos(nombre, totalTime, tema, creationDate,id);
+            allPlaylist.add(playlistVideos);
+        }
+        //cerrando la connexion
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
+        return allPlaylist;
     }
 
     @Override
@@ -83,7 +110,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
         for (int i = 0; i < playlistVideos.getVideos().size(); i++) {
             ps.setInt(5, playlistVideos.getVideos().get(i).getVideoId());
         }
-        ps.setInt(6, playlistVideos.getCode());
+        ps.setInt(6, playlistVideos.getId());
 
         int result = ps.executeUpdate();
         Connexion.closePreparedStatement(ps);
@@ -97,7 +124,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
         String sql = "DELETE FROM playlisttable WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, playlistVideos.getCode());
+        ps.setInt(1, playlistVideos.getId());
         int result = ps.executeUpdate();
 
         Connexion.closePreparedStatement(ps);

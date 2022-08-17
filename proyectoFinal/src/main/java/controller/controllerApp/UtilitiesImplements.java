@@ -2,12 +2,14 @@
  * @controller.controllerApp paquete que controla la interfaz grafica
  * @autor por Hellen Torres
  * @FechaCreacion 12/08/2022
- * @Ultima_Modificacion 12/08/2022
+ * @Ultima_Modificacion 17/08/2022
  * @por Hellen torres
  */
 package controller.controllerApp;
 
+import controller.dao.DAOPlayListVideos;
 import controller.dao.DAOVideo;
+import controller.dao.PlaylistVideoDAOImplement;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import model.PlaylistVideos;
 import model.Video;
 import view.InicioApp;
 
@@ -30,11 +33,12 @@ import static controller.controllerApp.HomeController.video;
  * Clase UtilitiesImplements, para implementar los metodos abstractos de la clase UtilitiesAbstract
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
-    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     private DAOVideo videoDAO;
+    private DAOPlayListVideos daoPlayListVideos;
 
     public UtilitiesImplements() {
         this.videoDAO = new VideoDAOImplement();
+        this.daoPlayListVideos = new PlaylistVideoDAOImplement();
     }
 
     @Override
@@ -104,4 +108,41 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         return todayVideos;
     }
 
+    /**
+     * Metodo para obtener todas las listas de reproduccion registradas
+     *
+     * @return retorna un arraylist con listas de reproduccion registradas
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public ArrayList<PlaylistVideos> allPlaylist() throws SQLException {
+        ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
+        ArrayList<PlaylistVideos> play = new ArrayList<>(daoPlayListVideos.getALL());
+        PlaylistVideos play1;
+        for (int i = 0; i < play.size(); i++) {
+            play1 = play.get(i);
+            playlistVideos.add(play1);
+        }
+        return playlistVideos;
+    }
+
+    /**
+     * Metodo para verificar si una lista de reproduccion existe
+     *
+     * @param id recibe por parametro un entero para hacer la busqueda
+     * @return retorna true si encuentra una lista con ese id o false si no existe
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public boolean verificarSiExistePlayList(int id, Video v) throws SQLException {
+        PlaylistVideos f;
+        f = daoPlayListVideos.get(id);
+        if (allPlaylist().contains(f)) {
+            f.agregarVideo(v);
+            System.out.println(f);
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
+

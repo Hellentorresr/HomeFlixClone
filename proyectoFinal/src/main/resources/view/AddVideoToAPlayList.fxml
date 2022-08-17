@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="485.0" maxWidth="465.0" prefHeight="485.0" prefWidth="465.0" style="-fx-background-color: #487eb0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.AddVideoToAPlayListController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="35.0" prefHeight="32.0" prefWidth="274.0" text="Agregar video a lista " textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tabla" layoutX="53.0" layoutY="143.0" prefHeight="121.0" prefWidth="371.0" style="-fx-background-color: white;">
+        <columns>
+          <TableColumn fx:id="idLista" prefWidth="146.0" text="Id lista" />
+          <TableColumn fx:id="nombreLista" prefWidth="224.0" text="Nombre lista" />
+        </columns>
+      </TableView>
+      <AnchorPane layoutX="83.0" layoutY="277.0" maxHeight="156.0" maxWidth="328.0" prefHeight="156.0" prefWidth="328.0" style="-fx-background-color: #2f3640;">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="2.0" text="Ingresar id de la lista" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="inputTextF" alignment="CENTER" layoutX="79.0" layoutY="49.0" prefHeight="25.0" prefWidth="157.0" promptText="Ej. id">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <Button fx:id="btnRegistro" alignment="CENTER" contentDisplay="CENTER" layoutX="95.0" layoutY="101.0" mnemonicParsing="false" onAction="#enviar" prefHeight="30.0" prefWidth="126.0" style="-fx-background-color: #e1b12c; -fx-cursor: hand;" text="Enviar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="121.0" fitWidth="166.0" layoutX="14.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/homeflixLogo.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="67.0" prefHeight="32.0" prefWidth="252.0" text="de reproducción" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnIrRegreso" alignment="CENTER" contentDisplay="CENTER" layoutX="330.0" layoutY="436.0" mnemonicParsing="false" onAction="#regresarHome" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Regresar" textFill="#f5ebe8" underline="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

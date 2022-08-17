@@ -173,7 +173,7 @@ public class RegisterVideoController {
      * Metodo para hacer cambios de interfaz
      */
     public void irPrincipal() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", irHome);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", irHome);
     }
 
     /**

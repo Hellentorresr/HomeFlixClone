@@ -68,6 +68,6 @@ public class AddPlaylistVideoController {
     }
 
     public void regresar() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml",btnRegresar);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml",btnRegresar);
     }
 }

@@ -43,6 +43,7 @@ public class ReproductorVideoController implements Initializable {
     public Button regresar;
     public Button noLike;
     public Button like;
+    public Button agregarAPlayList;
     /**
      * Atributos de la clase ReproductorVideoController
      */
@@ -346,10 +347,19 @@ public class ReproductorVideoController implements Initializable {
     }
 
     /**
-     * Metodo regresarHome para regresar a la interfaz DentroDeLaApp.fxml
+     * Metodo regresarHome para regresar a la interfaz Home.fxml
      * @throws IOException dara un error si no encuentra la interfaz
      */
     public void regresarHome() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("DentroDeLaApp.fxml", regresar);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", regresar);
+    }
+
+    /**
+     * Metodo para mover al usuario a la interfaz AddVideoToAPlayList.fxml
+     * @throws IOException genera una exception si no encuentra la interfaz
+     */
+    @FXML
+    public void irPlaylist() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("AddVideoToAPlayList.fxml",agregarAPlayList);
     }
 }
