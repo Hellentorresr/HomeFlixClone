@@ -1,6 +1,6 @@
 package controller.controllerApp;
 
-
+import controller.dao.DAOPlayListVideos;
 import controller.dao.PlaylistVideoDAOImplement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import static controller.controllerApp.HomeController.video;
 
 /**
  * Clase AddVideoToAPlayListController
  */
 public class AddVideoToAPlayListController implements Initializable {
     UtilitiesImplements utilitiesImplements;
-    PlaylistVideoDAOImplement playlistVideoDAOImplement;
+    DAOPlayListVideos daoPlayListVideos;
     /**
      * atributos de la clase
      * AddVideoToAPlayListController
@@ -31,7 +32,7 @@ public class AddVideoToAPlayListController implements Initializable {
     @FXML
     private Button btnRegistro;
     @FXML
-    private Button btnRegresar;
+    private Button btnIrRegreso;
     @FXML
     private TableColumn<PlaylistVideos, Integer> idLista;
     @FXML
@@ -46,23 +47,33 @@ public class AddVideoToAPlayListController implements Initializable {
     public AddVideoToAPlayListController() {
         this.utilitiesImplements = new UtilitiesImplements();
         playlistVideosOb = FXCollections.observableArrayList();
-        playlistVideoDAOImplement = new PlaylistVideoDAOImplement();
+        daoPlayListVideos = new PlaylistVideoDAOImplement();
     }
 
     /**
      * Metodo para el registro del video
      */
-    public void enviar() {
+    public void enviar() throws SQLException {
+        if (this.inputTextF.getText().isEmpty()) {
+            utilitiesImplements.mostrarMensajeNegativo("Favor ingresar un id");
+        } else {
+            int id = Integer.parseInt(this.inputTextF.getText());
+            if (utilitiesImplements.verificarSiExistePlayList(id,video)) {
+                utilitiesImplements.mostrarMensajePositivo("encontrado");
+                System.out.println(video);
+            } else {
+             utilitiesImplements.mostrarMensajeNegativo("NO ENCONTRADO");
+            }
+        }
     }
 
     /**
      * Metodo para el regreso
      */
     @FXML
-    public void regresar() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("Home.fxml", btnRegresar);
+    public void regresarHome() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", btnIrRegreso);
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,7 +85,7 @@ public class AddVideoToAPlayListController implements Initializable {
     }
 
     public void cargarDatos() throws SQLException {
-        playlistVideosOb.addAll(playlistVideoDAOImplement.getALL());
+        playlistVideosOb.addAll(daoPlayListVideos.getALL());
         this.idLista.setCellValueFactory(new PropertyValueFactory<>("id"));
         this.nombreLista.setCellValueFactory(new PropertyValueFactory<>("namePlaylist"));
         tabla.setItems(playlistVideosOb);
