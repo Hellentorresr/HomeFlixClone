@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="485.0" prefWidth="465.0" style="-fx-background-color: #487eb0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.AddVideoToAPlayListController">
+<AnchorPane maxHeight="485.0" maxWidth="465.0" prefHeight="485.0" prefWidth="465.0" style="-fx-background-color: #487eb0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.AddVideoToAPlayListController">
    <children>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="35.0" prefHeight="32.0" prefWidth="274.0" text="Agregar video a lista " textFill="WHITE" wrapText="true">
          <font>
@@ -24,7 +23,7 @@
           <TableColumn fx:id="nombreLista" prefWidth="224.0" text="Nombre lista" />
         </columns>
       </TableView>
-      <AnchorPane layoutX="83.0" layoutY="277.0" prefHeight="156.0" prefWidth="328.0" style="-fx-background-color: #2f3640;">
+      <AnchorPane layoutX="83.0" layoutY="277.0" maxHeight="156.0" maxWidth="328.0" prefHeight="156.0" prefWidth="328.0" style="-fx-background-color: #2f3640;">
          <children>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="71.0" layoutY="2.0" text="Ingresar id de la lista" textFill="WHITE">
                <font>
@@ -48,15 +47,15 @@
             <Image url="@img/homeflixLogo.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnRegresar" alignment="CENTER" contentDisplay="CENTER" layoutX="322.0" layoutY="436.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Regresar" textFill="#f5ebe8" underline="true">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Button>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="167.0" layoutY="67.0" prefHeight="32.0" prefWidth="252.0" text="de reproducción" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
+      <Button fx:id="btnIrRegreso" alignment="CENTER" contentDisplay="CENTER" layoutX="330.0" layoutY="436.0" mnemonicParsing="false" onAction="#regresarHome" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Regresar" textFill="#f5ebe8" underline="true">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
