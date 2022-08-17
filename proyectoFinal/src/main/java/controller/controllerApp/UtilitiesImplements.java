@@ -30,7 +30,6 @@ import static controller.controllerApp.HomeController.video;
  * Clase UtilitiesImplements, para implementar los metodos abstractos de la clase UtilitiesAbstract
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
-    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     private DAOVideo videoDAO;
 
     public UtilitiesImplements() {
