@@ -146,15 +146,26 @@ public class UtilitiesImplements extends UtilitiesAbstract {
 
     }
 
-    public int verificarPlayList(int id, Video v) throws SQLException {
-        PlaylistVideos f;
-        f = daoPlayListVideos.get(id);
-        if (allPlaylist().contains(f)) {
-            return id;
-        } else {
-            return 0;
-        }
+    /**
+     * Metodo registrarPlayList
+     * @param idList recibe por parametro un int id
+     * @param name recibe por parametro un string nombre
+     * @param tema recibe por parametro un string tema
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public void registrarPlaylist(int idList, String name, String tema) throws SQLException {
+      float  duration = 0;
+        int idVideo = 0;
+        LocalDate dateNow = LocalDate.now();
 
+        PlaylistVideos nuevaLista;
+        nuevaLista = daoPlayListVideos.get(idList);
+        if (allPlaylist().contains(nuevaLista)) {
+            mostrarMensajeNegativo("Id de lista ya existe, favor intentar de nuevo!");
+        } else {
+            daoPlayListVideos.insert(idList, name, duration, tema, dateNow, idVideo);
+            mostrarMensajePositivo("Lista de creada correctamente");
+        }
     }
 
 
