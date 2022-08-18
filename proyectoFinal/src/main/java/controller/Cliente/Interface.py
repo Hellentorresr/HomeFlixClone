@@ -2,7 +2,7 @@ from audioop import add
 from re import X
 import PySimpleGUI as pg
 import socket
-
+import mediaPlayer as MP
 
 socketCliente = socket.socket()
 
@@ -25,13 +25,14 @@ window = pg.Window("Form", layout)
 
 while True: 
     event, values = window.read()
-    
     if event == "Cancelar": 
         socketCliente.close()
         break
     elif(values[0] == address):
-        print("hola")
         socketCliente.connect(('localhost', port))
-        import mediaPlayer as MP
+        ##recibe info
+        MP.runApp()
+        
+        
 
 window.close()

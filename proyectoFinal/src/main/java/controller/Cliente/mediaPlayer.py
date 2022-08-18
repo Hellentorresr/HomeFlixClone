@@ -75,10 +75,11 @@ class Window(QWidget):
         self.slider.setRange(0, duration)
         
         
+    
+def runApp():
+    app = QApplication(sys.argv)
+    window = Window()
+    window.show()
+    sys.exit(app.exec_()) 
         
         
-        
-app = QApplication(sys.argv)
-window = Window()
-window.show()
-sys.exit(app.exec_())
