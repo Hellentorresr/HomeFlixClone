@@ -15,17 +15,15 @@ import model.PlaylistVideos;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-
 
 /**
  * Creacion de la clase AddPlaylistVideoController
  */
 public class AddPlaylistVideoController {
     public TextField txtIdList;
+    public Button btnRegresar;
     @FXML
     private TextField inputTextF;
-    public Button btnRegresar;
     /**
      * Atributos de la clase AddPlaylistVideoController
      */
@@ -60,20 +58,17 @@ public class AddPlaylistVideoController {
         String name = this.txtNameList.getText();
         String tema = this.txtTemaList.getText();
 
-        if (name.isEmpty() || tema.isEmpty()) {
+        if (name.isEmpty() || tema.isEmpty() || this.txtIdList.getText().isEmpty()) {
             utilitiesImplements.mostrarMensajeNegativo("Favor llenar los campos en blanco");
         } else {
-            float duration =0;
-            LocalDate dateNow = LocalDate.now();
-            //agregar input id
-            daoPlayListVideos.insert(name,duration,tema,dateNow);
-            utilitiesImplements.mostrarMensajePositivo("Playlist Creada correctamente");
+            int idList = Integer.parseInt(this.txtIdList.getText());
+            utilitiesImplements.registrarPlaylist(idList, name, tema);
             regresar();
         }
     }
 
 
     public void regresar() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("Home.fxml",btnRegresar);
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", btnRegresar);
     }
 }

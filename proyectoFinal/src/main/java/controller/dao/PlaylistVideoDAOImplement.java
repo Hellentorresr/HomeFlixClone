@@ -166,8 +166,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
     }
 
     public String playListName(int id) throws SQLException {
-        Connexion connection = new Connexion();
-        Connection connectDB = connection.getConnection();
+        Connection connectDB = Connexion.getConnection();
         String name = "select namePlayList from playList where id = " + "'" + id + "'";
         Statement statement = connectDB.createStatement();
         ResultSet queryResult = statement.executeQuery(name);
@@ -178,8 +177,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
     }
 
     public float playListDuration(int id) throws SQLException {
-        Connexion connection = new Connexion();
-        Connection connectDB = connection.getConnection();
+        Connection connectDB = Connexion.getConnection();
         String time = "select totalPlayListDurationTime from playList where id = " + "'" + id + "'";
         Statement statement = connectDB.createStatement();
         ResultSet queryResult = statement.executeQuery(time);
@@ -190,8 +188,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
     }
 
     public String playListTema(int id) throws SQLException {
-        Connexion connection = new Connexion();
-        Connection connectDB = connection.getConnection();
+        Connection connectDB = Connexion.getConnection();
         String tema = "select tema from playList where id = " + "'" + id + "'";
         Statement statement = connectDB.createStatement();
         ResultSet queryResult = statement.executeQuery(tema);
@@ -202,8 +199,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
     }
 
     public LocalDate playListDate(int id) throws SQLException {
-        Connexion connection = new Connexion();
-        Connection connectDB = connection.getConnection();
+        Connection connectDB = Connexion.getConnection();
         String date = "select creationDate from playList where id = " + "'" + id + "'";
         Statement statement = connectDB.createStatement();
         ResultSet queryResult = statement.executeQuery(date);
