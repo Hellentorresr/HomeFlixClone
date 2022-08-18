@@ -29,13 +29,6 @@ public class PlaylistVideos {
     /**
      * Metodo constructor
      */
-    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate) {
-        this.namePlaylist = namePlaylist;
-        this.totalPlayListDurationTime = totalPlayListDurationTime;
-        this.tema = tema;
-        this.creationDate = creationDate;
-        this.videos = new ArrayList<>();
-    }
 
     public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int id, int idVideo, ArrayList<Video> videos) {
         this.namePlaylist = namePlaylist;
@@ -81,14 +74,13 @@ public class PlaylistVideos {
         this.id = id;
         this.idVideo = idVideo;
     }
+    /**
+     * Getters y setters
+     */
 
     public String getNamePlaylist() {
         return namePlaylist;
     }
-
-    /**
-     * Getters y setters
-     */
 
     public void setNamePlaylist(String namePlaylist) {
         this.namePlaylist = namePlaylist;
@@ -126,18 +118,6 @@ public class PlaylistVideos {
         this.id = id;
     }
 
-    public ArrayList<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(ArrayList<Video> videos) {
-        this.videos = videos;
-    }
-
-    public void setTotalPlayListDurationTime(Video video) {
-        this.totalPlayListDurationTime+=video.getTotalDuration();
-    }
-
     public int getIdVideo() {
         return idVideo;
     }
@@ -146,9 +126,21 @@ public class PlaylistVideos {
         this.idVideo = idVideo;
     }
 
+    public ArrayList<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(ArrayList<Video> videos) {
+        this.videos = videos;
+    }
+
     public void agregarVideo(Video video){
         this.videos.add(video);
     }
+    public void setTotalPlayListDurationTime(Video video) {
+        this.totalPlayListDurationTime+=video.getTotalDuration();
+    }
+
     /**
      * Metodo toString
      */
@@ -159,7 +151,8 @@ public class PlaylistVideos {
                 ", totalPlayListDurationTime=" + totalPlayListDurationTime +
                 ", tema='" + tema + '\'' +
                 ", creationDate=" + creationDate +
-                ", code=" + id +
+                ", id=" + id +
+                ", idVideo=" + idVideo +
                 ", videos=" + videos +
                 '}';
     }
@@ -171,6 +164,6 @@ public class PlaylistVideos {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof PlaylistVideos that)) return false;
-        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getId() == that.getId() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate()) && Objects.equals(getVideos(), that.getVideos());
+        return Float.compare(that.getTotalPlayListDurationTime(), getTotalPlayListDurationTime()) == 0 && getId() == that.getId() && getIdVideo() == that.getIdVideo() && Objects.equals(getNamePlaylist(), that.getNamePlaylist()) && Objects.equals(getTema(), that.getTema()) && Objects.equals(getCreationDate(), that.getCreationDate()) && Objects.equals(getVideos(), that.getVideos());
     }
 }
