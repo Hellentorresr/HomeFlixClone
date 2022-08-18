@@ -55,7 +55,8 @@ public class HomeController implements Initializable {
     /**
      * Padre de los containers
      */
-    public VBox vboxContainer;
+    public VBox vboxContainer;//para que se le agregue hijos
+    public Button btnListas;
 
 
     UtilitiesImplements utilitiesImplements;
@@ -134,6 +135,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo para regresar a la página principalYSignIn por medio del boton cerrar
+     * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void handleBtnIngresar() throws IOException {
         utilitiesImplements.pathInterfazGrafica("PrincipalYSignIn.fxml", btnCerrar);
@@ -141,6 +143,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz RegistroVideo.fxml
+     * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void agregarVideo() throws IOException {
         utilitiesImplements.pathInterfazGrafica("RegistroVideo.fxml", btnCerrar);
@@ -149,6 +152,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz EditarEliminarVideo.fxml
+     * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void eliminarEditarVideo() throws IOException {
         utilitiesImplements.pathInterfazGrafica("EditarEliminarVideo.fxml", btnCerrar);
@@ -240,7 +244,19 @@ public class HomeController implements Initializable {
                 '}';
     }
 
+    /**
+     * Metodo goToCreateNewPlayList
+     * @throws IOException genera una IOException si no encuentra la interfaz
+     */
     public void goToCreateNewPlayList() throws IOException {
         utilitiesImplements.pathInterfazGrafica("AddPlayList.fxml", btnNewPlayList);
+    }
+
+    /**
+     * Metodo irAdministrarListas
+     * @throws IOException genera una IOException si no encuentra la interfaz
+     */
+    public void irAdministrarListas() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("CRUDPlayList.fxml",btnListas);
     }
 }
