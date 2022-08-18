@@ -15,8 +15,6 @@ import model.PlaylistVideos;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-
 
 /**
  * Creacion de la clase AddPlaylistVideoController
