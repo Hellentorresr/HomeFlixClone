@@ -18,10 +18,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import static controller.controllerApp.HomeController.video;
+
 /**
  * Creacion de la clase AddPlaylistVideoController
  */
 public class AddPlaylistVideoController {
+    @FXML
+    private TextField inputTextF;
     public Button btnRegresar;
     /**
      * Atributos de la clase AddPlaylistVideoController
@@ -37,6 +41,7 @@ public class AddPlaylistVideoController {
     private PlaylistVideos playlistVideos;
     private UtilitiesImplements utilitiesImplements;
     private DAOPlayListVideos daoPlayListVideos;
+
 
     /**
      * Constructor de la clase AddPlayListVideoController
@@ -61,11 +66,13 @@ public class AddPlaylistVideoController {
         } else {
             float duration =0;
             LocalDate dateNow = LocalDate.now();
+            //agregar input id
             daoPlayListVideos.insert(name,duration,tema,dateNow);
             utilitiesImplements.mostrarMensajePositivo("Playlist Creada correctamente");
             regresar();
         }
     }
+
 
     public void regresar() throws IOException {
         utilitiesImplements.pathInterfazGrafica("Home.fxml",btnRegresar);
