@@ -105,4 +105,26 @@ public class CRUDPlayListController implements Initializable {
     void regresar() throws IOException {
         utilitiesImplements.pathInterfazGrafica("Home.fxml", btnRegresar);
     }
+
+    /**
+     * Metodo cargarDatos
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public void cargarDatos() throws SQLException {
+        playlistVideosOb.addAll(daoPlayListVideos.getALL());
+        this.columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        this.columnNombre.setCellValueFactory(new PropertyValueFactory<>("namePlaylist"));
+        this.columnTema.setCellValueFactory(new PropertyValueFactory<>("tema"));
+        this.columnDate.setCellValueFactory(new PropertyValueFactory<>("creationDate"));
+        tabla.setItems(playlistVideosOb);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            cargarDatos();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
