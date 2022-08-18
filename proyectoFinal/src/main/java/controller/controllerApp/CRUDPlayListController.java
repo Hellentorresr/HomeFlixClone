@@ -54,9 +54,9 @@ public class CRUDPlayListController implements Initializable {
     private ObservableList<PlaylistVideos> playlistVideosOb;
 
     public CRUDPlayListController() {
-        this.playlistVideosOb = new UtilitiesImplements();
         playlistVideosOb = FXCollections.observableArrayList();
         daoPlayListVideos = new PlaylistVideoDAOImplement();
+        this.utilitiesImplements = new UtilitiesImplements();
     }
 
     /**
