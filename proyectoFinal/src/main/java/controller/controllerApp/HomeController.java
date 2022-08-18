@@ -12,7 +12,6 @@ import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -53,6 +52,11 @@ public class HomeController implements Initializable {
     public TextField buscarPlaceholder;
     //boton para ir a crear una playlist
     public Button btnNewPlayList;
+    /**
+     * Padre de los containers
+     */
+    public VBox vboxContainer;//para que se le agregue hijos
+    public Button btnListas;
 
 
     UtilitiesImplements utilitiesImplements;
@@ -131,6 +135,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo para regresar a la página principalYSignIn por medio del boton cerrar
+     * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void handleBtnIngresar() throws IOException {
         utilitiesImplements.pathInterfazGrafica("PrincipalYSignIn.fxml", btnCerrar);
@@ -138,6 +143,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz RegistroVideo.fxml
+     * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void agregarVideo() throws IOException {
         utilitiesImplements.pathInterfazGrafica("RegistroVideo.fxml", btnCerrar);
@@ -146,6 +152,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz EditarEliminarVideo.fxml
+     * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void eliminarEditarVideo() throws IOException {
         utilitiesImplements.pathInterfazGrafica("EditarEliminarVideo.fxml", btnCerrar);
@@ -160,7 +167,7 @@ public class HomeController implements Initializable {
         Video video = new Video();
         recentlyPlayedContainer.getChildren().clear();
         if (busqueda.isEmpty()) {
-            mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
+            utilitiesImplements.mostrarMensajeNegativo("Favor ingrese el nombre del video que desea encontrar");
             getData();
         } else {
 
@@ -205,7 +212,7 @@ public class HomeController implements Initializable {
                         //mostrarBusqueda();
                         break;
                     } else {
-                        mostrarMensajeNegativo("El video no fue encontrado");
+                        utilitiesImplements.mostrarMensajeNegativo("El video no fue encontrado");
                         getData();
                         break;
                     }
@@ -218,17 +225,9 @@ public class HomeController implements Initializable {
         return video;
     }
 
-    /**
-     * metodo que muestra un mensaje al usuario
-     */
 
-    private void mostrarMensajeNegativo(String mensaje) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("ERROR");
-        alert.setContentText(mensaje);
-        alert.showAndWait();
-    }
+
+
 
     /**
      * Metodo toString
@@ -245,7 +244,19 @@ public class HomeController implements Initializable {
                 '}';
     }
 
+    /**
+     * Metodo goToCreateNewPlayList
+     * @throws IOException genera una IOException si no encuentra la interfaz
+     */
     public void goToCreateNewPlayList() throws IOException {
         utilitiesImplements.pathInterfazGrafica("AddPlayList.fxml", btnNewPlayList);
+    }
+
+    /**
+     * Metodo irAdministrarListas
+     * @throws IOException genera una IOException si no encuentra la interfaz
+     */
+    public void irAdministrarListas() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("CRUDPlayList.fxml",btnListas);
     }
 }

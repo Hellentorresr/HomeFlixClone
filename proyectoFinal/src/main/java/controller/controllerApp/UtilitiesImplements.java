@@ -129,7 +129,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
      * Metodo para verificar si una lista de reproduccion existe
      *
      * @param id recibe por parametro un entero para hacer la busqueda
-     * @return retorna true si encuentra una lista con ese id o false si no existe
+     * @return retorna true si encuentra una lista con ese, id o false si no existe
      * @throws SQLException genera una exception si no hay communication con la bae de datos
      */
     public boolean verificarSiExistePlayList(int id, Video v) throws SQLException {
@@ -142,7 +142,50 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         } else {
             return false;
         }
+    }
 
+    /**
+     * metodo verificarPlay
+     * @param id
+     * @param nombre
+     * @param tema
+     * @return
+     * @throws SQLException
+     */
+    public boolean verificarPlay(int id, String nombre, String tema) throws SQLException {
+        PlaylistVideos f;
+        f = daoPlayListVideos.get(id);
+        if (allPlaylist().contains(f)) {
+            if (!nombre.isEmpty()) {
+                f.setNamePlaylist(nombre);
+                mostrarMensajePositivo("Nombre de la lista actualizado");
+            }
+            if (!tema.isEmpty()) {
+                f.setTema(tema);
+                mostrarMensajePositivo("Tema de la lista actualizado");
+            }
+            daoPlayListVideos.update(f);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Metodo verificarPlayEliminar
+     * @param id recibe un, id por parametro
+     * @return retorna true si encuentra la lista con este, id, o false si no la encuentra
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public boolean verificarPlayEliminar(int id) throws SQLException {
+        PlaylistVideos f;
+        f = daoPlayListVideos.get(id);
+        if (allPlaylist().contains(f)) {
+            daoPlayListVideos.delete(f);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

@@ -100,17 +100,14 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
     @Override
     public int update(PlaylistVideos playlistVideos) throws SQLException {
         Connection connection = Connexion.getConnection();
-        String sql = "UPDATE playlisttable set namePlaylist =?, totalPlayListDurationTime = ?, tema = ?, creationDate = ?, videosList = ? WHERE id = ?";
+        String sql = "UPDATE playlisttable set namePlaylist = ?, totalPlayListDurationTime = ?, tema = ?, creationDate = ? WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
 
         ps.setString(1, playlistVideos.getNamePlaylist());
         ps.setFloat(2, playlistVideos.getTotalPlayListDurationTime());
         ps.setString(3, playlistVideos.getTema());
         ps.setString(4, String.valueOf(playlistVideos.getCreationDate()));
-        for (int i = 0; i < playlistVideos.getVideos().size(); i++) {
-            ps.setInt(5, playlistVideos.getVideos().get(i).getVideoId());
-        }
-        ps.setInt(6, playlistVideos.getId());
+        ps.setInt(5, playlistVideos.getId());
 
         int result = ps.executeUpdate();
         Connexion.closePreparedStatement(ps);
