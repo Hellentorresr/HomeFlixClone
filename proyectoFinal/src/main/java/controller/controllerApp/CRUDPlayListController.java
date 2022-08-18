@@ -96,4 +96,13 @@ public class CRUDPlayListController implements Initializable {
             }
         }
     }
+
+    /**
+     * Metodo
+     * @throws IOException genera una IOException si no encuentra la interfaz
+     */
+    @FXML
+    void regresar() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("Home.fxml", btnRegresar);
+    }
 }
