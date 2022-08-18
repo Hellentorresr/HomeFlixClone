@@ -16,6 +16,7 @@ import model.PlaylistVideos;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import static controller.controllerApp.HomeController.video;
 
@@ -23,8 +24,13 @@ import static controller.controllerApp.HomeController.video;
  * Clase AddVideoToAPlayListController
  */
 public class AddVideoToAPlayListController implements Initializable {
+    @FXML
+    private TextField txtNameList;
+    @FXML
+    private TextField txtTemaList;
     UtilitiesImplements utilitiesImplements;
-    DAOPlayListVideos daoPlayListVideos;
+    PlaylistVideoDAOImplement daoPlayListVideos;
+    PlaylistVideos playlistVideos;
     /**
      * atributos de la clase
      * AddVideoToAPlayListController
@@ -48,6 +54,8 @@ public class AddVideoToAPlayListController implements Initializable {
         this.utilitiesImplements = new UtilitiesImplements();
         playlistVideosOb = FXCollections.observableArrayList();
         daoPlayListVideos = new PlaylistVideoDAOImplement();
+        playlistVideos = new PlaylistVideos();
+
     }
 
     /**
@@ -59,6 +67,8 @@ public class AddVideoToAPlayListController implements Initializable {
         } else {
             int id = Integer.parseInt(this.inputTextF.getText());
             if (utilitiesImplements.verificarSiExistePlayList(id,video)) {
+                //crear metodo para traer el id del video seleccionado.
+                daoPlayListVideos.insert(id,daoPlayListVideos.playListName(id),daoPlayListVideos.playListDuration(id),daoPlayListVideos.playListTema(id),daoPlayListVideos.playListDate(id),11);
                 utilitiesImplements.mostrarMensajePositivo("encontrado");
                 System.out.println(video);
             } else {

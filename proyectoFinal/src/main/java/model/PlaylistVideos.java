@@ -22,6 +22,8 @@ public class PlaylistVideos {
     private String tema;
     private LocalDate creationDate;
     private int id;
+
+    private int idVideo;
     private ArrayList<Video>videos = new ArrayList<>();
 
     /**
@@ -33,6 +35,16 @@ public class PlaylistVideos {
         this.tema = tema;
         this.creationDate = creationDate;
         this.videos = new ArrayList<>();
+    }
+
+    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int id, int idVideo, ArrayList<Video> videos) {
+        this.namePlaylist = namePlaylist;
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
+        this.tema = tema;
+        this.creationDate = creationDate;
+        this.id = id;
+        this.idVideo = idVideo;
+        this.videos = videos;
     }
 
     /**
@@ -59,6 +71,15 @@ public class PlaylistVideos {
         this.tema = tema;
         this.creationDate = creationDate;
         this.id = id;
+    }
+
+    public PlaylistVideos(int id,String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate,  int idVideo) {
+        this.namePlaylist = namePlaylist;
+        this.totalPlayListDurationTime = totalPlayListDurationTime;
+        this.tema = tema;
+        this.creationDate = creationDate;
+        this.id = id;
+        this.idVideo = idVideo;
     }
 
     public String getNamePlaylist() {
@@ -117,6 +138,13 @@ public class PlaylistVideos {
         this.totalPlayListDurationTime+=video.getTotalDuration();
     }
 
+    public int getIdVideo() {
+        return idVideo;
+    }
+
+    public void setIdVideo(int idVideo) {
+        this.idVideo = idVideo;
+    }
 
     public void agregarVideo(Video video){
         this.videos.add(video);
