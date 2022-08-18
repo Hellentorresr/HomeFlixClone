@@ -11,13 +11,11 @@ import controller.dao.DAOPlayListVideos;
 import controller.dao.DAOVideo;
 import controller.dao.PlaylistVideoDAOImplement;
 import controller.dao.VideoDAOImplement;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.PlaylistVideos;
 import model.Video;
@@ -132,7 +130,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
      * Metodo para verificar si una lista de reproduccion existe
      *
      * @param id recibe por parametro un entero para hacer la busqueda
-     * @return retorna true si encuentra una lista con ese id o false si no existe
+     * @return retorna true si encuentra una lista con ese, id o false si no existe
      * @throws SQLException genera una exception si no hay communication con la bae de datos
      */
     public boolean verificarSiExistePlayList(int id, Video v) throws SQLException {
@@ -152,11 +150,58 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         PlaylistVideos f;
         f = daoPlayListVideos.get(id);
         if (allPlaylist().contains(f)) {
-           return id;
+            return id;
         } else {
             return 0;
         }
 
+    }
+
+
+    /**
+     * metodo verificarPlay
+     *
+     * @param id     recibe un, id por parametro
+     * @param nombre recibe un nombre por parametro
+     * @param tema   recibe un tema por parametro
+     * @return retorna un boolean
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public boolean verificarPlay(int id, String nombre, String tema) throws SQLException {
+        PlaylistVideos f;
+        f = daoPlayListVideos.get(id);
+        if (allPlaylist().contains(f)) {
+            if (!nombre.isEmpty()) {
+                f.setNamePlaylist(nombre);
+                mostrarMensajePositivo("Nombre de la lista actualizado");
+            }
+            if (!tema.isEmpty()) {
+                f.setTema(tema);
+                mostrarMensajePositivo("Tema de la lista actualizado");
+            }
+            daoPlayListVideos.update(f);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Metodo verificarPlayEliminar
+     *
+     * @param id recibe un, id por parametro
+     * @return retorna true si encuentra la lista con este, id, o false si no la encuentra
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public boolean verificarPlayEliminar(int id) throws SQLException {
+        PlaylistVideos f;
+        f = daoPlayListVideos.get(id);
+        if (allPlaylist().contains(f)) {
+            daoPlayListVideos.delete(f);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

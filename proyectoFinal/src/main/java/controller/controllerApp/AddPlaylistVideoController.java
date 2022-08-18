@@ -8,7 +8,6 @@ package controller.controllerApp;
 
 import controller.dao.DAOPlayListVideos;
 import controller.dao.PlaylistVideoDAOImplement;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,12 +17,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import static controller.controllerApp.HomeController.video;
 
 /**
  * Creacion de la clase AddPlaylistVideoController
  */
 public class AddPlaylistVideoController {
+    public TextField txtIdList;
     @FXML
     private TextField inputTextF;
     public Button btnRegresar;

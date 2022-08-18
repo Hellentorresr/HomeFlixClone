@@ -35,21 +35,31 @@
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="74.0" layoutY="141.0" text="Tema" textFill="#463a3a">
+                  <Label layoutX="74.0" layoutY="111.0" text="Tema" textFill="#463a3a">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtTemaList" layoutX="74.0" layoutY="176.0" prefHeight="25.0" prefWidth="244.0" promptText="Ej. Tema">
+                  <TextField fx:id="txtTemaList" layoutX="74.0" layoutY="136.0" prefHeight="25.0" prefWidth="244.0" promptText="Ej. Tema">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="btnSend" alignment="CENTER" layoutX="159.0" layoutY="228.0" mnemonicParsing="false" onAction="#addRegistration" prefHeight="39.0" prefWidth="127.0" style="-fx-background-color: #e1b12c; -fx-cursor: hand; -fx-border-color: white;" text="Enviar" textFill="WHITE">
+                  <Button fx:id="btnSend" alignment="CENTER" layoutX="157.0" layoutY="254.0" mnemonicParsing="false" onAction="#addRegistration" prefHeight="39.0" prefWidth="127.0" style="-fx-background-color: #e1b12c; -fx-cursor: hand; -fx-border-color: white;" text="Enviar" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
+                  <Label layoutX="74.0" layoutY="181.0" text="Id" textFill="#463a3a">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtIdList" layoutX="74.0" layoutY="203.0" prefHeight="35.0" prefWidth="244.0" promptText="Ej. 1">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
                </children>
             </AnchorPane>
             <Button fx:id="btnRegresar" alignment="CENTER" contentDisplay="CENTER" layoutX="369.0" layoutY="440.0" mnemonicParsing="false" onAction="#regresar" prefHeight="35.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Regresar" underline="true">

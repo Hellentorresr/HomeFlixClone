@@ -195,8 +195,6 @@ public class VideoDAOImplement implements DAOVideo {
         int result = ps.executeUpdate();
         Connexion.closePreparedStatement(ps);
         Connexion.closeConnection(connection);
-
-        System.out.println(result);
         return result;
     }
 

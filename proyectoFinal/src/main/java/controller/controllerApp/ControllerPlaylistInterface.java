@@ -34,7 +34,7 @@ public class ControllerPlaylistInterface implements Initializable {
 
 
     private void cargarDatos() {
-        ObservableList<Object> playlists = FXCollections.observableArrayList();
+      /*  ObservableList<Object> playlists = FXCollections.observableArrayList();
         playlists.addAll(PlaylistsVideoDAOImplement.allPlaylist);
         this.namePlaylist.setCellValueFactory(new PropertyValueFactory<>("namePlaylist"));
         this.tema.setCellValueFactory(new PropertyValueFactory<>("tema"));
@@ -43,7 +43,7 @@ public class ControllerPlaylistInterface implements Initializable {
         this.totalPlayListDurationTime.setCellValueFactory(new PropertyValueFactory<>("totalPlayListDurationTime"));
         this.PLAY.setCellValueFactory(new PropertyValueFactory<>(play));
         TableViewPlaylists.setItems(PlaylistsVideoDAOImplement.allPlaylist);
-        System.out.println(TableViewPlaylists);
+        System.out.println(TableViewPlaylists);*/
     }
 
     @Override
