@@ -59,5 +59,23 @@ public class CRUDPlayListController implements Initializable {
         daoPlayListVideos = new PlaylistVideoDAOImplement();
     }
 
-
+    /**
+     * Metodo editarLista
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    @FXML
+    void editarLista() throws SQLException {
+        String nombre = this.txtNombre.getText();
+        String tema = this.txtTema.getText();
+        if (this.inputIdEditar.getText().isEmpty()) {
+            utilitiesImplements.mostrarMensajeNegativo("Favor ingresar código");
+        } else {
+            int id = Integer.parseInt(this.inputIdEditar.getText());
+            if (utilitiesImplements.verificarPlay(id, nombre, tema)) {
+                utilitiesImplements.mostrarMensajePositivo("Actualizado correctamente");
+            } else {
+                utilitiesImplements.mostrarMensajeNegativo("Lista con código : " + id + " No existe");
+            }
+        }
+    }
 }
