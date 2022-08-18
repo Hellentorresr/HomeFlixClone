@@ -78,4 +78,22 @@ public class CRUDPlayListController implements Initializable {
             }
         }
     }
+
+    /**
+     * metodo eliminarLista
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    @FXML
+    void eliminarLista() throws SQLException {
+        if (this.inputIdEliminar.getText().isEmpty()) {
+            utilitiesImplements.mostrarMensajeNegativo("Favor ingresar código");
+        } else {
+            int id = Integer.parseInt(this.inputIdEliminar.getText());
+            if (utilitiesImplements.verificarPlayEliminar(id)) {
+                utilitiesImplements.mostrarMensajePositivo("Video eliminado correctamente");
+            } else {
+                utilitiesImplements.mostrarMensajeNegativo("Lista con código : " + id + " No existe");
+            }
+        }
+    }
 }
