@@ -171,6 +171,21 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         }
     }
 
-  
+    /**
+     * Metodo verificarPlayEliminar
+     * @param id recibe un, id por parametro
+     * @return retorna true si encuentra la lista con este, id, o false si no la encuentra
+     * @throws SQLException genera una exception si no hay communication con la bae de datos
+     */
+    public boolean verificarPlayEliminar(int id) throws SQLException {
+        PlaylistVideos f;
+        f = daoPlayListVideos.get(id);
+        if (allPlaylist().contains(f)) {
+            daoPlayListVideos.delete(f);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
