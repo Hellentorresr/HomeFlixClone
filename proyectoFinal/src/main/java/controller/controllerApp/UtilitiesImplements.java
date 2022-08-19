@@ -255,7 +255,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
 
             button.setOnAction(event -> {
                 try {
-                    pathInterfazGrafica("AddPlayList.fxml", button);//cambiar a la correcta interfaz
+                    pathInterfazGrafica("ReproductorPlaylist.fxml", button);//cambiar a la correcta interfaz
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
