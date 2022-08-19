@@ -68,7 +68,7 @@ public class AddVideoToAPlayListController implements Initializable {
             int id = Integer.parseInt(this.inputTextF.getText());
             if (utilitiesImplements.verificarSiExistePlayList(id,video)) {
                 //crear metodo para traer el id del video seleccionado.
-                daoPlayListVideos.insert(id,daoPlayListVideos.playListName(id),daoPlayListVideos.playListDuration(id),daoPlayListVideos.playListTema(id),daoPlayListVideos.playListDate(id),11);
+                daoPlayListVideos.insert(id,daoPlayListVideos.playListName(id),daoPlayListVideos.playListDuration(id),daoPlayListVideos.playListTema(id),daoPlayListVideos.playListDate(id),video.getVideoId());
                 utilitiesImplements.mostrarMensajePositivo("encontrado");
                 System.out.println(video);
             } else {
