@@ -37,6 +37,7 @@ public class HomeController implements Initializable {
      */
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
+    public static ArrayList<PlaylistVideos> playList = new ArrayList<>();
     public static Video video = new Video();
     @FXML
     public ImageView fotoPerfil;
@@ -93,10 +94,10 @@ public class HomeController implements Initializable {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
-            playlistVideos = new ArrayList<>(utilitiesImplements.allPlaylist());
+            playList = new ArrayList<>(utilitiesImplements.allPlaylist());
             cargarDatos(utilitiesImplements.recentAdd(), recentlyPlayedContainer);
             cargarDatos(videosBaseDatos, favoritasContainer);
-            utilitiesImplements.cargarDatosDeLasListas(playlistVideos,vboxContainer);
+            utilitiesImplements.cargarDatosDeLasListas(playList,vboxContainer);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

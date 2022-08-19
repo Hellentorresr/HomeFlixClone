@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
-    private ArrayList<PlaylistVideos> allPlaylist;
+    public ArrayList<PlaylistVideos> allPlaylist;
 
     public PlaylistVideoDAOImplement() {
         this.allPlaylist = new ArrayList<>();
@@ -30,7 +30,8 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
         if (rs.next()) {//verificamos si tengo un record
             //aqui obteniendo el contenido de las columnas de la base de datos del video encontrado
-            int oid = rs.getInt("id");// guardando en oid el índice o conteo del video si lo encontró
+            int idPlayList = rs.getInt("id");
+            int idVideo = rs.getInt("videoId");// guardando en oid el índice o conteo del video si lo encontró
             String nombreVideo = rs.getString("namePlaylist");
             float duration = rs.getFloat("totalPlayListDurationTime");
             String tema = rs.getString("tema");
@@ -38,9 +39,9 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
             String fechaString = rs.getString("creationDate");
             DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
-            int videosList = rs.getInt("videoId");
+
             ArrayList<Video> videos = new ArrayList<>();
-            playlistVideos = new PlaylistVideos(nombreVideo, duration, tema, creationDate, oid, videos);
+            playlistVideos = new PlaylistVideos(idPlayList,nombreVideo,duration,tema,creationDate,idVideo);
         }
         return playlistVideos;
 
@@ -66,16 +67,16 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            PlaylistVideos playlistVideos = new PlaylistVideos();
+            PlaylistVideos playlistVideos;
             int id = rs.getInt("id");
             String nombre = rs.getString("namePlaylist");
             float totalTime = rs.getFloat("totalPlayListDurationTime");
             String tema = rs.getString("tema");
-
+            int idVideo = rs. getInt("videoId");
             String fechaString = rs.getString("creationDate");
             DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
-            playlistVideos = new PlaylistVideos(nombre, totalTime, tema, creationDate,id);
+            playlistVideos = new PlaylistVideos(id, nombre, totalTime, tema,creationDate,idVideo);
             allPlaylist.add(playlistVideos);
         }
         //cerrando la connexion

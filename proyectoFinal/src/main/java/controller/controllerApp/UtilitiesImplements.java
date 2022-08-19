@@ -45,6 +45,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
     //
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
+    public static ArrayList<PlaylistVideos> playList = new ArrayList<>();
     public static Video video = new Video();
 
     private DAOVideo videoDAO;
@@ -232,48 +233,54 @@ public class UtilitiesImplements extends UtilitiesAbstract {
     //para la playlist
     public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos , VBox vBox) {
         for (int i = 0; i < playlistVideos.size(); i++) {
+            if(playlistVideos.get(i).getIdVideo()==0){
+                System.out.println(playlistVideos.get(i));
+                Label titulo = new Label();
+                titulo.setText("Playlist");
+                titulo.setFont(Font.font(18));
+
+                HBox hBox = new HBox(i);
+                ScrollPane scrollPane = new ScrollPane(hBox);
+                scrollPane.prefWidth(1059);
+                scrollPane.prefHeight(229);
+
+                scrollPane.setContent(hBox);
+                scrollPane.setBackground(Background.fill(Paint.valueOf("transparent")));
+
+                Button button = new Button(playlistVideos.get(i).getNamePlaylist());
+                button.setTextFill(Paint.valueOf("white"));
+                button.setCursor(Cursor.cursor("hand"));
+                button.setUnderline(true);
+                button.setBackground(Background.fill(Paint.valueOf("transparent")));
+                button.setFont(Font.font(14));
+                button.setText("Reproducir lista");
+
+                button.setOnAction(event -> {
+                    try {
+                        pathInterfazGrafica("AddPlayList.fxml", button);//cambiar a la correcta interfaz
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+
+
+                Label nombre = new Label();
+                nombre.setText(playlistVideos.get(i).getNamePlaylist());
+                hBox.getChildren().add(nombre);
+                nombre.setFont(Font.font(16));
+                nombre.setTextFill(Paint.valueOf("#fff"));
+
+                hBox.getChildren().add(button);
+
+                vBox.getChildren().add(scrollPane);
+                HomeController homeController = new HomeController();
+                homeController.cargarDatos(playlistVideos.get(i).getVideos(), hBox);
+            }
             //para lo que va afuera del hbox
-            Label titulo = new Label();
-            titulo.setText("Playlist");
-            titulo.setFont(Font.font(18));
 
-            HBox hBox = new HBox(i);
-            ScrollPane scrollPane = new ScrollPane(hBox);
-            scrollPane.prefWidth(1059);
-            scrollPane.prefHeight(229);
-
-            scrollPane.setContent(hBox);
-            scrollPane.setBackground(Background.fill(Paint.valueOf("transparent")));
-
-            Button button = new Button(playlistVideos.get(i).getNamePlaylist());
-            button.setTextFill(Paint.valueOf("white"));
-            button.setCursor(Cursor.cursor("hand"));
-            button.setUnderline(true);
-            button.setBackground(Background.fill(Paint.valueOf("transparent")));
-            button.setFont(Font.font(14));
-            button.setText("Reproducir lista");
-
-            button.setOnAction(event -> {
-                try {
-                    pathInterfazGrafica("AddPlayList.fxml", button);//cambiar a la correcta interfaz
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-
-            Label nombre = new Label();
-            nombre.setText(playlistVideos.get(i).getNamePlaylist());
-            hBox.getChildren().add(nombre);
-            nombre.setFont(Font.font(16));
-            nombre.setTextFill(Paint.valueOf("#fff"));
-
-            hBox.getChildren().add(button);
-
-            vBox.getChildren().add(scrollPane);
-            HomeController homeController = new HomeController();
-           homeController.cargarDatos(playlistVideos.get(i).getVideos(), hBox);
         }
     }
+
+
 }
 
