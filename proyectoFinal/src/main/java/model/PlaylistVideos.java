@@ -49,13 +49,13 @@ public class PlaylistVideos {
     /**
      * Tercer constructor
      */
-    public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int code, ArrayList<Video> videos) {
+    public PlaylistVideos(int id,String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate,  int idVideo) {
         this.namePlaylist = namePlaylist;
         this.totalPlayListDurationTime = totalPlayListDurationTime;
         this.tema = tema;
         this.creationDate = creationDate;
-        this.id = code;
-        this.videos = videos;
+        this.id = id;
+        this.idVideo = idVideo;
     }
 
     public PlaylistVideos(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int id) {
@@ -66,14 +66,7 @@ public class PlaylistVideos {
         this.id = id;
     }
 
-    public PlaylistVideos(int id,String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate,  int idVideo) {
-        this.namePlaylist = namePlaylist;
-        this.totalPlayListDurationTime = totalPlayListDurationTime;
-        this.tema = tema;
-        this.creationDate = creationDate;
-        this.id = id;
-        this.idVideo = idVideo;
-    }
+
     /**
      * Getters y setters
      */
