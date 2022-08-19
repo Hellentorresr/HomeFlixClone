@@ -6,9 +6,7 @@
  */
 package controller.controllerApp;
 
-import controller.dao.UsuarioDAOImplement;
-import controller.dao.DAOVideo;
-import controller.dao.VideoDAOImplement;
+import controller.dao.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -21,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import model.PlaylistVideos;
 import model.Video;
 
 import java.io.IOException;
@@ -37,6 +36,7 @@ public class HomeController implements Initializable {
      * Atributos de la clase DentroDeLaAppController
      */
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
+    public static ArrayList<PlaylistVideos>playlistVideos = new ArrayList<>();
     public static Video video = new Video();
     @FXML
     public ImageView fotoPerfil;
@@ -66,6 +66,7 @@ public class HomeController implements Initializable {
     private Button button;
     @FXML
     private HBox favoritasContainer;
+    DAOPlayListVideos daoPlayListVideos;
 
 
     /**
@@ -75,6 +76,7 @@ public class HomeController implements Initializable {
         videoDAO = new VideoDAOImplement();
         UDI = new UsuarioDAOImplement();
         this.utilitiesImplements = new UtilitiesImplements();
+        daoPlayListVideos = new PlaylistVideoDAOImplement();
     }
 
     /**
@@ -93,8 +95,11 @@ public class HomeController implements Initializable {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
+            playlistVideos =new ArrayList<>(utilitiesImplements.allPlaylist());
             cargarDatos(utilitiesImplements.recentAdd(), recentlyPlayedContainer);
             cargarDatos(videosBaseDatos, favoritasContainer);
+             cargarDatosDeLasListas(playlistVideos);
+
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -133,8 +138,26 @@ public class HomeController implements Initializable {
         }
     }
 
+    public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos) {
+        for (int i = 0; i < playlistVideos.size(); i++) {
+            HBox hBox = new HBox(i);
+            Button button = new Button(playlistVideos.get(i).getNamePlaylist());
+            button.setTextFill(Paint.valueOf("Green"));
+            button.setCursor(Cursor.cursor("hand"));
+            button.setText("Ir a playlist");
+            Label nombre = new Label();
+            nombre.setText(playlistVideos.get(i).getNamePlaylist());
+            hBox.getChildren().add(nombre);
+            nombre.setFont(Font.font(16));
+            nombre.setTextFill(Paint.valueOf("#fff"));
+            vboxContainer.getChildren().add(hBox);
+            cargarDatos(playlistVideos.get(i).getVideos(), hBox);
+        }
+    }
+
     /**
      * Metodo para regresar a la página principalYSignIn por medio del boton cerrar
+     *
      * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void handleBtnIngresar() throws IOException {
@@ -143,6 +166,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz RegistroVideo.fxml
+     *
      * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void agregarVideo() throws IOException {
@@ -152,6 +176,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo que por medio del boton btnCerrar mueve al usuario a la interfaz EditarEliminarVideo.fxml
+     *
      * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void eliminarEditarVideo() throws IOException {
@@ -226,9 +251,6 @@ public class HomeController implements Initializable {
     }
 
 
-
-
-
     /**
      * Metodo toString
      */
@@ -246,6 +268,7 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo goToCreateNewPlayList
+     *
      * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void goToCreateNewPlayList() throws IOException {
@@ -254,9 +277,10 @@ public class HomeController implements Initializable {
 
     /**
      * Metodo irAdministrarListas
+     *
      * @throws IOException genera una IOException si no encuentra la interfaz
      */
     public void irAdministrarListas() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("CRUDPlayList.fxml",btnListas);
+        utilitiesImplements.pathInterfazGrafica("CRUDPlayList.fxml", btnListas);
     }
 }
