@@ -89,14 +89,22 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     int contador = 0;
 
-
+    /**
+     * Constructor para reproductor
+     * @param playlistVideos
+     * @param reproductorVideoController
+     */
     public ReproducirVideoPlaylistController(PlaylistVideos playlistVideos, ReproductorVideoController reproductorVideoController) {
         this.playlistVideos = playlistVideos;
         this.reproductorVideoController = reproductorVideoController;
         this.utilitiesImplements = new UtilitiesImplements();
     }
 
-
+    /**
+     * metodo initialize que se implementa con el initializable,sirve para correr el video de la playlist.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_SIZE = 25;
@@ -287,13 +295,18 @@ public class ReproducirVideoPlaylistController implements Initializable {
         });
     }
 
-    public void cargarDatosPlaylist() {
-
-    }
+    /**
+     * para mostrar el tiempo
+     */
     public void bindCurrentTimeLabel() {
         labelCurrentTime.textProperty().bind(Bindings.createStringBinding(() -> getTime(mpVideo.getCurrentTime()) + " / ", mpVideo.currentTimeProperty()));
     }
 
+    /**
+     * obtener el tiempo
+     * @param time
+     * @return
+     */
     public String getTime(Duration time) {
         int hours = (int) time.toHours();
         int minutes = (int) time.toMinutes();
@@ -312,6 +325,12 @@ public class ReproducirVideoPlaylistController implements Initializable {
                 seconds);
     }
 
+    /**
+     * final del video
+     * @param labelTime
+     * @param labelTotalTime
+     */
+
     public void labelMatchEndVideo(String labelTime, String labelTotalTime) {
         for (int i = 0; i < labelTotalTime.length(); i++) {
             if (labelTime.charAt(i) != labelTotalTime.charAt(i)) {
@@ -326,6 +345,10 @@ public class ReproducirVideoPlaylistController implements Initializable {
         }
     }
 
+    /**
+     * siguiente video
+     * @return
+     */
 
     @FXML
     public int siguienteVideo() {
@@ -337,6 +360,11 @@ public class ReproducirVideoPlaylistController implements Initializable {
         return contador;
     }
 
+    /**
+     * video anterior
+     * @return
+     */
+
     @FXML
     public int videoAnterior() {
         if (contador > 0) {
@@ -347,6 +375,11 @@ public class ReproducirVideoPlaylistController implements Initializable {
         return contador;
     }
 
+    /**
+     * regresar
+     * @param actionEvent
+     * @throws IOException
+     */
     public void regresarHome(ActionEvent actionEvent) throws IOException {
         utilitiesImplements.pathInterfazGrafica("Home.fxml", regresar);
     }
