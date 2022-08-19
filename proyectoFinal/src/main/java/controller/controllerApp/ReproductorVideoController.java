@@ -40,6 +40,7 @@ import static controller.controllerApp.HomeController.video;
  */
 
 public class ReproductorVideoController implements Initializable {
+    public static float time;
     public Button regresar;
     public Button noLike;
     public Button like;
@@ -54,7 +55,6 @@ public class ReproductorVideoController implements Initializable {
     @FXML
     private MediaView mvVideo;
     private MediaPlayer mpVideo;
-
     @FXML
     private HBox hboxControls;
     @FXML
@@ -75,8 +75,6 @@ public class ReproductorVideoController implements Initializable {
     private Slider sliderVolume;
     @FXML
     private Slider sliderTime;
-    public static float time;
-
     /**
      * Declarar algunas variables booleanas para determinar si nuestro video se está reproduciendo o no
      * si es el final del video o si el video está silenciado----
@@ -109,6 +107,10 @@ public class ReproductorVideoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {//paquete de recursos=resource bundle
+        cargarDatosReproductor();
+    }
+
+    public void cargarDatosReproductor() {
         final int IV_SIZE = 25;
 
         Media mediaVideo = new Media(new File(video.getVideoPath()).toURI().toString());
@@ -348,6 +350,7 @@ public class ReproductorVideoController implements Initializable {
 
     /**
      * Metodo regresarHome para regresar a la interfaz Home.fxml
+     *
      * @throws IOException dara un error si no encuentra la interfaz
      */
     public void regresarHome() throws IOException {
@@ -356,10 +359,11 @@ public class ReproductorVideoController implements Initializable {
 
     /**
      * Metodo para mover al usuario a la interfaz AddVideoToAPlayList.fxml
+     *
      * @throws IOException genera una exception si no encuentra la interfaz
      */
     @FXML
     public void irPlaylist() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("AddVideoToAPlayList.fxml",agregarAPlayList);
+        utilitiesImplements.pathInterfazGrafica("AddVideoToAPlayList.fxml", agregarAPlayList);
     }
 }
