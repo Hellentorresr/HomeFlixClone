@@ -12,10 +12,19 @@ import controller.dao.DAOVideo;
 import controller.dao.PlaylistVideoDAOImplement;
 import controller.dao.VideoDAOImplement;
 import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.PlaylistVideos;
 import model.Video;
@@ -27,12 +36,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static controller.controllerApp.HomeController.video;
+
 
 /**
  * Clase UtilitiesImplements, para implementar los metodos abstractos de la clase UtilitiesAbstract
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
+    //
+    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
+    public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
+    public static Video video = new Video();
+
     private DAOVideo videoDAO;
     private DAOPlayListVideos daoPlayListVideos;
 
@@ -212,6 +226,53 @@ public class UtilitiesImplements extends UtilitiesAbstract {
             return true;
         } else {
             return false;
+        }
+    }
+
+    //para la playlist
+    public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos , VBox vBox) {
+        for (int i = 0; i < playlistVideos.size(); i++) {
+            //para lo que va afuera del hbox
+            Label titulo = new Label();
+            titulo.setText("Playlist");
+            titulo.setFont(Font.font(18));
+
+            HBox hBox = new HBox(i);
+            ScrollPane scrollPane = new ScrollPane(hBox);
+            scrollPane.prefWidth(1059);
+            scrollPane.prefHeight(229);
+
+            scrollPane.setContent(hBox);
+            scrollPane.setBackground(Background.fill(Paint.valueOf("transparent")));
+
+            Button button = new Button(playlistVideos.get(i).getNamePlaylist());
+            button.setTextFill(Paint.valueOf("white"));
+            button.setCursor(Cursor.cursor("hand"));
+            button.setUnderline(true);
+            button.setBackground(Background.fill(Paint.valueOf("transparent")));
+            button.setFont(Font.font(14));
+            button.setText("Reproducir lista");
+
+            button.setOnAction(event -> {
+                try {
+                    pathInterfazGrafica("AddPlayList.fxml", button);//cambiar a la correcta interfaz
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+
+            Label nombre = new Label();
+            nombre.setText(playlistVideos.get(i).getNamePlaylist());
+            hBox.getChildren().add(nombre);
+            nombre.setFont(Font.font(16));
+            nombre.setTextFill(Paint.valueOf("#fff"));
+
+            hBox.getChildren().add(button);
+
+            vBox.getChildren().add(scrollPane);
+            HomeController homeController = new HomeController();
+           homeController.cargarDatos(playlistVideos.get(i).getVideos(), hBox);
         }
     }
 }

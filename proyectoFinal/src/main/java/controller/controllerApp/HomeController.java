@@ -36,7 +36,7 @@ public class HomeController implements Initializable {
      * Atributos de la clase DentroDeLaAppController
      */
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
-    public static ArrayList<PlaylistVideos>playlistVideos = new ArrayList<>();
+    public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
     public static Video video = new Video();
     @FXML
     public ImageView fotoPerfil;
@@ -66,17 +66,15 @@ public class HomeController implements Initializable {
     private Button button;
     @FXML
     private HBox favoritasContainer;
-    DAOPlayListVideos daoPlayListVideos;
 
 
     /**
      * Metodo constructor
      */
     public HomeController() {
-        videoDAO = new VideoDAOImplement();
         UDI = new UsuarioDAOImplement();
         this.utilitiesImplements = new UtilitiesImplements();
-        daoPlayListVideos = new PlaylistVideoDAOImplement();
+        videoDAO = new VideoDAOImplement();
     }
 
     /**
@@ -95,10 +93,10 @@ public class HomeController implements Initializable {
         try {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
-            playlistVideos =new ArrayList<>(utilitiesImplements.allPlaylist());
+            playlistVideos = new ArrayList<>(utilitiesImplements.allPlaylist());
             cargarDatos(utilitiesImplements.recentAdd(), recentlyPlayedContainer);
             cargarDatos(videosBaseDatos, favoritasContainer);
-             cargarDatosDeLasListas(playlistVideos);
+            utilitiesImplements.cargarDatosDeLasListas(playlistVideos,vboxContainer);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -137,24 +135,6 @@ public class HomeController implements Initializable {
             hbox.getChildren().add(vBox);
         }
     }
-
-    public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos) {
-        for (int i = 0; i < playlistVideos.size(); i++) {
-            HBox hBox = new HBox(i);
-            Button button = new Button(playlistVideos.get(i).getNamePlaylist());
-            button.setTextFill(Paint.valueOf("Green"));
-            button.setCursor(Cursor.cursor("hand"));
-            button.setText("Ir a playlist");
-            Label nombre = new Label();
-            nombre.setText(playlistVideos.get(i).getNamePlaylist());
-            hBox.getChildren().add(nombre);
-            nombre.setFont(Font.font(16));
-            nombre.setTextFill(Paint.valueOf("#fff"));
-            vboxContainer.getChildren().add(hBox);
-            cargarDatos(playlistVideos.get(i).getVideos(), hBox);
-        }
-    }
-
     /**
      * Metodo para regresar a la página principalYSignIn por medio del boton cerrar
      *
