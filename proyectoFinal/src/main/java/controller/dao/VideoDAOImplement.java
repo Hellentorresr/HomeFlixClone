@@ -123,6 +123,22 @@ public class VideoDAOImplement implements DAOVideo {
         return videos;
     }
 
+    public String getVideoPath(int id) throws SQLException {
+        System.out.println("Entra");
+        Connection daoConnection = Connexion.getConnection();
+        String sql = "SELECT videoPath FROM videotabla WHERE id = " + "'" + id + "'";
+        PreparedStatement ps = daoConnection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        String videoPath = "";
+        if (rs.next()) {
+            System.out.println("adios");
+            videoPath = rs.getString("videoPath");
+        }
+        return videoPath;
+
+    }
+
     @Override
     public int save(Video video) throws SQLException {
         return 0;
