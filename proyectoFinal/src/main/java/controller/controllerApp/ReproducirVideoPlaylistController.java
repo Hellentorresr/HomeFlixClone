@@ -313,8 +313,8 @@ public class ReproducirVideoPlaylistController implements Initializable {
     }
 
     public void labelMatchEndVideo(String labelTime, String labelTotalTime) {
-        for (int i = 0; i < labelTotalTime.length(); i++) {
-            if (labelTime.charAt(i) != labelTotalTime.charAt(i)) {
+        for (int cont = 0; cont < labelTotalTime.length(); cont++) {
+            if (labelTime.charAt(cont) != labelTotalTime.charAt(cont)) {
                 atEndOfVideo = false;
                 if (isPlaying) buttonPPR.setGraphic(ivPause);
                 else buttonPPR.setGraphic(ivPlay);
