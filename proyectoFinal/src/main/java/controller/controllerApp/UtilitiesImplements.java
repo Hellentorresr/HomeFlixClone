@@ -232,6 +232,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
 
     //para la playlist
     public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos , VBox vBox) {
+        System.out.println(playlistVideos.size());
         for (int i = 0; i < playlistVideos.size(); i++) {
             if(playlistVideos.get(i).getIdVideo()==0){
                 System.out.println(playlistVideos.get(i));
@@ -257,7 +258,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
 
                 button.setOnAction(event -> {
                     try {
-                        pathInterfazGrafica("AddPlayList.fxml", button);//cambiar a la correcta interfaz
+                        pathInterfazGrafica("ReproductorPlaylists.fxml", button);//cambiar a la correcta interfaz
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

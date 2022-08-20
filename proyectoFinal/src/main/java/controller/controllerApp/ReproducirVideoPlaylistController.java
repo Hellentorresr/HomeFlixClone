@@ -1,5 +1,6 @@
 package controller.controllerApp;
 
+import controller.dao.VideoDAOImplement;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ReproducirVideoPlaylistController implements Initializable {
@@ -34,6 +36,8 @@ public class ReproducirVideoPlaylistController implements Initializable {
      * Atributos de la clase ReproductorVideoController
      */
     UtilitiesImplements utilitiesImplements;
+    HomeController homeController;
+    Media mediaVideo;
     RegisterVideoController rvc;
     @FXML
     private VBox vboxParent;
@@ -86,18 +90,20 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     ReproductorVideoController reproductorVideoController;
 
+    VideoDAOImplement videoDAOImplement;
 
-    int contador = 0;
+    int contador = 1;
 
     /**
      * Constructor para reproductor
-     * @param playlistVideos
-     * @param reproductorVideoController
      */
-    public ReproducirVideoPlaylistController(PlaylistVideos playlistVideos, ReproductorVideoController reproductorVideoController) {
-        this.playlistVideos = playlistVideos;
-        this.reproductorVideoController = reproductorVideoController;
-        this.utilitiesImplements = new UtilitiesImplements();
+
+    public ReproducirVideoPlaylistController() {
+        utilitiesImplements = new UtilitiesImplements();
+        playlistVideos = new PlaylistVideos();
+        reproductorVideoController = new ReproductorVideoController();
+        homeController = new HomeController();
+        videoDAOImplement = new VideoDAOImplement();
     }
 
     /**
@@ -108,8 +114,13 @@ public class ReproducirVideoPlaylistController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         final int IV_SIZE = 25;
-        int contador = 0;
-        Media mediaVideo = new Media(new File( HomeController.playlistVideos.get(contador).getVideos().get(contador).getVideoPath()).toString());
+        try {
+            homeController.playList = new ArrayList<>(utilitiesImplements.allPlaylist());
+            mediaVideo = new Media(new File(videoDAOImplement.getVideoPath(homeController.playList.get(contador).getIdVideo())).toURI().toString());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
         mpVideo = new MediaPlayer(mediaVideo);
         //this displays the media that we want to display
@@ -352,10 +363,11 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     @FXML
     public int siguienteVideo() {
-        if (contador < HomeController.playlistVideos.size()) {
+
+        if (contador < homeController.playList.size()) {
             contador++;
         }else{
-            contador = 0;
+            contador = 1;
         }
         return contador;
     }
@@ -367,10 +379,10 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     @FXML
     public int videoAnterior() {
-        if (contador > 0) {
+        if (contador > 1) {
             contador--;
         } else {
-            contador = HomeController.playlistVideos.size();
+            contador = homeController.playList.size();
         }
         return contador;
     }
