@@ -89,7 +89,6 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     int contador = 0;
 
-
     public ReproducirVideoPlaylistController(PlaylistVideos playlistVideos, ReproductorVideoController reproductorVideoController) {
         this.playlistVideos = playlistVideos;
         this.reproductorVideoController = reproductorVideoController;
