@@ -113,6 +113,13 @@ public class ReproducirVideoPlaylistController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        cargarDatos(contador);
+    }
+
+    /**
+     * para mostrar el tiempo
+     */
+    public void cargarDatos(int contador) {
         final int IV_SIZE = 25;
         try {
             homeController.playList = new ArrayList<>(utilitiesImplements.allPlaylist());
@@ -169,7 +176,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
         //Start using the button or adding functionality
         buttonPPR.setOnAction(actionEvent -> {//funciona para cualquier nodo o componente
-            bindCurrentTimeLabel();
+            reproductorVideoController.bindCurrentTimeLabel();
             Button buttonPlay = (Button) actionEvent.getSource();//interface ActionListener
             if (atEndOfVideo) {
                 sliderTime.setValue(0);
@@ -192,7 +199,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
         hboxVolume.getChildren().remove(sliderVolume);
         mpVideo.volumeProperty().bindBidirectional(sliderVolume.valueProperty());
 
-        bindCurrentTimeLabel();
+        reproductorVideoController.bindCurrentTimeLabel();
 
         sliderVolume.valueProperty().addListener(observable -> {
             mpVideo.setVolume(sliderVolume.getValue());
@@ -257,9 +264,9 @@ public class ReproducirVideoPlaylistController implements Initializable {
         });
 
         mpVideo.totalDurationProperty().addListener((observableValue, oldDuration, newDuration) -> {
-            bindCurrentTimeLabel();
+            reproductorVideoController.bindCurrentTimeLabel();
             sliderTime.setMax(newDuration.toSeconds());
-            labelTotalTime.setText(getTime(newDuration));
+            labelTotalTime.setText(reproductorVideoController.getTime(newDuration));
             double total = newDuration.toMinutes();
             total = Double.parseDouble(new DecimalFormat("##.##").format(total));
             time = (float) total;
@@ -274,87 +281,43 @@ public class ReproducirVideoPlaylistController implements Initializable {
         sliderTime.valueChangingProperty().addListener((observableValue, wasChanging, isChanging) -> {
             //what I want to do is once the slider has stopped changing meaning the user has let go of the slider ball,
             //so I have to set the video to that time
-            bindCurrentTimeLabel();
+            reproductorVideoController.bindCurrentTimeLabel();
             if (!isChanging) {//if this is no longer true
                 mpVideo.seek(Duration.seconds(sliderTime.getValue()));
             }
         });
 
         sliderTime.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            bindCurrentTimeLabel();
+            reproductorVideoController.bindCurrentTimeLabel();
             double currentTime = mpVideo.getCurrentTime().toSeconds();
             if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {// half second
                 mpVideo.seek(Duration.seconds(newValue.doubleValue()));
             }
-            labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
+            reproductorVideoController.labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
         });
 
         mpVideo.currentTimeProperty().addListener((observableValue, oldTime, newTime) -> {
-            bindCurrentTimeLabel();
+            reproductorVideoController.bindCurrentTimeLabel();
             if (!sliderTime.isValueChanging()) {
                 sliderTime.setValue(newTime.toSeconds());
             }
-            labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
+            reproductorVideoController.labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
         });
 
         mpVideo.setOnEndOfMedia(() -> {
             buttonPPR.setGraphic(ivRestart);
             atEndOfVideo = true;
             if (!labelCurrentTime.textProperty().equals(labelTotalTime.textProperty())) {
-                labelCurrentTime.setText(getTime(mpVideo.getTotalDuration()) + " / ");
+                labelCurrentTime.setText(reproductorVideoController.getTime(mpVideo.getTotalDuration()) + " / ");
             }
         });
-    }
-
-    /**
-     * para mostrar el tiempo
-     */
-    public void bindCurrentTimeLabel() {
-        labelCurrentTime.textProperty().bind(Bindings.createStringBinding(() -> getTime(mpVideo.getCurrentTime()) + " / ", mpVideo.currentTimeProperty()));
-    }
+        }
 
     /**
      * obtener el tiempo
      * @param time
      * @return
      */
-    public String getTime(Duration time) {
-        int hours = (int) time.toHours();
-        int minutes = (int) time.toMinutes();
-        int seconds = (int) time.toSeconds();
-
-        if (seconds > 59) seconds = seconds % 60;
-        if (minutes > 59) minutes = minutes % 60;
-        if (hours > 59) hours = hours % 60;
-
-        if (hours > 0) return String.format("%d:%02d:%02d",
-                hours,
-                minutes,
-                seconds);
-        else return String.format("%02d:%02d",
-                minutes,
-                seconds);
-    }
-
-    /**
-     * final del video
-     * @param labelTime
-     * @param labelTotalTime
-     */
-
-    public void labelMatchEndVideo(String labelTime, String labelTotalTime) {
-        for (int cont = 0; cont < labelTotalTime.length(); cont++) {
-            if (labelTime.charAt(cont) != labelTotalTime.charAt(cont)) {
-                atEndOfVideo = false;
-                if (isPlaying) buttonPPR.setGraphic(ivPause);
-                else buttonPPR.setGraphic(ivPlay);
-                break;
-            } else {
-                atEndOfVideo = true;
-                buttonPPR.setGraphic(ivRestart);
-            }
-        }
-    }
 
     /**
      * siguiente video
@@ -362,14 +325,14 @@ public class ReproducirVideoPlaylistController implements Initializable {
      */
 
     @FXML
-    public int siguienteVideo() {
+    public void siguienteVideo() {
 
         if (contador < homeController.playList.size()) {
             contador++;
         }else{
             contador = 1;
         }
-        return contador;
+        cargarDatos(contador);
     }
 
     /**
@@ -378,13 +341,13 @@ public class ReproducirVideoPlaylistController implements Initializable {
      */
 
     @FXML
-    public int videoAnterior() {
+    public void videoAnterior() {
         if (contador > 1) {
             contador--;
         } else {
             contador = homeController.playList.size();
         }
-        return contador;
+        cargarDatos(contador);
     }
 
     /**
