@@ -176,7 +176,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
         //Start using the button or adding functionality
         buttonPPR.setOnAction(actionEvent -> {//funciona para cualquier nodo o componente
-            reproductorVideoController.bindCurrentTimeLabel();
+            bindCurrentTimeLabel();
             Button buttonPlay = (Button) actionEvent.getSource();//interface ActionListener
             if (atEndOfVideo) {
                 sliderTime.setValue(0);
@@ -199,7 +199,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
         hboxVolume.getChildren().remove(sliderVolume);
         mpVideo.volumeProperty().bindBidirectional(sliderVolume.valueProperty());
 
-        reproductorVideoController.bindCurrentTimeLabel();
+        bindCurrentTimeLabel();
 
         sliderVolume.valueProperty().addListener(observable -> {
             mpVideo.setVolume(sliderVolume.getValue());
@@ -264,9 +264,9 @@ public class ReproducirVideoPlaylistController implements Initializable {
         });
 
         mpVideo.totalDurationProperty().addListener((observableValue, oldDuration, newDuration) -> {
-            reproductorVideoController.bindCurrentTimeLabel();
+            bindCurrentTimeLabel();
             sliderTime.setMax(newDuration.toSeconds());
-            labelTotalTime.setText(reproductorVideoController.getTime(newDuration));
+            labelTotalTime.setText(getTime(newDuration));
             double total = newDuration.toMinutes();
             total = Double.parseDouble(new DecimalFormat("##.##").format(total));
             time = (float) total;
@@ -281,38 +281,72 @@ public class ReproducirVideoPlaylistController implements Initializable {
         sliderTime.valueChangingProperty().addListener((observableValue, wasChanging, isChanging) -> {
             //what I want to do is once the slider has stopped changing meaning the user has let go of the slider ball,
             //so I have to set the video to that time
-            reproductorVideoController.bindCurrentTimeLabel();
+            bindCurrentTimeLabel();
             if (!isChanging) {//if this is no longer true
                 mpVideo.seek(Duration.seconds(sliderTime.getValue()));
             }
         });
 
         sliderTime.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            reproductorVideoController.bindCurrentTimeLabel();
+            bindCurrentTimeLabel();
             double currentTime = mpVideo.getCurrentTime().toSeconds();
             if (Math.abs(currentTime - newValue.doubleValue()) > 0.5) {// half second
                 mpVideo.seek(Duration.seconds(newValue.doubleValue()));
             }
-            reproductorVideoController.labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
+            labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
         });
 
         mpVideo.currentTimeProperty().addListener((observableValue, oldTime, newTime) -> {
-            reproductorVideoController.bindCurrentTimeLabel();
+            bindCurrentTimeLabel();
             if (!sliderTime.isValueChanging()) {
                 sliderTime.setValue(newTime.toSeconds());
             }
-            reproductorVideoController.labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
+            labelMatchEndVideo(labelCurrentTime.getText(), labelTotalTime.getText());
         });
 
         mpVideo.setOnEndOfMedia(() -> {
             buttonPPR.setGraphic(ivRestart);
             atEndOfVideo = true;
             if (!labelCurrentTime.textProperty().equals(labelTotalTime.textProperty())) {
-                labelCurrentTime.setText(reproductorVideoController.getTime(mpVideo.getTotalDuration()) + " / ");
+                labelCurrentTime.setText(getTime(mpVideo.getTotalDuration()) + " / ");
             }
         });
         }
+    public void bindCurrentTimeLabel() {
+        labelCurrentTime.textProperty().bind(Bindings.createStringBinding(() -> getTime(mpVideo.getCurrentTime()) + " / ", mpVideo.currentTimeProperty()));
+    }
 
+    public String getTime(Duration time) {
+        int hours = (int) time.toHours();
+        int minutes = (int) time.toMinutes();
+        int seconds = (int) time.toSeconds();
+
+        if (seconds > 59) seconds = seconds % 60;
+        if (minutes > 59) minutes = minutes % 60;
+        if (hours > 59) hours = hours % 60;
+
+        if (hours > 0) return String.format("%d:%02d:%02d",
+                hours,
+                minutes,
+                seconds);
+        else return String.format("%02d:%02d",
+                minutes,
+                seconds);
+    }
+
+    public void labelMatchEndVideo(String labelTime, String labelTotalTime) {
+        for (int i = 0; i < labelTotalTime.length(); i++) {
+            if (labelTime.charAt(i) != labelTotalTime.charAt(i)) {
+                atEndOfVideo = false;
+                if (isPlaying) buttonPPR.setGraphic(ivPause);
+                else buttonPPR.setGraphic(ivPlay);
+                break;
+            } else {
+                atEndOfVideo = true;
+                buttonPPR.setGraphic(ivRestart);
+            }
+        }
+    }
     /**
      * obtener el tiempo
      * @param time
