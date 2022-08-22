@@ -16,7 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ServerJava {
-    final int PUERTO = 5000;
+    final int PUERTO = 12345;
     //puentes de connection entre el cliente y el servidor
     DataInputStream in;// del cliente al servidor
     DataOutputStream out;// del servidor al cliente
@@ -35,12 +35,12 @@ public class ServerJava {
                 in = new DataInputStream(sc.getInputStream());
 
                 out = new DataOutputStream(sc.getOutputStream());
-
+                out.writeUTF("conectar");
                 String massage = in.readUTF();
                 System.out.println(massage);
 
                 ///respuesta del servidor
-                out.writeUTF("Hello word! massage from the Server✈");
+
 
                 //cerra el cliente, No el servidor
                 sc.close();
