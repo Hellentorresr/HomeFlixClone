@@ -15,7 +15,9 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ServerJava {
+import static controller.controllerApp.HomeController.video;
+
+public class Server {
     final int PUERTO = 12345;
     //puentes de connection entre el cliente y el servidor
     DataInputStream in;// del cliente al servidor
@@ -35,7 +37,9 @@ public class ServerJava {
                 in = new DataInputStream(sc.getInputStream());
 
                 out = new DataOutputStream(sc.getOutputStream());
-                out.writeUTF("conectar");
+
+                out.writeUTF(video.getVideoPath());
+
                 String massage = in.readUTF();
                 System.out.println(massage);
 
@@ -47,7 +51,7 @@ public class ServerJava {
                 System.out.println("Cliente desconectado");
             }
         } catch (IOException ex) {
-            Logger.getLogger(ServerJava.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
