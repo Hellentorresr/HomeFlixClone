@@ -43,9 +43,6 @@ import java.util.Objects;
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
     //
-    public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
-    public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
-    public static ArrayList<PlaylistVideos> playList = new ArrayList<>();
     public static Video video = new Video();
 
     private DAOVideo videoDAO;
