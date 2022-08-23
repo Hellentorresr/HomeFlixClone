@@ -3,6 +3,7 @@ from re import X
 import PySimpleGUI as pg
 import socket
 import mediaPlayer as MP
+import jpysocket
 
 socketCliente = socket.socket()
 
@@ -22,17 +23,31 @@ layout = [
 ]
 portString = str(port)
 window = pg.Window("Form", layout)
+socketCliente.connect(('localhost', port))
+
+
+
 
 while True: 
-    event, values = window.read()
-    if event == "Cancelar": 
-        socketCliente.close()
-        break
-    elif(values[0] == address):
-        socketCliente.connect(('localhost', port))
+    #event, values = window.read()
+        msg = socketCliente.recv(port)
+        print(msg)
+        msg = jpysocket.jpydecode(msg)
         ##recibe info
-        MP.runApp()
+        if(msg.startswith('C:')):
+            mensaje = jpysocket.jpyencode("done")
+            socketCliente.send(mensaje)
+            MP.runApp(msg)  
+            
+        if(msg.startswith("pausar")):
+            MP.pauseAPP()
+        if(msg.startswith("play")):
+            MP.playApp
+        
         
         
 
-window.close()
+'''if event == "Cancelar": 
+        socketCliente.close()
+        break
+    elif(values[0] == address):'''
