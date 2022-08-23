@@ -14,9 +14,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="1320.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.ReproducirVideoPlaylistController">
    <children>
-      <TableView fx:id="VideosDelPlaylist" layoutX="8.0" layoutY="9.0" prefHeight="848.0" prefWidth="191.0">
+      <TableView fx:id="videosDelPlaylist" layoutX="8.0" layoutY="9.0" prefHeight="848.0" prefWidth="191.0">
          <columns>
-            <TableColumn maxWidth="0.0" minWidth="0.0" prefWidth="0.0" text="VIDEOS" />
+            <TableColumn fx:id="videoName" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" text="VIDEOS" />
          </columns>
       </TableView>
       <VBox fx:id="vboxParent" alignment="CENTER" layoutX="207.0" prefHeight="66.0" prefWidth="944.0" style="-fx-background-color: Black;">

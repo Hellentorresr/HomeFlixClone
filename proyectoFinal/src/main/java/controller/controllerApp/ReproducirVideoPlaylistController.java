@@ -2,12 +2,13 @@ package controller.controllerApp;
 
 import controller.dao.VideoDAOImplement;
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -32,6 +33,7 @@ import java.util.ResourceBundle;
 public class ReproducirVideoPlaylistController implements Initializable {
     public static float time;
     public Button regresar;
+    public TableView<PlaylistVideos> videosDelPlaylist;
     /**
      * Atributos de la clase ReproductorVideoController
      */
@@ -39,6 +41,13 @@ public class ReproducirVideoPlaylistController implements Initializable {
     HomeController homeController;
     Media mediaVideo;
     RegisterVideoController rvc;
+    PlaylistVideos playlistVideos;
+    ReproductorVideoController reproductorVideoController;
+    VideoDAOImplement videoDAOImplement;
+    int contador = 1;
+    @FXML
+    // public TableColumn VideoName;
+    private TableColumn<PlaylistVideos, String> videoName;
     @FXML
     private VBox vboxParent;
     @FXML
@@ -74,7 +83,6 @@ public class ReproducirVideoPlaylistController implements Initializable {
     private boolean atEndOfVideo = false;
     private boolean isPlaying = true;
     private boolean isMuted = true;
-
     /**
      * variables for the button with images
      */
@@ -85,14 +93,6 @@ public class ReproducirVideoPlaylistController implements Initializable {
     private ImageView ivFullScreen;
     private ImageView ivMute;
     private ImageView ivExit;
-
-    PlaylistVideos playlistVideos;
-
-    ReproductorVideoController reproductorVideoController;
-
-    VideoDAOImplement videoDAOImplement;
-
-    int contador = 1;
 
     /**
      * Constructor para reproductor
@@ -108,6 +108,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     /**
      * metodo initialize que se implementa con el initializable,sirve para correr el video de la playlist.
+     *
      * @param url
      * @param resourceBundle
      */
@@ -117,13 +118,14 @@ public class ReproducirVideoPlaylistController implements Initializable {
     }
 
     /**
-     * para mostrar el tiempo
+     * funcion cargarDatos que reproduce el video de la posicion del contador en la playlist
      */
     public void cargarDatos(int contador) {
         final int IV_SIZE = 25;
         try {
             homeController.playList = new ArrayList<>(utilitiesImplements.allPlaylist());
             mediaVideo = new Media(new File(videoDAOImplement.getVideoPath(homeController.playList.get(contador).getIdVideo())).toURI().toString());
+            cargarPlaylist();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -311,7 +313,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
                 labelCurrentTime.setText(getTime(mpVideo.getTotalDuration()) + " / ");
             }
         });
-        }
+    }
     public void bindCurrentTimeLabel() {
         labelCurrentTime.textProperty().bind(Bindings.createStringBinding(() -> getTime(mpVideo.getCurrentTime()) + " / ", mpVideo.currentTimeProperty()));
     }
@@ -363,7 +365,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
         if (contador < homeController.playList.size()) {
             contador++;
-        }else{
+        } else {
             contador = 1;
         }
         cargarDatos(contador);
@@ -371,6 +373,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     /**
      * video anterior
+     *
      * @return
      */
 
@@ -386,6 +389,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
 
     /**
      * regresar
+     *
      * @param actionEvent
      * @throws IOException
      */
@@ -393,6 +397,11 @@ public class ReproducirVideoPlaylistController implements Initializable {
         utilitiesImplements.pathInterfazGrafica("Home.fxml", regresar);
     }
 
-
+    private void cargarPlaylist() throws SQLException {
+        ObservableList<PlaylistVideos> playlistVideosOb = FXCollections.observableArrayList();
+        playlistVideosOb.addAll(utilitiesImplements.allPlaylist());
+        this.videoName.setCellValueFactory(new PropertyValueFactory<>(""));
+        videosDelPlaylist.setItems(playlistVideosOb);
+    }
 
 }
