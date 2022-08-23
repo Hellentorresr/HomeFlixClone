@@ -7,6 +7,7 @@
 package controller.controllerApp;
 
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
@@ -45,6 +46,7 @@ public class ReproductorVideoController implements Initializable {
     public Button noLike;
     public Button like;
     public Button agregarAPlayList;
+    public Button btnEmpezarHost;
     /**
      * Atributos de la clase ReproductorVideoController
      */
@@ -365,5 +367,9 @@ public class ReproductorVideoController implements Initializable {
     @FXML
     public void irPlaylist() throws IOException {
         utilitiesImplements.pathInterfazGrafica("AddVideoToAPlayList.fxml", agregarAPlayList);
+    }
+
+    public void llamarEmpezarHost() throws IOException {
+        utilitiesImplements.pathInterfazGrafica("EmpezarHost.fxml",btnEmpezarHost);
     }
 }
