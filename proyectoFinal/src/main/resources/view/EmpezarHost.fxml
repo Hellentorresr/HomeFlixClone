@@ -2,14 +2,12 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="430.0" prefWidth="383.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EmpezarHost">
+<AnchorPane maxHeight="430.0" maxWidth="383.0" prefHeight="430.0" prefWidth="383.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.controllerApp.EmpezarHostController">
    <children>
       <Label alignment="CENTER" layoutX="59.0" layoutY="256.0" prefHeight="17.0" prefWidth="253.0" text="Empezar Host" textFill="WHITE">
          <font>
@@ -26,10 +24,11 @@
             <Image url="@img/homeflixLogo.png" />
          </image>
       </ImageView>
-      <TextField fx:id="txtMostrar" alignment="CENTER" layoutX="68.0" layoutY="361.0" prefHeight="25.0" prefWidth="253.0" style="-fx-background-color: black;">
+      <Label layoutX="-108.0" layoutY="207.0" text="Label" />
+      <Label fx:id="txtMostrar" layoutX="59.0" layoutY="377.0" prefHeight="25.0" prefWidth="253.0" text="Hola" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
-      </TextField>
+      </Label>
    </children>
 </AnchorPane>
