@@ -35,9 +35,12 @@ public class HomeController implements Initializable {
     /**
      * Atributos de la clase DentroDeLaAppController
      */
+
+    //EmpezarHostController empezarHostController;
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
     public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
     public static ArrayList<PlaylistVideos> playList = new ArrayList<>();
+
     public static Video video = new Video();
     @FXML
     public ImageView fotoPerfil;
@@ -76,6 +79,7 @@ public class HomeController implements Initializable {
         UDI = new UsuarioDAOImplement();
         this.utilitiesImplements = new UtilitiesImplements();
         videoDAO = new VideoDAOImplement();
+        //empezarHostController = new EmpezarHostController();
     }
 
     /**
@@ -130,10 +134,26 @@ public class HomeController implements Initializable {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+
             });
             button.setText("Reproducir");
             vBox.getChildren().add(button);
             hbox.getChildren().add(vBox);
+        }
+    }
+
+    public void selectVideo(ArrayList<Video> videos){
+        for (int i = 0; i < videos.size(); i++) {
+            int toGetIterator = i;
+            button.setOnAction(event -> {
+                video = videos.get(toGetIterator);
+                try {
+                    utilitiesImplements.pathInterfazGrafica("ReproductorVideo.fxml", button);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+            });
         }
     }
     /**
