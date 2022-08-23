@@ -97,7 +97,7 @@ public class HomeController implements Initializable {
             playList = new ArrayList<>(utilitiesImplements.allPlaylist());
             cargarDatos(utilitiesImplements.recentAdd(), recentlyPlayedContainer);
             cargarDatos(videosBaseDatos, favoritasContainer);
-            utilitiesImplements.cargarDatosDeLasListas(playList,vboxContainer);
+            utilitiesImplements.cargarDatosDeLasListas(playList, vboxContainer);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
