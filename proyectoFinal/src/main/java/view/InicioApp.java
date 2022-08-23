@@ -6,8 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 
 public class InicioApp extends Application {
 
@@ -16,10 +14,8 @@ public class InicioApp extends Application {
      *
      * @param args cadena de caracteres
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         launch();
-        /*ServerJava serverJava = new ServerJava();
-        serverJava.serverConnectorJava();*/
     }
 
     /**
