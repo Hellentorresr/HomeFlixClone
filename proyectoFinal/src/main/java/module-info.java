@@ -9,5 +9,6 @@ module com.example.proyectofinal {
     exports view;
     exports model;
     exports controller.controllerApp;
+    exports controller.baseDatos;
     opens controller.controllerApp to javafx.fxml;
 }
