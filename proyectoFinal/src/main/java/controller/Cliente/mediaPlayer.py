@@ -1,3 +1,5 @@
+
+from fileinput import filename
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QStyle, QSlider, QFileDialog
 from PyQt5.QtGui import QIcon, QPalette
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
@@ -20,24 +22,25 @@ class Window(QWidget):
         self.createPlayer()
 
     def createPlayer(self):
+        
         self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
         videoWidget = QVideoWidget()
         
-        self.openBtn = QPushButton('Open Video')
-        self.openBtn.clicked.connect(self.openFile)
+        #self.openBtn = QPushButton('Open Video')
+        #self.openBtn.clicked.connect(self.openFile)
         
         self.playBtn = QPushButton()
-        self.playBtn.setEnabled(False)
+        self.playBtn.setEnabled(True)
         self.playBtn.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
         self.playBtn.clicked.connect(self.playVideo)
         
         self.slider = QSlider(Qt.Horizontal)
         self.slider.setRange(0,0)
-        
+        self.slider.sliderMoved.connect(self.set_position)
         
         hbox = QHBoxLayout()
         hbox.setContentsMargins(0,0,0,0)
-        hbox.addWidget(self.openBtn)
+        #hbox.addWidget(self.openBtn)
         hbox.addWidget(self.playBtn)
         hbox.addWidget(self.slider)
         
@@ -47,19 +50,29 @@ class Window(QWidget):
         
         self.mediaPlayer.setVideoOutput(videoWidget)
         self.setLayout(vbox)
-
-    def openFile(self):
-        fileName, _ = QFileDialog.getOpenFileName(self, "Open Video")
         
+        self.mediaPlayer.stateChanged.connect(self.mediaStateChange)
+        self.mediaPlayer.stateChanged.connect(self.positionChanged)
+        self.mediaPlayer.stateChanged.connect(self.duratioChanged)
+        
+    
+    def openFile(self,fileName):      
+        print(fileName)
         if fileName != '':
             self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile(fileName)))
+            #self.mediaPlayer.play
             self.playBtn.setEnabled(True)
+            if self.mediaPlayer.state() != QMediaPlayer.PlayingState:
+                self.mediaPlayer.play()
+            
         
     def playVideo(self):   
+        if self.mediaPlayer.state() != QMediaPlayer.PlayingState:
+            self.mediaPlayer.play()
+        
+    def pauseVideo(self):
         if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
             self.mediaPlayer.pause()
-        else:
-            self.mediaPlayer.play()
     
     def mediaStateChange(self, state):
         if (self.mediaPlayer.state() == QMediaPlayer.PlayingState):
@@ -74,12 +87,22 @@ class Window(QWidget):
     def duratioChanged(self, duration):
         self.slider.setRange(0, duration)
         
-        
+    def set_position(self, position):
+        self.mediaPlayer.setPosition(position)      
     
-def runApp():
+def runApp(fileName):
     app = QApplication(sys.argv)
+    print("esto es lo que tiene que entrar fuck: ",fileName)
     window = Window()
+    window.openFile(fileName)
     window.show()
     sys.exit(app.exec_()) 
-        
+  
+def pauseAPP():
+    window = Window()
+    window.pauseVideo
+
+def playApp():
+    window = Window()
+    window.playVideo
         

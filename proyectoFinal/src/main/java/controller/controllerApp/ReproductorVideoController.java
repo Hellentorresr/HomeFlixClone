@@ -41,6 +41,7 @@ import static controller.controllerApp.HomeController.video;
  */
 
 public class ReproductorVideoController implements Initializable {
+    EmpezarHostController empezarHostController;
     public static float time;
     public Button regresar;
     public Button noLike;
@@ -56,7 +57,7 @@ public class ReproductorVideoController implements Initializable {
     private VBox vboxParent;
     @FXML
     private MediaView mvVideo;
-    private MediaPlayer mpVideo;
+    public static MediaPlayer mpVideo;
     @FXML
     private HBox hboxControls;
     @FXML
@@ -102,6 +103,7 @@ public class ReproductorVideoController implements Initializable {
     public ReproductorVideoController() {
         rvc = new RegisterVideoController();
         utilitiesImplements = new UtilitiesImplements();
+        empezarHostController = new EmpezarHostController();
     }
 
     /**
@@ -370,6 +372,21 @@ public class ReproductorVideoController implements Initializable {
     }
 
     public void llamarEmpezarHost() throws IOException {
-        utilitiesImplements.pathInterfazGrafica("EmpezarHost.fxml",btnEmpezarHost);
+
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                empezarHostController.llamarServidor();
+            }
+
+
+        }).start();
+
+        //utilitiesImplements.pathInterfazGrafica("EmpezarHost.fxml",btnEmpezarHost);
+
+    }
+
+    public void reproducir(){
+        mpVideo.play();
     }
 }
