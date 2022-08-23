@@ -1,6 +1,6 @@
 package controller.controllerApp;
 
-import controller.server.Servidor;
+import controller.server.Server;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -16,8 +16,8 @@ public class EmpezarHostController {
      * Metodo que llama al servidor
      */
     public void llamarServidor() {
-        Servidor s = new Servidor();
-        s.sever();
+        Server s = new Server();
+        s.serverConnectorJava();
         txtMostrar.setText("casa");
     }
 }
