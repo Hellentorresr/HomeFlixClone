@@ -38,7 +38,6 @@ public class HomeController implements Initializable {
 
     //EmpezarHostController empezarHostController;
     public static ArrayList<Video> videosBaseDatos = new ArrayList<>();
-    public static ArrayList<PlaylistVideos> playlistVideos = new ArrayList<>();
     public static ArrayList<PlaylistVideos> playList = new ArrayList<>();
 
     public static Video video = new Video();
@@ -79,7 +78,6 @@ public class HomeController implements Initializable {
         UDI = new UsuarioDAOImplement();
         this.utilitiesImplements = new UtilitiesImplements();
         videoDAO = new VideoDAOImplement();
-        //empezarHostController = new EmpezarHostController();
     }
 
     /**
@@ -99,9 +97,10 @@ public class HomeController implements Initializable {
             videosBaseDatos = new ArrayList<>(videoDAO.getALL());
             nombreDeUsuario.setText(UDI.get(UDI.getUserId()).getUserName());
             playList = new ArrayList<>(utilitiesImplements.allPlaylist());
+            utilitiesImplements.cargarDatosDeLasListas(playList, vboxContainer);
             cargarDatos(utilitiesImplements.recentAdd(), recentlyPlayedContainer);
             cargarDatos(videosBaseDatos, favoritasContainer);
-            utilitiesImplements.cargarDatosDeLasListas(playList, vboxContainer);
+
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
