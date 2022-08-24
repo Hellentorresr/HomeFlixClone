@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
-
     public ArrayList<PlaylistVideos> allPlaylist;
 
     public PlaylistVideoDAOImplement() {
@@ -41,23 +40,10 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
             LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
 
             ArrayList<Video> videos = new ArrayList<>();
-            playlistVideos = new PlaylistVideos(idPlayList,nombreVideo,duration,tema,creationDate,idVideo);
+            playlistVideos = new PlaylistVideos(idPlayList, nombreVideo, duration, tema, creationDate, idVideo);
         }
         return playlistVideos;
 
-    }
-    public ArrayList<Integer> videosPlayList(int id) throws SQLException {
-        ArrayList<Integer> videos = new ArrayList<Integer>();
-        PlaylistVideos playlistVideos = null;
-        Connection daoConnection = Connexion.getConnection();
-        String sql = "select videoId from playList where id = " + "'" + id + "'";
-        PreparedStatement ps = daoConnection.prepareStatement(sql);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            int idVideo = rs.getInt("id");
-            videos.add(idVideo);
-        }
-        return videos;
     }
     @Override
     public ArrayList<PlaylistVideos> getALL() throws SQLException {
@@ -72,11 +58,11 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
             String nombre = rs.getString("namePlaylist");
             float totalTime = rs.getFloat("totalPlayListDurationTime");
             String tema = rs.getString("tema");
-            int idVideo = rs. getInt("videoId");
+            int idVideo = rs.getInt("videoId");
             String fechaString = rs.getString("creationDate");
             DateTimeFormatter JEFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate creationDate = LocalDate.parse(fechaString, JEFormatter);
-            playlistVideos = new PlaylistVideos(id, nombre, totalTime, tema,creationDate,idVideo);
+            playlistVideos = new PlaylistVideos(id, nombre, totalTime, tema, creationDate, idVideo);
             allPlaylist.add(playlistVideos);
         }
         //cerrando la connexion
@@ -97,13 +83,8 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
 
 
     @Override
-    public void insert(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate) throws SQLException {
-
-    }
-
-    @Override
-    public void insert(int id, String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int idVideo) throws SQLException {
-        PlaylistVideos playlistVideos1 = new PlaylistVideos(id, namePlaylist, totalPlayListDurationTime, tema, creationDate, idVideo);
+    public void insert(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate,int id) throws SQLException {
+        PlaylistVideos playlistVideos1 = new PlaylistVideos(namePlaylist, totalPlayListDurationTime, tema, creationDate,id);
         Connection connection = Connexion.getConnection();
         String sql = "INSERT INTO playList (id ,namePlaylist, totalPlayListDurationTime, tema, creationDate, videoId) VAlUES (?,?,?,?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -118,21 +99,6 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
         Connexion.closeConnection(connection);
     }
 
-    /*@Override
-        public void insert(String namePlaylist, float totalPlayListDurationTime, String tema, LocalDate creationDate, int idVideo) throws SQLException {
-            PlaylistVideos playlistVideos1 = new PlaylistVideos(namePlaylist, totalPlayListDurationTime, tema, creationDate, idVideo);
-            Connection connection = Connexion.getConnection();
-            String sql = "INSERT INTO playList (namePlaylist, totalPlayListDurationTime, tema, creationDate, videoId) VAlUES (?,?,?,?,?)";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, playlistVideos1.getNamePlaylist());
-            ps.setFloat(2, playlistVideos1.getTotalPlayListDurationTime());
-            ps.setString(3, playlistVideos1.getTema());
-            ps.setString(4, String.valueOf(playlistVideos1.getCreationDate()));
-            ps.setInt(5, playlistVideos1.getIdVideo());
-            ps.executeUpdate();
-            Connexion.closePreparedStatement(ps);
-            Connexion.closeConnection(connection);
-        }*/
 
     @Override
     public int update(PlaylistVideos playlistVideos) throws SQLException {
@@ -144,7 +110,7 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
         ps.setFloat(2, playlistVideos.getTotalPlayListDurationTime());
         ps.setString(3, playlistVideos.getTema());
         ps.setString(4, String.valueOf(playlistVideos.getCreationDate()));
-        ps.setInt(5,playlistVideos.getId());
+        ps.setInt(5, playlistVideos.getId());
 
         int result = ps.executeUpdate();
         Connexion.closePreparedStatement(ps);
@@ -166,47 +132,37 @@ public class PlaylistVideoDAOImplement implements DAOPlayListVideos {
         return result;
     }
 
-    public String playListName(int id) throws SQLException {
-        Connection connectDB = Connexion.getConnection();
-        String name = "select namePlayList from playList where id = " + "'" + id + "'";
-        Statement statement = connectDB.createStatement();
-        ResultSet queryResult = statement.executeQuery(name);
-        queryResult.next();
-        String pLName = queryResult.getString(1);
-        Connexion.closeConnection(connectDB);
-        return pLName;
+    public void insertVideoAPlaylist(int idVideo, int idPlaylist) throws SQLException {
+        PlaylistVideos playlistVideos1 = new PlaylistVideos(idVideo, idPlaylist);
+        Connection connection = Connexion.getConnection();
+        String sql = "INSERT INTO videosdelaplaylist (idPlaylist, idVideo)VAlUES (?,?)";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, playlistVideos1.getId());
+        ps.setInt(2, playlistVideos1.getIdVideo());
+
+        ps.executeUpdate();
+        Connexion.closePreparedStatement(ps);
+        Connexion.closeConnection(connection);
     }
 
-    public float playListDuration(int id) throws SQLException {
-        Connection connectDB = Connexion.getConnection();
-        String time = "select totalPlayListDurationTime from playList where id = " + "'" + id + "'";
-        Statement statement = connectDB.createStatement();
-        ResultSet queryResult = statement.executeQuery(time);
-        queryResult.next();
-        String pLDuration = queryResult.getString(1);
-        Connexion.closeConnection(connectDB);
-        return Float.parseFloat(pLDuration);
-    }
 
-    public String playListTema(int id) throws SQLException {
-        Connection connectDB = Connexion.getConnection();
-        String tema = "select tema from playList where id = " + "'" + id + "'";
-        Statement statement = connectDB.createStatement();
-        ResultSet queryResult = statement.executeQuery(tema);
-        queryResult.next();
-        String pLTema = queryResult.getString(1);
-        Connexion.closeConnection(connectDB);
-        return pLTema;
-    }
+    public ArrayList<Video> getIdVideosFromOnePlaylist(int idPlaylist) throws SQLException {
+        ArrayList<Video> videos = new ArrayList<>();
+        VideoDAOImplement vs = new VideoDAOImplement();
+        PlaylistVideos P = get(idPlaylist);
+        Connection daoConnection = Connexion.getConnection();
 
-    public LocalDate playListDate(int id) throws SQLException {
-        Connection connectDB = Connexion.getConnection();
-        String date = "select creationDate from playList where id = " + "'" + id + "'";
-        Statement statement = connectDB.createStatement();
-        ResultSet queryResult = statement.executeQuery(date);
-        queryResult.next();
-        String pLTema = queryResult.getString(1);
-        Connexion.closeConnection(connectDB);
-        return LocalDate.parse(pLTema);
+        String sql = "select * from videosdelaplaylist idVideo where idPlaylist = ?";
+
+        PreparedStatement ps = daoConnection.prepareStatement(sql);
+        ps.setInt(1, idPlaylist);//primer parametro
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            int idVideo = rs.getInt("idVideo");
+            videos.add(vs.get(idVideo));
+            P.agregarVideo(vs.get(idVideo));
+        }
+        return P.getVideos();
     }
 }
