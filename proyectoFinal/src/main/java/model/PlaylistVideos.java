@@ -66,6 +66,11 @@ public class PlaylistVideos {
         this.id = id;
     }
 
+    public PlaylistVideos(int idVideo, int idPlaylist) {
+        this.id = idPlaylist;
+        this.idVideo = idVideo;
+    }
+
 
     /**
      * Getters y setters

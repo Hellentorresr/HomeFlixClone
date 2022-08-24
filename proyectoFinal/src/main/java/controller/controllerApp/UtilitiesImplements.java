@@ -35,7 +35,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
-
+import java.util.RandomAccess;
 
 
 /**
@@ -43,6 +43,7 @@ import java.util.Objects;
  */
 public class UtilitiesImplements extends UtilitiesAbstract {
     //
+    public static PlaylistVideos pl = new PlaylistVideos();
     public static Video video = new Video();
 
     private DAOVideo videoDAO;
@@ -160,13 +161,14 @@ public class UtilitiesImplements extends UtilitiesAbstract {
 
     /**
      * Metodo registrarPlayList
+     *
      * @param idList recibe por parametro un int id
-     * @param name recibe por parametro un string nombre
-     * @param tema recibe por parametro un string tema
+     * @param name   recibe por parametro un string nombre
+     * @param tema   recibe por parametro un string tema
      * @throws SQLException genera una exception si no hay communication con la bae de datos
      */
     public void registrarPlaylist(int idList, String name, String tema) throws SQLException {
-      float  duration = 0;
+        float duration = 0;
         int idVideo = 0;
         LocalDate dateNow = LocalDate.now();
 
@@ -175,7 +177,7 @@ public class UtilitiesImplements extends UtilitiesAbstract {
         if (allPlaylist().contains(nuevaLista)) {
             mostrarMensajeNegativo("Id de lista ya existe, favor intentar de nuevo!");
         } else {
-            daoPlayListVideos.insert(idList, name, duration, tema, dateNow, idVideo);
+            daoPlayListVideos.insert(name, duration, tema, dateNow,idList);
             mostrarMensajePositivo("Lista de creada correctamente");
         }
     }
@@ -228,57 +230,50 @@ public class UtilitiesImplements extends UtilitiesAbstract {
     }
 
     //para la playlist
-    public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos , VBox vBox) {
-        System.out.println(playlistVideos.size());
+    public void cargarDatosDeLasListas(ArrayList<PlaylistVideos> playlistVideos, VBox vBox) throws SQLException {
         for (int i = 0; i < playlistVideos.size(); i++) {
-            if(playlistVideos.get(i).getIdVideo()==0){
-                System.out.println(playlistVideos.get(i));
-                Label titulo = new Label();
-                titulo.setText("Playlist");
-                titulo.setFont(Font.font(18));
+            HBox hBox = new HBox(i);
+            hBox.setSpacing(30);
+            ScrollPane scrollPane = new ScrollPane(hBox);
+            scrollPane.prefWidth(1059);
+            scrollPane.prefHeight(229);
+            scrollPane.setMinViewportHeight(270);
 
-                HBox hBox = new HBox(i);
-                ScrollPane scrollPane = new ScrollPane(hBox);
-                scrollPane.prefWidth(1059);
-                scrollPane.prefHeight(229);
+            scrollPane.setContent(hBox);
+            scrollPane.setBackground(Background.fill(Paint.valueOf("transparent")));
 
-                scrollPane.setContent(hBox);
-                scrollPane.setBackground(Background.fill(Paint.valueOf("transparent")));
+            Button button = new Button(playlistVideos.get(i).getNamePlaylist());
+            button.setTextFill(Paint.valueOf("white"));
+            button.setCursor(Cursor.cursor("hand"));
+            button.setUnderline(true);
+            button.setBackground(Background.fill(Paint.valueOf("#d35400")));
+            button.setFont(Font.font(16));
+            button.setText("Reproducir lista");
 
-                Button button = new Button(playlistVideos.get(i).getNamePlaylist());
-                button.setTextFill(Paint.valueOf("white"));
-                button.setCursor(Cursor.cursor("hand"));
-                button.setUnderline(true);
-                button.setBackground(Background.fill(Paint.valueOf("transparent")));
-                button.setFont(Font.font(14));
-                button.setText("Reproducir lista");
-
-                button.setOnAction(event -> {
-                    try {
-                        pathInterfazGrafica("ReproductorPlaylists.fxml", button);//cambiar a la correcta interfaz
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+            int p = i;
+            button.setOnAction(event -> {
+                pl = playlistVideos.get(p);
+                try {
+                    pathInterfazGrafica("ReproductorPlaylists.fxml", button);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
 
-                Label nombre = new Label();
-                nombre.setText(playlistVideos.get(i).getNamePlaylist());
-                hBox.getChildren().add(nombre);
-                nombre.setFont(Font.font(16));
-                nombre.setTextFill(Paint.valueOf("#fff"));
+            Label nombre = new Label();
+            nombre.setText(playlistVideos.get(i).getNamePlaylist());
+            vBox.getChildren().add(nombre);
+            nombre.setFont(Font.font(18));
+            nombre.setTextFill(Paint.valueOf("#fff"));
 
-                hBox.getChildren().add(button);
+            hBox.getChildren().add(button);
 
-                vBox.getChildren().add(scrollPane);
-                HomeController homeController = new HomeController();
-                homeController.cargarDatos(playlistVideos.get(i).getVideos(), hBox);
-            }
-            //para lo que va afuera del hbox
-
+            PlaylistVideoDAOImplement s = new PlaylistVideoDAOImplement();
+            vBox.getChildren().add(scrollPane);
+            HomeController homeController = new HomeController();
+            homeController.cargarDatos(s.getIdVideosFromOnePlaylist(playlistVideos.get(i).getId()), hBox);
         }
     }
-
-
 }
 

@@ -1,10 +1,10 @@
 package controller.controllerApp;
 
+import controller.dao.PlaylistVideoDAOImplement;
 import controller.dao.VideoDAOImplement;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,6 +21,7 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.PlaylistVideos;
+import model.Video;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,24 +31,21 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import static controller.controllerApp.UtilitiesImplements.pl;
+
 public class ReproducirVideoPlaylistController implements Initializable {
     public static float time;
     public Button regresar;
-    public TableView<PlaylistVideos> videosDelPlaylist;
+    public TableView<Video> videosDelPlaylist;
     /**
      * Atributos de la clase ReproductorVideoController
      */
     UtilitiesImplements utilitiesImplements;
-    HomeController homeController;
     Media mediaVideo;
-    RegisterVideoController rvc;
-    PlaylistVideos playlistVideos;
-    ReproductorVideoController reproductorVideoController;
-    VideoDAOImplement videoDAOImplement;
     int contador = 1;
     @FXML
     // public TableColumn VideoName;
-    private TableColumn<PlaylistVideos, String> videoName;
+    private TableColumn<Video, String> videoName;
     @FXML
     private VBox vboxParent;
     @FXML
@@ -73,6 +71,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
     private Slider sliderVolume;
     @FXML
     private Slider sliderTime;
+    PlaylistVideoDAOImplement s;
     /**
      * Declarar algunas variables booleanas para determinar si nuestro video se está reproduciendo o no
      * si es el final del video o si el video está silenciado----
@@ -99,11 +98,8 @@ public class ReproducirVideoPlaylistController implements Initializable {
      */
 
     public ReproducirVideoPlaylistController() {
+        s = new PlaylistVideoDAOImplement();
         utilitiesImplements = new UtilitiesImplements();
-        playlistVideos = new PlaylistVideos();
-        reproductorVideoController = new ReproductorVideoController();
-        homeController = new HomeController();
-        videoDAOImplement = new VideoDAOImplement();
     }
 
     /**
@@ -123,8 +119,8 @@ public class ReproducirVideoPlaylistController implements Initializable {
     public void cargarDatos(int contador) {
         final int IV_SIZE = 25;
         try {
-            homeController.playList = new ArrayList<>(utilitiesImplements.allPlaylist());
-            mediaVideo = new Media(new File(videoDAOImplement.getVideoPath(homeController.playList.get(contador).getIdVideo())).toURI().toString());
+           s = new PlaylistVideoDAOImplement();
+            mediaVideo = new Media(new File(s.getIdVideosFromOnePlaylist(pl.getId()).get(0).getVideoPath()).toURI().toString());
             cargarPlaylist();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -363,7 +359,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
     @FXML
     public void siguienteVideo() {
 
-        if (contador < homeController.playList.size()) {
+        if (contador < HomeController.playList.size()) {
             contador++;
         } else {
             contador = 1;
@@ -382,7 +378,7 @@ public class ReproducirVideoPlaylistController implements Initializable {
         if (contador > 1) {
             contador--;
         } else {
-            contador = homeController.playList.size();
+            contador = HomeController.playList.size();
         }
         cargarDatos(contador);
     }
@@ -390,17 +386,17 @@ public class ReproducirVideoPlaylistController implements Initializable {
     /**
      * regresar
      *
-     * @param actionEvent
+     * @param
      * @throws IOException
      */
-    public void regresarHome(ActionEvent actionEvent) throws IOException {
+    public void regresarHome() throws IOException {
         utilitiesImplements.pathInterfazGrafica("Home.fxml", regresar);
     }
 
     private void cargarPlaylist() throws SQLException {
-        ObservableList<PlaylistVideos> playlistVideosOb = FXCollections.observableArrayList();
-        playlistVideosOb.addAll(utilitiesImplements.allPlaylist());
-        this.videoName.setCellValueFactory(new PropertyValueFactory<>(""));
+        ObservableList<Video> playlistVideosOb = FXCollections.observableArrayList();
+        playlistVideosOb.addAll(s.getIdVideosFromOnePlaylist(pl.getId()));
+        this.videoName.setCellValueFactory(new PropertyValueFactory<>("nombreVideo"));
         videosDelPlaylist.setItems(playlistVideosOb);
     }
 
