@@ -63,7 +63,7 @@ public class Server extends Thread{
                 if(message.equals("done")){
                     //reproductorVideoController.reproducir();
                     System.out.println(message);
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(1200);
                     mpVideo.play();
                 }
                 if(!sc.isConnected()){
