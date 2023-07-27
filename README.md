@@ -13,6 +13,7 @@ The application uses multithreading to handle video playback and ensure smooth p
 The project includes exception handling to handle errors and provide appropriate feedback to the user.
 
 User Experience:
+
 Users can sign in to the application using their username and password.
 Upon signing in, users are greeted with a home screen that displays recently played videos and recommendations based on their preferences.
 Users can search for videos using the search bar and view video details, such as title, description, and duration.
